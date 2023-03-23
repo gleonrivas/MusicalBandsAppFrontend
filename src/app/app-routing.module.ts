@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from "@angular/router";
-import {LoginComponent} from "./views/components/login/login.component";
+import {LoginComponent} from "./views/pages/login/login.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
