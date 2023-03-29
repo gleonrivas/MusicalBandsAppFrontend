@@ -1,0 +1,3 @@
+export enum EnumElectronicInstruments{
+  SYNTHESIZER,SAMPLER,MIDI_CONTROLLER,DRUM_MACHINE,THEREMIN
+}
