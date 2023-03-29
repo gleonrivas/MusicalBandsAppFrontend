@@ -1,0 +1,134 @@
+body{
+  background-color: whitesmoke;
+}
+.container{
+  height: 100vh
+}
+.contenedor{
+  width: 100%;
+  padding: 30px
+}
+.form{
+  padding: 20px
+}
+.form-control{
+  height: 50px;
+  background-color: #eee
+}
+.form-control:focus{
+  color: #495057;
+  background-color: #fff;
+  border-color: lightcoral;
+  outline: 0;
+  box-shadow: none;
+  background-color: #eee
+}
+.inputbox{
+  margin-bottom: 15px
+}
+.register{
+  width: 200px;
+  height: 51px;
+  background-color: lightcoral;
+  border-color: lightcoral;
+  color: whitesmoke;
+}
+.register:hover{
+  width: 200px;height: 51px;background-color: lightcoral;border-color: lightcoral
+}
+.register:active{
+  width: 200px;height: 51px;background-color: lightcoral;border-color: lightcoral
+}
+.login{
+  color: lightcoral;text-decoration: none
+}
+.login:hover{
+  color: lightcoral;text-decoration: none
+}
+.form-check-input:checked{
+  background-color: lightcoral;border-color: lightcoral
+}
+
+@import url(https://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+.mt-100{
+
+  margin-top:100px;
+
+}
+
+.card{
+  border-radius: 3vh;
+  margin: auto;
+  max-width: 380px;
+  padding: 7vh 6vh;
+  align-items: center;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media(max-width:767px){
+  .card{
+    width: 90vw;
+  }
+}
+.card-img{
+  padding: 20px 0;
+  width: 40%;
+}
+
+.card-img img{
+  opacity: 0.7;
+}
+.card-title{
+  margin-bottom: unset;
+}
+.card-title p{
+  color: lightcoral;
+  font-weight: 900;
+  font-size: 30px;
+  margin-bottom: unset;
+}
+.card-text p{
+  color: grey;
+  font-size: 25px;
+  text-align: center;
+  padding: 3vh 0;
+  font-weight: lighter;
+}
+
+
+#logro{
+  display: none;
+}
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 9999;
+}
+
+.loader {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid lightcoral;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

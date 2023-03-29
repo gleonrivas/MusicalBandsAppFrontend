@@ -1,0 +1,31 @@
+<head>
+  <link rel="stylesheet" href="registro.component.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>Registro</title>
+</head>
+<body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="contenedor">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form">
+          <h2>Registro</h2>
+          <div class="inputbox mt-3"> <span>Nombre de usuario</span> <input type="text" placeholder="Name" name="" class="form-control" #[(ngModel)]=""> </div>
+          <div class="inputbox mt-3"> <span>Email</span> <input type="text" placeholder="Email" name="" class="form-control" #[(ngModel)]=""> </div>
+          <div class="inputbox mt-3"> <span>Contraseña</span> <input type="password" placeholder="" name="" class="form-control" #[(ngModel)]=""> </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="text-right">
+              <button class="btn register btn-block" style="background-color: #C63535; border-color: #C63535" >Registrar</button>
+            </div>
+            <a href="/login" class="login">Iniciar sesión</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="text-center mt-5" > <img src="https://i.imgur.com/AHPdMLt.jpg" width="80%" style="border-radius: 20px;"> </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
