@@ -9,8 +9,6 @@ import {User} from "../../../shared/models/user.model";
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent {
-  constructor(private http: HttpClient) { }
-
   newUser: Register = { user: '', email: '', password: '' }
   guardarUsuario(){
     const headers = new HttpHeaders()
