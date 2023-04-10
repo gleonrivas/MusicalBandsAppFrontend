@@ -10,12 +10,14 @@ import {faHome, faMessage, faBell, faHashtag, faWrench, faPerson, faPlus, faShar
 import { NavegacionComponent } from './views/components/navegacion/navegacion.component';
 import {FormsModule} from "@angular/forms";
 import { RegistroComponent } from './views/pages/registro/registro.component';
+import { HomeComponent } from './views/pages/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavegacionComponent,
-    RegistroComponent
+    RegistroComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
