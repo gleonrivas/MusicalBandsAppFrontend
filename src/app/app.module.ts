@@ -9,7 +9,6 @@ import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome
 import {faHome, faMessage, faBell, faHashtag, faWrench, faPerson, faPlus, faShare, faXmark, faSearch, faHeart, faSignOut} from '@fortawesome/free-solid-svg-icons';
 import { NavegacionComponent } from './views/components/navegacion/navegacion.component';
 import {FormsModule} from "@angular/forms";
-import { RegistroComponent } from './views/pages/registro/registro.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +18,7 @@ import { RegistroComponent } from './views/pages/registro/registro.component';
   ],
   imports: [
     BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
