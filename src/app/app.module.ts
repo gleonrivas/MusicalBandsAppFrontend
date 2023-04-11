@@ -12,13 +12,15 @@ import {FormsModule} from "@angular/forms";
 import {IonicModule} from "@ionic/angular";
 import {RegistroComponent} from "./views/pages/registro/registro.component";
 import {HttpClientModule} from "@angular/common/http";
+import { SquadComponent } from './views/pages/squad/squad.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavegacionComponent,
-    RegistroComponent
+    RegistroComponent,
+    SquadComponent
   ],
   imports: [
     BrowserModule,

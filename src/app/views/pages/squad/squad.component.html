@@ -1,0 +1,87 @@
+<ion-grid  class="container">
+  <ion-row>
+    <ion-col>
+      <ion-chip color="primary">
+        <ion-icon name="people"></ion-icon>
+        <ion-label>Miembros</ion-label>
+      </ion-chip>
+    </ion-col>
+
+    <ion-col>
+      <ion-chip color="primary">
+        <ion-icon name="musical-notes"></ion-icon>
+        <ion-label>Actuaciones</ion-label>
+      </ion-chip>
+    </ion-col>
+
+    <ion-col>
+      <ion-chip color="primary">
+        <ion-icon name="microphone"></ion-icon>
+        <ion-label>Ensayos</ion-label>
+      </ion-chip>
+    </ion-col>
+
+    <ion-col>
+      <ion-chip color="primary">
+        <ion-icon name="radio"></ion-icon>
+        <ion-label>Repertorio</ion-label>
+      </ion-chip>
+    </ion-col>
+
+  </ion-row>
+
+</ion-grid>
+
+<ion-grid class="container">
+  <ion-row>
+
+    <ion-col>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Próxima actuación</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-icon name="musical-notes"></ion-icon> Por ahora, no se han programado actuaciones.
+        </ion-card-content>
+
+        <ion-button color="success">Nueva actuación</ion-button>
+
+      </ion-card>
+    </ion-col>
+
+    <ion-col>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Próximo ensayo</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-icon name="microphone"></ion-icon> Por ahora, no hay programado ensayos.
+        </ion-card-content>
+
+        <ion-button color="success">Nuevo ensayo</ion-button>
+      </ion-card>
+    </ion-col>
+
+    <ion-col>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Invitar músicos</ion-card-title>
+          <ion-card-subtitle>Comparte el link para que los miembros de tu agrupación se unan al grupo.</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          Activar link de invitación <ion-toggle></ion-toggle>
+          <ion-input label="URL" placeholder="URL para invitar"></ion-input>
+        </ion-card-content>
+
+        <ion-button fill="clear">Whatsapp</ion-button>
+        <ion-button fill="clear">Facebook</ion-button>
+        <ion-button fill="clear">Correok</ion-button>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+</ion-grid>
+
