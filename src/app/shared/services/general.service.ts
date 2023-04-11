@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -6,5 +7,11 @@ import { Injectable } from '@angular/core';
 
 export class GeneralService{
 
+  constructor(private route: Router) {
+  }
+  logOut(){
+    localStorage.setItem('token', '');
+    this.route.navigate(['/login']);
+  }
 
 }

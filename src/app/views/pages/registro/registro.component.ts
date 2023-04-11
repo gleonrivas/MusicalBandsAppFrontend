@@ -17,11 +17,11 @@ export class RegistroComponent {
   }
   newUser: Register = { name: '', surname: '', email: '', password: '' }
   registerUser(){
-    const body = JSON.stringify(
+    const body =
       {'firstname':this.newUser.name,
         'secondname':this.newUser.surname,
         'email':this.newUser.email,
-        'password':this.newUser.password})
+        'password':this.newUser.password};
     console.log(body)
     this.registerService.registerMethod(body);
     this.router.navigate(['/login'])
