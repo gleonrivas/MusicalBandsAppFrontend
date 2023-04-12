@@ -9,8 +9,9 @@ import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome
 import {faHome, faMessage, faBell, faHashtag, faWrench, faPerson, faPlus, faShare, faXmark, faSearch, faHeart, faSignOut} from '@fortawesome/free-solid-svg-icons';
 import { NavegacionComponent } from './views/components/navegacion/navegacion.component';
 import {FormsModule} from "@angular/forms";
+import { RegistroComponent } from './views/pages/registro/registro.component';
+import { HomeComponent } from './views/pages/home/home.component';
 import {IonicModule} from "@ionic/angular";
-import {RegistroComponent} from "./views/pages/registro/registro.component";
 import {HttpClientModule} from "@angular/common/http";
 import { SquadComponent } from './views/pages/squad/squad.component';
 import {NgxEchartsModule} from "ngx-echarts";
@@ -20,6 +21,8 @@ import {NgxEchartsModule} from "ngx-echarts";
     AppComponent,
     LoginComponent,
     NavegacionComponent,
+    RegistroComponent,
+    HomeComponent,
     RegistroComponent,
     SquadComponent
   ],
