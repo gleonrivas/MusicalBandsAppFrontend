@@ -24,7 +24,10 @@ const routes: Routes = [
     path: 'formacion',
     component: SquadComponent
   },
-  {path: 'home',component: HomeComponent},
+  {
+    path: 'home',
+    component: HomeComponent
+  },
 
 ]
 @NgModule({

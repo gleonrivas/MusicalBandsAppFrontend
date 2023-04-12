@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { User } from "../../../shared/models/user.model";
 import { IonicModule } from '@ionic/angular';
 import {LoginService} from "./service/login.service";
-import {Router} from "@angular/router";
+import {RouterModule} from "@angular/router";
 
 
 @Component({
