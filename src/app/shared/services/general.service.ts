@@ -10,7 +10,7 @@ export class GeneralService{
   constructor(private route: Router) {
   }
   logOut(){
-    localStorage.setItem('token', '');
+    localStorage.clear;
     this.route.navigate(['/login']);
   }
 
