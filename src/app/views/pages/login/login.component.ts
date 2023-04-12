@@ -15,8 +15,7 @@ import {Router} from "@angular/router";
 export class LoginComponent {
 
   constructor(
-    private loginService: LoginService,
-    private router:Router,) {
+    private loginService: LoginService, private router: Router) {
   }
   currentUser: User = { user: '', password: '' };
   async login(){
@@ -31,7 +30,7 @@ export class LoginComponent {
       }
       else{
         localStorage.setItem('token', data.token)
-        this.router.navigateByUrl('/home')
+        this.router.navigate(['/home'])
       }
     })
   }

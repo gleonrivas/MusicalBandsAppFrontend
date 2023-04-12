@@ -14,6 +14,7 @@ import { HomeComponent } from './views/pages/home/home.component';
 import {IonicModule} from "@ionic/angular";
 import {HttpClientModule} from "@angular/common/http";
 import { SquadComponent } from './views/pages/squad/squad.component';
+import {NgxEchartsModule} from "ngx-echarts";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,8 @@ import { SquadComponent } from './views/pages/squad/squad.component';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')}),
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
