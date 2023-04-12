@@ -1,0 +1,3 @@
+export enum EnumKeyboardInstruments{
+  PIANO,ORGAN,SYNTHESIZER,HARPSICHORD,ACCORDION
+}

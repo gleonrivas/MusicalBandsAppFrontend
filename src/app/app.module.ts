@@ -11,20 +11,29 @@ import { NavegacionComponent } from './views/components/navegacion/navegacion.co
 import {FormsModule} from "@angular/forms";
 import { RegistroComponent } from './views/pages/registro/registro.component';
 import { HomeComponent } from './views/pages/home/home.component';
+import {IonicModule} from "@ionic/angular";
+import {RegistroComponent} from "./views/pages/registro/registro.component";
+import {HttpClientModule} from "@angular/common/http";
+import { SquadComponent } from './views/pages/squad/squad.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavegacionComponent,
     RegistroComponent,
-    HomeComponent
+    HomeComponent,
+    RegistroComponent,
+    SquadComponent
   ],
   imports: [
     BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

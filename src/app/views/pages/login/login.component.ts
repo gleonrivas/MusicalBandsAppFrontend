@@ -1,44 +1,34 @@
 import { Component } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { User } from "../../../shared/models/user.model";
+import { IonicModule } from '@ionic/angular';
+import {LoginService} from "./service/login.service";
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  providers: [LoginService],
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+
+  constructor(private loginService: LoginService) {
+  }
   currentUser: User = { user: '', password: '' };
-  async promise() {
-    const circulo: any = document.getElementById('logro')
-    circulo.style.display = "block";
-    const body = JSON.stringify({
-      "usuario": this.currentUser.user,
+  async login(){
+    const body = {
+      "email": this.currentUser.user,
       "password": this.currentUser.password
-    });
-    alert(body)
-    console.log(body);
-    let tokencito: string = ''
-    const params = new HttpParams();
-    const headers = new HttpHeaders();
-
-    const test = 10;
-
-    return test
+    };
+    await this.loginService.loginMethod(body).subscribe((data: any) => {
+      console.log(data)
+      if (data.token === 0){
+        alert(data.error)
+      }
+      else{
+        localStorage.setItem('token', data.token)
+      }
+    })
   }
-  async login() {
-    let login = await this.promise();
-    console.log(login);
-    // @ts-ignore
-    localStorage.setItem('token', login)
-    console.log(localStorage.getItem('token'))
-    const circle:any = document.getElementById('logro')
-    circle.style.display = "none";
-
-    if (localStorage.getItem('token') === 'undefined'){}
-    else {
-      window.location.href = '/';
-    }
-  }
-
 }
