@@ -12,7 +12,6 @@ import {FormsModule} from "@angular/forms";
 import { RegistroComponent } from './views/pages/registro/registro.component';
 import { HomeComponent } from './views/pages/home/home.component';
 import {IonicModule} from "@ionic/angular";
-import {RegistroComponent} from "./views/pages/registro/registro.component";
 import {HttpClientModule} from "@angular/common/http";
 import { SquadComponent } from './views/pages/squad/squad.component';
 
