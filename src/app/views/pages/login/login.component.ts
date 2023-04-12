@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { User } from "../../../shared/models/user.model";
 import { IonicModule } from '@ionic/angular';
 import {LoginService} from "./service/login.service";
+import {RouterModule} from "@angular/router";
 
 
 @Component({
@@ -13,7 +14,7 @@ import {LoginService} from "./service/login.service";
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, ) {
   }
   currentUser: User = { user: '', password: '' };
   async login(){
