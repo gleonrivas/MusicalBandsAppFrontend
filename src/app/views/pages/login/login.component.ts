@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { User } from "../../../shared/models/user.model";
 import { IonicModule } from '@ionic/angular';
 import {LoginService} from "./service/login.service";
-import {Router} from "@angular/router";
+import {RouterModule} from "@angular/router";
 
 
 @Component({
@@ -14,8 +14,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  constructor(
-    private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService, ) {
   }
   currentUser: User = { user: '', password: '' };
   async login(){
@@ -30,7 +29,6 @@ export class LoginComponent {
       }
       else{
         localStorage.setItem('token', data.token)
-        this.router.navigate(['/home'])
       }
     })
   }
