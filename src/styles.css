@@ -28,7 +28,6 @@
 
 body {
   font-family: 'Rubik', sans-serif;
-  overflow : scroll;
 }
 
 ion-content{
@@ -43,6 +42,8 @@ ion-content{
   margin-right: 2vh;
   font-size: 12px;
 }
+
+
 
 ion-chip{
   font-family: 'Rubik', sans-serif;
@@ -66,7 +67,7 @@ ion-tab-button{
 }
 
 ion-text{
-  color: whitesmoke;
+  color: #1a1a1a;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -81,5 +82,17 @@ ion-button{
   margin: 0 auto;
 }
 
+.inputIon{
+  max-width: 200vh;
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 2vh;
+  font-family: 'Rubik', sans-serif;
+  border: 2px solid #1a1a1a;
+}
+
+ion-input.ion-border {
+
+}
 
 

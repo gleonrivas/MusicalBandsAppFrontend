@@ -15,6 +15,7 @@ import {IonicModule} from "@ionic/angular";
 import {HttpClientModule} from "@angular/common/http";
 import { SquadComponent } from './views/pages/squad/squad.component';
 import {NgxEchartsModule} from "ngx-echarts";
+import { SquadCreateComponent } from './views/pages/squad-create/squad-create.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NgxEchartsModule} from "ngx-echarts";
     RegistroComponent,
     HomeComponent,
     RegistroComponent,
-    SquadComponent
+    SquadComponent,
+    SquadCreateComponent
   ],
   imports: [
     BrowserModule,
