@@ -6,16 +6,6 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 })
 export class HomeService {
 
-  constructor(private http: HttpClient ) { }
-
-  getFormationByUser(){
-    const headers = new HttpHeaders();
-    const params = new HttpParams();
-    this.http.post('http://localhost:8080/login/register', {headers: headers, params: params}).subscribe(
-      response => {
-        console.log(response);
-      }
-    )
-  }
+  constructor() {}
 
 }
