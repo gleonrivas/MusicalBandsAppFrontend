@@ -2,13 +2,23 @@ import {AfterViewInit, Component} from '@angular/core';
 import {EChartsOption, getInstanceByDom} from 'echarts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import {connect} from "rxjs";
+import {SquadService} from "./service/squad.service";
 
 @Component({
   selector: 'app-squad',
   templateUrl: './squad.component.html',
+  providers: [SquadService],
   styleUrls: ['./squad.component.css']
 })
 export class SquadComponent{
+
+  constructor() {
+  }
+
+  ngOnInit(){
+    let id = 1;
+
+  }
   initOpts = {
     renderer: 'svg',
     width: 850,
@@ -32,7 +42,7 @@ export class SquadComponent{
     xAxis: [
       {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: ['Celia', 'Gonza', 'Luis', 'Thu', 'Fri', 'Sat', 'Sun'],
         axisTick: {
           alignWithLabel: true
         }
@@ -45,7 +55,7 @@ export class SquadComponent{
       name: 'Counters',
       type: 'bar',
       barWidth: '30%',
-      data: [10, 52, 200, 334, 390, 330, 220]
+      data: [50, 52, 200, 334, 390, 330, 220]
     }]
   };
 }
