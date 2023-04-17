@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {GeneralService} from "../../../shared/services/general.service";
 
 @Component({
   selector: 'app-navegacion',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class NavegacionComponent {
 
+  constructor(private generalService: GeneralService){};
+  logout(){
+    this.generalService.logOut();
+  }
 }

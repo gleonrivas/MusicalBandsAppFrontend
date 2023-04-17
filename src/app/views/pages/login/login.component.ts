@@ -14,8 +14,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService, private router: Router) {
-  }
+  constructor(private loginService: LoginService, private router: Router) {}
   currentUser: User = { user: '', password: '' };
   async login(){
     const body = {
