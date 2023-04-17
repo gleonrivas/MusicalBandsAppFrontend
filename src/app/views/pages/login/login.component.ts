@@ -28,7 +28,7 @@ export class LoginComponent {
         alert(data.error)
       }
       else{
-        localStorage.setItem('token', data.token)
+        localStorage.setItem('Authorization', 'Bearer ' + data.token)
         this.router.navigate(['/home'])
       }
     })
