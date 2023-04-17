@@ -17,16 +17,15 @@
       </div>
       <div class="box">
         <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
-        <div class="formacion flex-row bg-dark text-light" *ngIf="!auth == false" >Error de CORS</div>
         <div class="formacion flex-row" *ngFor="let formation of userFormations">
 <!--        <div class="formacion flex-row">-->
           <h5 class="">LOGO</h5>
           <div class="formacion-info f-col">
           <p class="fw-bold">{{formation.name}}</p>
 <!--            <p class="fw-bold">Solfamidas</p>-->
-            <p>Rol<!--{{formation.type}}--></p>
+            <p>rol</p>
           </div>
-          <a class="text-light" (click)="sendFormation(formation)">Ver</a>
+          <a class="text-light" (click)="viewFormation(formation)">Ver</a>
         </div>
 
       </div>
