@@ -1,8 +1,9 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {EChartsOption, getInstanceByDom} from 'echarts';
 import { NgxEchartsModule } from 'ngx-echarts';
 import {connect} from "rxjs";
 import {SquadService} from "./service/squad.service";
+import {FormationService} from "../../../shared/services/formation.service";
 
 @Component({
   selector: 'app-squad',
@@ -12,12 +13,12 @@ import {SquadService} from "./service/squad.service";
 })
 export class SquadComponent{
 
-  constructor() {
+  constructor(private formationService:FormationService) {
   }
 
   ngOnInit(){
     let id = 1;
-
+    console.log(this.formationService.getFormation())
   }
   initOpts = {
     renderer: 'svg',
