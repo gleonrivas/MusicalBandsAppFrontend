@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {RestService} from "./rest.service";
+import {FormationModel} from "../models/formation.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormationService {
 
-  constructor(private http: HttpClient ) { }
+  public apikey = localStorage.getItem('token')
+  constructor(private rest: RestService ) { }
 
   getUserFormations(){
-    const headers = new HttpHeaders();
-    const params = new HttpParams();
-    return this.http.post('http://localhost:8080/formation/listByUser', {headers: headers, params: params})
+    return this.rest.get<FormationModel[]>('http://localhost:8080/formation/listByUser')
   }
 
 }
