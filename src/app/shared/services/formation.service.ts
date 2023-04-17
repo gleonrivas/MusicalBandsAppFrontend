@@ -11,8 +11,20 @@ export class FormationService {
   public apikey = localStorage.getItem('token')
   constructor(private rest: RestService ) { }
 
+  private formation!:FormationModel;
+
+  setFormation(formation: FormationModel) {
+    this.formation = formation;
+  }
+  getFormation(): FormationModel {
+    return this.formation;
+  }
+
   getUserFormations(){
     return this.rest.get<FormationModel[]>('http://localhost:8080/formation/listByUser')
   }
+
+
+
 
 }
