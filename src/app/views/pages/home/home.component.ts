@@ -5,6 +5,7 @@ import {FormationService} from "../../../shared/services/formation.service";
 import {FormationModel} from "../../../shared/models/formation.model";
 import {Router} from "@angular/router";
 import {round} from "@popperjs/core/lib/utils/math";
+import {EnumFormationType} from "../../../shared/models/Enum/EnumFormationType";
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,8 @@ export class HomeComponent implements OnInit{
 
   public userFormations:FormationModel[]=[]
   public auth = localStorage.getItem('Authorization');
+  public finder: string = '';
+  public searchedFormations:FormationModel[]=[];
 
   constructor(
     private formationService:FormationService,
@@ -32,6 +35,33 @@ export class HomeComponent implements OnInit{
     console.log(localStorage.getItem('Authorization'))
     this.formationService.getFormation()
   }
+
+  searchFormation() {
+    this.searchedFormations = [];
+    if (!this.finder) {
+      return;
+    }
+
+    this.formationService.formationFinder(this.finder).subscribe((data) => {
+      this.searchedFormations = [];
+      data.forEach((result: any) => {
+        const {id, active, designation, foundationYear, logo, name, type} = result;
+        this.searchedFormations.push({
+          id:id,
+          active:active,
+          designation:designation,
+          foundationYear:foundationYear,
+          logo:logo,
+          name:name,
+          type:type
+        });
+      });
+      if (!this.finder) {
+        this.searchedFormations = [];
+      }
+    })
+  }
+
 
   viewFormation(formation:FormationModel){
     this.formationService.setFormation(formation);

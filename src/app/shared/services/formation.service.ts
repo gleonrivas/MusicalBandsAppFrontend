@@ -20,6 +20,10 @@ export class FormationService {
     return this.formation;
   }
 
+  formationFinder(formationName:string){
+    return this.rest.get<FormationModel[]>('http://localhost:8080/formation/listByUser');
+  }
+
   getUserFormations(){
     return this.rest.get<FormationModel[]>('http://localhost:8080/formation/listByUser')
   }
