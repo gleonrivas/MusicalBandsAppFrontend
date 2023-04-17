@@ -23,7 +23,10 @@ export class HomeComponent implements OnInit{
       console.log(data);
     });
     console.log(localStorage.getItem('Authorization'))
+  }
 
+  sendFormation(formation:FormationModel){
+    this.formationService.setFormation(formation);
   }
 
 
