@@ -11,38 +11,25 @@
   <div class="home-container">
 
     <div class="scroll">
-      <h3 >Mis formaciones</h3>
+      <div class="title-controller f-row">
+        <h3 >Mis formaciones</h3>
+        <a href="#">Crear</a>
+      </div>
       <div class="box">
-        <div class="formacion flex-row" >
+
+        <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
+        <div class="formacion flex-row bg-dark text-light" *ngIf="!auth == false" >Error de PERMISOS</div>
+        <div class="formacion flex-row" *ngFor="let formation of userFormations">
+<!--        <div class="formacion flex-row">-->
           <h5 class="">LOGO</h5>
-          <p class="">Solfamidas</p>
+          <div class="formacion-info f-col">
+          <p class="fw-bold">{{formation.name}}</p>
+<!--            <p class="fw-bold">Solfamidas</p>-->
+            <p>Rol</p>
+          </div>
           <a href="#">Ver</a>
         </div>
-        <div class="formacion flex-row" >
-          <h5 class="">LOGO</h5>
-          <p class="">AliveMusic</p>
-          <a href="#">Ver</a>
-        </div>
-        <div class="formacion flex-row" >
-          <h5 class="">LOGO</h5>
-          <p class="">Musicalia</p>
-          <a href="#">Ver</a>
-        </div>
-        <div class="formacion flex-row" >
-          <h5 class="">LOGO</h5>
-          <p class="">Musicalia</p>
-          <a href="#">Ver</a>
-        </div>
-        <div class="formacion flex-row" >
-          <h5 class="">LOGO</h5>
-          <p class="">Musicalia</p>
-          <a href="#">Ver</a>
-        </div>
-        <div class="formacion flex-row" >
-          <h5 class="">LOGO</h5>
-          <p class="">Musicalia</p>
-          <a href="#">Ver</a>
-        </div>
+
       </div>
     </div>
 
