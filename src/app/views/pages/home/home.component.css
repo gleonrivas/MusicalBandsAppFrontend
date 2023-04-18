@@ -27,13 +27,14 @@ body::-webkit-scrollbar{
   flex-flow: column nowrap;
   min-width: 40%;
   margin: 3rem auto;
-  height: 60vh;
+  height: 50vh;
 }
 
 .scroll{
   overflow-y: scroll;
   padding: 1rem;
   width: 90%;
+  height: 100vh;
   margin: 0 auto;
   border-radius: .3rem;
   background-color: white;
