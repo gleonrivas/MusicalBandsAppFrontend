@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HomeService} from "./service/home.service";
-import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {FormationService} from "../../../shared/services/formation.service";
 import {FormationModel} from "../../../shared/models/formation.model";
 import {Router} from "@angular/router";
-import {round} from "@popperjs/core/lib/utils/math";
-import {EnumFormationType} from "../../../shared/models/Enum/EnumFormationType";
 
 @Component({
   selector: 'app-home',
