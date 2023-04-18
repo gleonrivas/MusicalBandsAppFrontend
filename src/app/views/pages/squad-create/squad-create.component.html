@@ -4,12 +4,17 @@
   <ion-text>Empieza a organizar ensayos y conciertos de forma fácil</ion-text>
   <br>
   <br>
-  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Nombre del grupo"></ion-input>
-  <ion-select class="inputIon" label-placement="floating" fill="outline" placeholder="Tipo de grupo">
-    <ion-select-option *ngFor="let key of enumKeys">{{key}}</ion-select-option>
+  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Nombre del grupo" [(ngModel)]="newSquad.name"></ion-input>
+  <ion-select [(ngModel)]="selectedValue" class="inputIon" label-placement="floating" fill="outline" placeholder="Tipo de grupo" [(ngModel)]="newSquad.type">
+    <ion-select-option value="BUGLE_AND_DRUM_BAND">Banda de cornetas y tambores</ion-select-option>
+    <ion-select-option value="MUSICAL_GROUP">Agrupación músical</ion-select-option>
+    <ion-select-option value="BANDS_OF_MUSIC">Banda de música</ion-select-option>
+    <ion-select-option value="SYMPHONY_ORCHESTRA">Orquesta sinfónica</ion-select-option>
   </ion-select>
-  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Ubicación"></ion-input>
-  <ion-input class="inputIon" label-placement="floating" fill="outline" type="number" placeholder="¿Cuántos miembros sois?"></ion-input>
+  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Ubicación" [(ngModel)]="newSquad.location"></ion-input>
+  <ion-input class="inputIon" label-placement="floating" fill="outline" type="number" placeholder="¿Cuántos miembros sois?" [(ngModel)]="newSquad.number"></ion-input>
+  <ion-datetime class="inputIon" label-placement="floating" fill="outline" placeholder="¿Fecha fundación?" [(ngModel)]="newSquad.date"></ion-datetime>
+  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Logo" [(ngModel)]="newSquad.logo"></ion-input>
   <br>
-  <ion-button color="success">Crear formación</ion-button>
+  <ion-button color="success" (click)="createSquad()">Crear formación</ion-button>
 </ion-grid>

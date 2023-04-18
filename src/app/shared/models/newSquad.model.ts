@@ -3,4 +3,6 @@ export interface newSquad {
   type: string;
   location: string;
   number: number;
+  date: Date;
+  logo: string;
 }
