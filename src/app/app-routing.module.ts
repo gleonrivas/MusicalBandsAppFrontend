@@ -5,6 +5,7 @@ import {SquadComponent} from "./views/pages/squad/squad.component";
 import {HomeComponent} from "./views/pages/home/home.component";
 import {RegistroComponent} from "./views/pages/registro/registro.component";
 import {SquadCreateComponent} from "./views/pages/squad-create/squad-create.component";
+import {ProfileComponent} from "./views/pages/profile/profile.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'crearformacion',
     component: SquadCreateComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ]
 @NgModule({

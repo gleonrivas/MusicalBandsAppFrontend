@@ -16,6 +16,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { SquadComponent } from './views/pages/squad/squad.component';
 import {NgxEchartsModule} from "ngx-echarts";
 import { SquadCreateComponent } from './views/pages/squad-create/squad-create.component';
+import { ProfileComponent } from './views/pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SquadCreateComponent } from './views/pages/squad-create/squad-create.co
     HomeComponent,
     RegistroComponent,
     SquadComponent,
-    SquadCreateComponent
+    SquadCreateComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
