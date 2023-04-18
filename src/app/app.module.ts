@@ -30,14 +30,16 @@ import { SquadCreateComponent } from './views/pages/squad-create/squad-create.co
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'ios'
+    }),
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')}),
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
