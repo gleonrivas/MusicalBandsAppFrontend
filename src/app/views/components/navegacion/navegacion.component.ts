@@ -12,4 +12,15 @@ export class NavegacionComponent {
   logout(){
     this.generalService.logOut();
   }
+
+  searchBar(){
+    const search:any = document.getElementById('search');
+    if (search.style.display === 'none'){
+      search.style.display = 'block'
+    }
+    else {
+      search.style.display = 'none';
+    }
+  }
+
 }
