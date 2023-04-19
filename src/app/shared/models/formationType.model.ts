@@ -1,7 +1,7 @@
 import {EnumFormationType} from "./Enum/EnumFormationType";
 
 
-export type FormationModel = {
+export type FormationType = {
 
   id?:number,
   active?:boolean,
@@ -9,6 +9,7 @@ export type FormationModel = {
   foundationYear?:string,
   logo?:string,
   name?:string,
-  type?:EnumFormationType
+  type?:EnumFormationType,
+  origin?:string,
 
 }
