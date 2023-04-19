@@ -7,7 +7,9 @@ export class SquadCreateService {
 
   constructor(private http: HttpClient) { }
   sendNewSquad(body: any){
-    const headers = new HttpHeaders();
+    const token: string | null = localStorage.getItem('Authorization')
+    console.log(token)
+    const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     try {
       this.http.post('http://localhost:8080/formation/create', body, {headers: headers, params: params}).subscribe(

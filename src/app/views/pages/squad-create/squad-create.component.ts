@@ -25,7 +25,6 @@ export class SquadCreateComponent {
   ngOnInit(){
     const value = EnumFormationType[this.selectedValue];
   }
-
   createSquad(){
     const body =
       {'id_user': 2,
@@ -35,6 +34,7 @@ export class SquadCreateComponent {
         'fundationDate':this.newSquad.date,
         'logo': this.newSquad.logo
       };
+    console.log(body)
     this.squadCreateService.sendNewSquad(body);
     this.router.navigate(['/home'])
   }
