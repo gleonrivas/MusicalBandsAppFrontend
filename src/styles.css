@@ -42,8 +42,6 @@ ion-content{
   font-size: 12px;
 }
 
-
-
 ion-chip{
   font-family: 'Rubik', sans-serif;
 }
@@ -94,4 +92,7 @@ ion-input.ion-border {
 
 }
 
+#search{
+  display: none;
+}
 
