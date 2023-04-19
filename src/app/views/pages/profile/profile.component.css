@@ -1,0 +1,11 @@
+@import "src/app/views/pages/login/login.component.css";
+body{
+  min-height: 100vh;
+}
+input:not([type="submit"]) {
+  width: 40vw;
+  height: 2.5rem;
+}
+.form *{
+  margin: 0 auto;
+}
