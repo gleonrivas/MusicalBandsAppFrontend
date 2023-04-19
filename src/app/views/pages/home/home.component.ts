@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormationService} from "../../../shared/services/formation.service";
-import {FormationModel} from "../../../shared/models/formation.model";
+import {FormationType} from "../../../shared/models/formationType.model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,10 +10,10 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit{
 
-  public userFormations:FormationModel[]=[]
+  public userFormations:FormationType[]=[]
   public auth = localStorage.getItem('Authorization');
   public finder: string = '';
-  public searchedFormations:FormationModel[]=[];
+  public searchedFormations: FormationType[] | null | undefined;
 
   constructor(
     private formationService:FormationService,
@@ -24,12 +24,38 @@ export class HomeComponent implements OnInit{
 
 
   ngOnInit(){
-    this.formationService.getUserFormations().subscribe((data)=>{
-      this.userFormations = data;
-      console.log(data);
+    this.formationService.getUserFormationsByOwner().subscribe((data) => {
+      this.userFormations = [];
+      data.forEach((result: any) => {
+        const {id, active, designation, foundationYear, logo, name, type} = result;
+        this.userFormations.push({
+          id: id,
+          active: active,
+          designation: designation,
+          foundationYear: foundationYear,
+          logo: logo,
+          name: name,
+          type: type,
+          origin: 'Eres propietari@'
+        });
+      });
     });
-    console.log(localStorage.getItem('Authorization'))
-    this.formationService.getFormation()
+    this.formationService.getUserFormationsByUser().subscribe((data) => {
+      this.userFormations = [];
+      data.forEach((result: any) => {
+        const {id, active, designation, foundationYear, logo, name, type} = result;
+        this.userFormations.push({
+          id: id,
+          active: active,
+          designation: designation,
+          foundationYear: foundationYear,
+          logo: logo,
+          name: name,
+          type: type,
+          origin: 'Eres participante'
+        });
+      });
+    });
   }
 
   searchFormation() {
@@ -42,24 +68,25 @@ export class HomeComponent implements OnInit{
       this.searchedFormations = [];
       data.forEach((result: any) => {
         const {id, active, designation, foundationYear, logo, name, type} = result;
-        this.searchedFormations.push({
+        this.searchedFormations!.push({
           id:id,
           active:active,
           designation:designation,
           foundationYear:foundationYear,
           logo:logo,
           name:name,
-          type:type
+          type:type,
+          origin:'Propietario'
         });
       });
       if (!this.finder) {
         this.searchedFormations = [];
       }
-    })
+    });
   }
 
 
-  viewFormation(formation:FormationModel){
+  viewFormation(formation:FormationType){
     this.formationService.setFormation(formation);
     this.route.navigateByUrl('/formacion');
   }

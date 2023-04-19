@@ -12,21 +12,35 @@
 
     <div class="scroll">
       <div class="title-controller f-row">
-        <h3>Mis formaciones</h3>
-        <a href="#">Crear</a>
+        <h3 *ngIf="!finder">Mis formaciones</h3>
+        <h3 *ngIf="finder">Resultado de la busqueda</h3>
+        <a href="#" *ngIf="!finder">Crear</a>
       </div>
-      <div class="box">
+      <div *ngIf="!finder" class="box">
         <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
         <div class="formacion flex-row" *ngFor="let formation of userFormations">
-<!--        <div class="formacion flex-row">-->
+          <!--        <div class="formacion flex-row">-->
           <h5 class="">LOGO</h5>
           <div class="formacion-info f-col">
-          <p class="fw-bold">{{formation.name}}</p>
-<!--            <p class="fw-bold">Solfamidas</p>-->
-            <p>rol</p>
+            <p class="fw-bold">{{formation.name}}</p>
+            <!--            <p class="fw-bold">Solfamidas</p>-->
+            <p>{{formation.origin}}</p>
           </div>
           <a class="text-light" (click)="viewFormation(formation)">Ver</a>
         </div>
+
+      </div>
+      <div *ngIf="finder" class="box">
+        <div class="formacion flex-row" *ngIf="searchedFormations!.length " >No se encuentran coincidencias.</div>
+
+       <!-- <div class="formacion flex-row" *ngFor="let formation of userFormations">
+          <h5 class="">LOGO</h5>
+          <div class="formacion-info f-col">
+            <p class="fw-bold">{{formation.name}}</p>
+            <p>{{formation.origin}}</p>
+          </div>
+          <a class="text-light" (click)="viewFormation(formation)">Ver</a>
+        </div>-->
 
       </div>
     </div>
