@@ -4,23 +4,23 @@
     <div id="navbarNav" style="alignment: center">
       <ul class="navbar-nav" style="display: flex; flex-direction: row; flex-wrap: nowrap;">
         <li class="nav-item" style="margin-left: 1vw; margin-right: 1vw;">
-          <a class="nav-link active" aria-current="page" routerLink=""><fa-icon [icon]="['fas', 'home']" style="Color:white;  hover-color: white; width: 100px;"></fa-icon></a>
+          <a class="nav-link active" aria-current="page"><fa-icon [icon]="['fas', 'home']" style="Color:white;  hover-color: white; width: 100px;"></fa-icon></a>
         </li>
         <li class="nav-item" style="margin-left: 1vw; margin-right: 1vw;" routerLink="/perfil">
-          <a class="nav-link active" aria-current="page" routerLink=""><fa-icon [icon]="['fas', 'person']" style="Color:white;  hover-color: white;"></fa-icon></a>
+          <a class="nav-link active" aria-current="page" #routerLink=""><fa-icon [icon]="['fas', 'person']" style="Color:white;  hover-color: white;"></fa-icon></a>
         </li>
         <li class="nav-item" style="margin-left: 1vw; margin-right: 1vw;">
-          <a class="nav-link" routerLink=""><img src="https://i.imgur.com/68z5BI7.png"></a>
+          <a class="nav-link" ><img src="https://i.imgur.com/68z5BI7.png"></a>
         </li>
         <li class="nav-item" style="margin-left: 1vw; margin-right: 1vw;">
-          <a class="nav-link" routerLink=""><fa-icon [icon]="['fas', 'message']" style="Color:white;  hover-color: white; width: 150px;"></fa-icon></a>
+          <a class="nav-link" ><fa-icon [icon]="['fas', 'message']" style="Color:white;  hover-color: white; width: 150px;"></fa-icon></a>
         </li>
         <li class="nav-item" style="margin-left: 1vw; margin-right: 1vw;">
-          <button style="background-color: transparent; border-color: transparent;" class="nav-link" href="#" tabindex="-1" aria-disabled="true" #(click)=""><fa-icon [icon]="['fas', 'sign-out']" style="Color:white;  hover-color: white;"></fa-icon></button>
+          <button style="background-color: transparent; border-color: transparent;" class="nav-link" href="#" tabindex="-1" aria-disabled="true" (click)="logout()"><fa-icon [icon]="['fas', 'sign-out']" style="Color:white;  hover-color: white;"></fa-icon></button>
         </li>
       </ul>
     </div>
-    <button class="nav-link" href="#" style="border-radius: 50px; background-color: transparent; border-color: transparent; alignment: center" #(click)="" disabled></button>
+    <button class="nav-link" href="#" style="border-radius: 50px; background-color: transparent; border-color: transparent; alignment: center"  disabled></button>
   </div>
 </nav>
 <router-outlet></router-outlet>
