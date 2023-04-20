@@ -34,6 +34,23 @@ ion-content{
   --ion-color: #1a1a1a
 }
 
+#barra {
+  width: 100%;
+}
+
+.ion-color-danger {
+  --ion-color-base: var(--ion-color-danger, #C63535) !important;
+  --ion-color-base-rgb: var(--ion-color-danger-rgb, 235, 68, 90) !important;
+  --ion-color-contrast: var(--ion-color-danger-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-danger-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-danger-shade, #C63535) !important;
+  --ion-color-tint: var(--ion-color-danger-tint, #C63535) !important;
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0px;
+}
+
 .text{
   color: #1a1a1a;
   font-family: 'Rubik', sans-serif;
@@ -94,5 +111,6 @@ ion-input.ion-border {
 
 #search{
   display: none;
+  background-color: white;
 }
 
