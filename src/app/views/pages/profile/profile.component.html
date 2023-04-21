@@ -3,20 +3,35 @@
   <title>Perfil</title>
 </head>
 <body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
+<app-navegacion></app-navegacion>
+<div class="d-flex flex-column m-auto">
+  <br>
+  <br>
+  <br>
+    <h1 class="m-auto">Perfil</h1>
 
-<div class="form d-flex flex-column">
-  <h2>Perfil</h2>
-  <div class="inputbox mt-3">Nombre<input type="text" placeholder="" name="" class="form-control"  required="required"> </div>
-  <div class="inputbox mt-3">Apellidos<input type="text" placeholder="" name="" class="form-control" required="required" > </div>
-  <div class="inputbox mt-3">Email<input type="text" placeholder="" name="" class="form-control" required="required" > </div>
-  <div class="inputbox mt-3">DNI<input type="text" placeholder="" name="" class="form-control" required="required" > </div>
-  <div class="inputbox mt-3">Fecha de nacimiento<input type="date" placeholder="" name="" class="form-control" required="required" > </div>
-  <div class="d-flex flex-column justify-content-between align-items-center gap-2 m-4">
-    <div class="text-right">
-      <button class="btn register btn-block">Guardar cambios</button>
+    <div class="form d-flex flex-row m-auto">
+      <div class="div-img"><img src="" alt=""></div>
+      <div class="form d-flex flex-column">
+        <div class="inputbox">Nombre<input [value]="profile.name" type="text" placeholder="" name="" class="form-control"  required="required"> </div>
+        <div class="inputbox">Apellidos<input [value]="profile.surName" type="text" placeholder="" name="" class="form-control" required="required" > </div>
+        <div class="inputbox">Email<input [value]="profile.email" type="text" placeholder="" name="" class="form-control" required="required" > </div>
+        <div class="inputbox">DNI<input [value]="profile.dni" type="text" placeholder="" name="" class="form-control" required="required" > </div>
+        <div class="inputbox">Fecha de nacimiento</div>
+        <div class="d-flex flex-row gap-5">
+          <input [value]="profile.birthDate" type="number" placeholder="Dia: 02" name="" class="form-control" required="required" >
+          <input [value]="profile.birthDate" type="number" placeholder="Mes: 05" name="" class="form-control" required="required" >
+          <input [value]="profile.birthDate" type="number" placeholder="Año: 2011" name="" class="form-control" required="required" >
+        </div>
+      </div>
     </div>
-    <a routerLink="/registro" class="login">Cambiar contraseña</a>
+    <div class="d-flex flex-column justify-content-between align-items-center gap-2 mt3">
+      <div class="text-right">
+        <button class="btn register btn-block">Guardar cambios</button>
+      </div>
+      <a routerLink="/registro" class="login">Cambiar contraseña</a>
+    </div>
   </div>
-</div>
+
 
 </body>
