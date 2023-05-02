@@ -1,10 +1,10 @@
 <br>
-<ion-grid  class="container">
+<ion-grid  class="containerCreate">
   <h1>Crear formación</h1>
   <ion-text>Empieza a organizar ensayos y conciertos de forma fácil</ion-text>
   <br>
   <br>
-  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Nombre del grupo" [(ngModel)]="newSquad.name"></ion-input>
+  <ion-input class="mi-input"  placeholder="Nombre del grupo" [(ngModel)]="newSquad.name"></ion-input>
   <ion-select [(ngModel)]="selectedValue" class="inputIon" label-placement="floating" fill="outline" placeholder="Tipo de grupo" [(ngModel)]="newSquad.type">
     <ion-select-option value="BUGLE_AND_DRUM_BAND">Banda de cornetas y tambores</ion-select-option>
     <ion-select-option value="MUSICAL_GROUP">Agrupación músical</ion-select-option>

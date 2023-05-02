@@ -14,4 +14,12 @@ export class SquadService {
 
   }
 
+  createLink(id: any){
+    const token: string | null = localStorage.getItem('Authorization')
+    const headers = new HttpHeaders({'Authorization': token!})
+    const params = new HttpParams();
+    const body = {'':''}
+    return this.http.post('http://localhost:8080/InvitationLink/create/' + id, body, {headers: headers, params: params})
+  }
+
 }

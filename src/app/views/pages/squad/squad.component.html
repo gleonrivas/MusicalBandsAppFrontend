@@ -82,8 +82,8 @@
         </ion-card-header>
 
         <ion-card-content>
-          Activar link de invitación <ion-toggle></ion-toggle>
-          <ion-input label="URL" placeholder="URL para invitar"></ion-input>
+          Activar link de invitación <ion-toggle (click)="openLink()"></ion-toggle>
+          <ion-input id="invitationLink" label="URL" [value]="invitation" placeholder="URL para invitar"></ion-input>
         </ion-card-content>
 
         <ion-button fill="clear">Whatsapp</ion-button>

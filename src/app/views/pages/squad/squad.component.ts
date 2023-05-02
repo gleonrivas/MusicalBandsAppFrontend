@@ -12,10 +12,15 @@ import {FormationModel} from "../../../shared/models/formation.model";
 })
 export class SquadComponent{
 
-  constructor(private formationService:FormationService) {}
+  constructor(private formationService:FormationService, private squadService:SquadService) {}
 
 
   finalSquad: any;
+  link = false;
+
+  invitation: any;
+
+  id: any;
   ngOnInit(){
     let squad = this.formationService.getFormation()
     console.log('Squad:', squad.name);
@@ -23,8 +28,26 @@ export class SquadComponent{
       'name': squad.name,
       'image': squad.logo,
     };
+    this.id = squad.id;
+    console.log(this.id)
     console.log(this.finalSquad)
 
+  }
+
+  async openLink(){
+    const linkSpace:any = document.getElementById('invitationLink');
+    if (this.link === false){
+      await this.squadService.createLink(this.id).subscribe((data: any) => {
+        this.invitation = data.link
+      })
+      console.log(this.invitation)
+      linkSpace.style.display = 'block';
+      this.link = true;
+    }
+    else{
+      linkSpace.style.display = 'none'
+      this.link = false;
+    }
   }
 
   initOpts = {
