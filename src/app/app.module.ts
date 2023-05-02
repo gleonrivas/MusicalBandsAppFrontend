@@ -8,7 +8,7 @@ import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome
 // Con el import de abajo, podemos traer iconos a la aplicación de forma nativa, sin necesidad de JPG ni nada. Ahí declaramos qué icono queremos.
 import {faHome, faMessage, faBell, faHashtag, faWrench, faPerson, faPlus, faShare, faXmark, faSearch, faHeart, faSignOut} from '@fortawesome/free-solid-svg-icons';
 import { NavegacionComponent } from './views/components/navegacion/navegacion.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegistroComponent } from './views/pages/registro/registro.component';
 import { HomeComponent } from './views/pages/home/home.component';
 import {IonicModule} from "@ionic/angular";
@@ -17,6 +17,7 @@ import { SquadComponent } from './views/pages/squad/squad.component';
 import {NgxEchartsModule} from "ngx-echarts";
 import { SquadCreateComponent } from './views/pages/squad-create/squad-create.component';
 import { ProfileComponent } from './views/pages/profile/profile.component';
+import { PasswordComponent } from './views/pages/password/password.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProfileComponent } from './views/pages/profile/profile.component';
     RegistroComponent,
     SquadComponent,
     SquadCreateComponent,
-    ProfileComponent
+    ProfileComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -36,12 +38,14 @@ import { ProfileComponent } from './views/pages/profile/profile.component';
       mode: 'ios'
     }),
     NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')}),
+      echarts: () => import('echarts')
+    }),
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

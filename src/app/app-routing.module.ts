@@ -6,6 +6,7 @@ import {HomeComponent} from "./views/pages/home/home.component";
 import {RegistroComponent} from "./views/pages/registro/registro.component";
 import {SquadCreateComponent} from "./views/pages/squad-create/squad-create.component";
 import {ProfileComponent} from "./views/pages/profile/profile.component";
+import {PasswordComponent} from "./views/pages/password/password.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'password',
+    component: PasswordComponent
   }
 ]
 @NgModule({
