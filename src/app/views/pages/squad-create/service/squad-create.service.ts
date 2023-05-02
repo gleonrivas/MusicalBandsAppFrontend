@@ -8,7 +8,6 @@ export class SquadCreateService {
   constructor(private http: HttpClient) { }
   sendNewSquad(body: any){
     const token: string | null = localStorage.getItem('Authorization')
-    console.log(token)
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     try {
