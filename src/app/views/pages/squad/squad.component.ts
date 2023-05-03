@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SquadService} from "./service/squad.service";
 import {FormationService} from "../../../shared/services/formation.service";
 import {EChartsOption} from "echarts";
-import {FormationModel} from "../../../shared/models/formation.model";
+import {FormationType} from "../../../shared/models/formationType.model";
 
 @Component({
   selector: 'app-squad',

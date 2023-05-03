@@ -10,7 +10,7 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+// @import "@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
@@ -24,6 +24,78 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 @import url('https://fonts.googleapis.com/css2?family=Changa+One:ital@1&family=Jost:wght@800&family=Rubik:wght@400;600&display=swap');
+
+.ion-color-primary {
+  --ion-color-base: var(--ion-color-primary, #3880ff) !important;
+  --ion-color-base-rgb: var(--ion-color-primary-rgb, 56, 128, 255) !important;
+  --ion-color-contrast: var(--ion-color-primary-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-primary-shade, #3171e0) !important;
+  --ion-color-tint: var(--ion-color-primary-tint, #4c8dff) !important;
+}
+
+.ion-color-secondary {
+  --ion-color-base: var(--ion-color-secondary, #3dc2ff) !important;
+  --ion-color-base-rgb: var(--ion-color-secondary-rgb, 61, 194, 255) !important;
+  --ion-color-contrast: var(--ion-color-secondary-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-secondary-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-secondary-shade, #36abe0) !important;
+  --ion-color-tint: var(--ion-color-secondary-tint, #50c8ff) !important;
+}
+
+.ion-color-tertiary {
+  --ion-color-base: var(--ion-color-tertiary, #5260ff) !important;
+  --ion-color-base-rgb: var(--ion-color-tertiary-rgb, 82, 96, 255) !important;
+  --ion-color-contrast: var(--ion-color-tertiary-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-tertiary-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-tertiary-shade, #4854e0) !important;
+  --ion-color-tint: var(--ion-color-tertiary-tint, #6370ff) !important;
+}
+
+.ion-color-success {
+  --ion-color-base: var(--ion-color-success, #2dd36f) !important;
+  --ion-color-base-rgb: var(--ion-color-success-rgb, 45, 211, 111) !important;
+  --ion-color-contrast: var(--ion-color-success-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-success-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-success-shade, #28ba62) !important;
+  --ion-color-tint: var(--ion-color-success-tint, #42d77d) !important;
+}
+
+.ion-color-warning {
+  --ion-color-base: var(--ion-color-warning, #ffc409) !important;
+  --ion-color-base-rgb: var(--ion-color-warning-rgb, 255, 196, 9) !important;
+  --ion-color-contrast: var(--ion-color-warning-contrast, #000) !important;
+  --ion-color-contrast-rgb: var(--ion-color-warning-contrast-rgb, 0, 0, 0) !important;
+  --ion-color-shade: var(--ion-color-warning-shade, #e0ac08) !important;
+  --ion-color-tint: var(--ion-color-warning-tint, #ffca22) !important;
+}
+
+.ion-color-light {
+  --ion-color-base: var(--ion-color-light, #f4f5f8) !important;
+  --ion-color-base-rgb: var(--ion-color-light-rgb, 244, 245, 248) !important;
+  --ion-color-contrast: var(--ion-color-light-contrast, #000) !important;
+  --ion-color-contrast-rgb: var(--ion-color-light-contrast-rgb, 0, 0, 0) !important;
+  --ion-color-shade: var(--ion-color-light-shade, #d7d8da) !important;
+  --ion-color-tint: var(--ion-color-light-tint, #f5f6f9) !important;
+}
+
+.ion-color-medium {
+  --ion-color-base: var(--ion-color-medium, #92949c) !important;
+  --ion-color-base-rgb: var(--ion-color-medium-rgb, 146, 148, 156) !important;
+  --ion-color-contrast: var(--ion-color-medium-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-medium-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-medium-shade, #808289) !important;
+  --ion-color-tint: var(--ion-color-medium-tint, #9d9fa6) !important;
+}
+
+.ion-color-dark {
+  --ion-color-base: var(--ion-color-dark, #222428) !important;
+  --ion-color-base-rgb: var(--ion-color-dark-rgb, 34, 36, 40) !important;
+  --ion-color-contrast: var(--ion-color-dark-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-dark-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: var(--ion-color-dark-shade, #1e2023) !important;
+  --ion-color-tint: var(--ion-color-dark-tint, #383a3e) !important;
+}
 
 body {
   font-family: 'Rubik', sans-serif;
@@ -91,6 +163,8 @@ ion-button{
   margin: 0 auto;
 }
 
+
+
 .containerCreate{
   position: relative;
   border-radius: 20px;
@@ -102,17 +176,137 @@ ion-button{
   background-color: white;
 }
 
-.mi-input {
-  background: rgba(250,250,250,1);
-  border: solid 1px rgba(218,218,218,1);
-  margin-bottom: 16px;
-  height: 50px;
-  border-radius: 20px;
-  padding-left: 16px;
-}
-
 #invitationLink{
   display: none;
 }
+
+// Añadido el 03/05
+.contenedor{
+  width: 100%;
+  padding: 30px
+}
+.form{
+  padding: 20px
+}
+.form-control{
+  height: 50px;
+  background-color: #eee
+}
+.form-control:focus{
+  color: #495057;
+  background-color: #fff;
+  border-color: lightcoral;
+  outline: 0;
+  box-shadow: none;
+  background-color: #eee
+}
+.inputbox{
+  margin-bottom: 15px
+}
+.register{
+  width: 200px;
+  height: 51px;
+  background-color: lightcoral;
+  border-color: lightcoral;
+  color: whitesmoke;
+}
+.register:hover{
+  width: 200px;height: 51px;background-color: lightcoral;border-color: lightcoral
+}
+.register:active{
+  width: 200px;height: 51px;background-color: lightcoral;border-color: lightcoral
+}
+.login{
+  color: lightcoral;text-decoration: none
+}
+.login:hover{
+  color: lightcoral;text-decoration: none
+}
+.form-check-input:checked{
+  background-color: lightcoral;border-color: lightcoral
+}
+
+@import url(https://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+.mt-100{
+  margin-top:100px;
+}
+
+.card{
+  border-radius: 3vh;
+  margin: auto;
+  max-width: 380px;
+  padding: 7vh 6vh;
+  align-items: center;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media(max-width:767px){
+  .card{
+    width: 90vw;
+  }
+}
+.card-img{
+  padding: 20px 0;
+  width: 40%;
+}
+
+.card-img img{
+  opacity: 0.7;
+}
+.card-title{
+  margin-bottom: unset;
+}
+.card-title p{
+  color: lightcoral;
+  font-weight: 900;
+  font-size: 30px;
+  margin-bottom: unset;
+}
+.card-text p{
+  color: grey;
+  font-size: 25px;
+  text-align: center;
+  padding: 3vh 0;
+  font-weight: lighter;
+}
+
+
+#logro{
+  display: none;
+}
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 9999;
+}
+
+.loader {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid lightcoral;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 

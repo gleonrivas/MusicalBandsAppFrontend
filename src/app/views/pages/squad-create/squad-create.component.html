@@ -1,20 +1,28 @@
-<br>
-<ion-grid  class="containerCreate">
-  <h1>Crear formación</h1>
-  <ion-text>Empieza a organizar ensayos y conciertos de forma fácil</ion-text>
+<head>
+  <link rel="stylesheet" href="squad-create.component.css">
+</head>
+<body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
+  <app-navegacion></app-navegacion>
   <br>
   <br>
-  <ion-input class="mi-input"  placeholder="Nombre del grupo" [(ngModel)]="newSquad.name"></ion-input>
-  <ion-select [(ngModel)]="selectedValue" class="inputIon" label-placement="floating" fill="outline" placeholder="Tipo de grupo" [(ngModel)]="newSquad.type">
-    <ion-select-option value="BUGLE_AND_DRUM_BAND">Banda de cornetas y tambores</ion-select-option>
-    <ion-select-option value="MUSICAL_GROUP">Agrupación músical</ion-select-option>
-    <ion-select-option value="BANDS_OF_MUSIC">Banda de música</ion-select-option>
-    <ion-select-option value="SYMPHONY_ORCHESTRA">Orquesta sinfónica</ion-select-option>
-  </ion-select>
-  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Ubicación" [(ngModel)]="newSquad.location"></ion-input>
-  <ion-input class="inputIon" label-placement="floating" fill="outline" type="number" placeholder="¿Cuántos miembros sois?" [(ngModel)]="newSquad.number"></ion-input>
-  <ion-datetime class="inputIon" label-placement="floating" fill="outline" placeholder="¿Fecha fundación?" [(ngModel)]="newSquad.date"></ion-datetime>
-  <ion-input class="inputIon" label-placement="floating" fill="outline" placeholder="Logo" [(ngModel)]="newSquad.logo"></ion-input>
   <br>
-  <ion-button color="success" (click)="createSquad()">Crear formación</ion-button>
-</ion-grid>
+  <ion-grid  class="containerCreate">
+    <h1>Crear formación</h1>
+    <ion-text>Empieza a organizar ensayos y conciertos de forma fácil</ion-text>
+    <br>
+    <br>
+    <div class="inputbox mt-3"> <input type="text" placeholder="Nombre" name="" class="form-control" [(ngModel)]="newSquad.name"></div>
+      <ion-select class="inputbox mt-3" [(ngModel)]="selectedValue" class="inputIon" label-placement="floating" fill="outline" placeholder="Tipo de grupo" [(ngModel)]="newSquad.type">
+      <ion-select-option value="BUGLE_AND_DRUM_BAND">Banda de cornetas y tambores</ion-select-option>
+      <ion-select-option value="MUSICAL_GROUP">Agrupación músical</ion-select-option>
+      <ion-select-option value="BANDS_OF_MUSIC">Banda de música</ion-select-option>
+      <ion-select-option value="SYMPHONY_ORCHESTRA">Orquesta sinfónica</ion-select-option>
+    </ion-select>
+    <div class="inputbox mt-3"> <input type="text" placeholder="Localidad" name="" class="form-control" [(ngModel)]="newSquad.location"></div>
+    <div class="inputbox mt-3"> <input type="number" placeholder="¿Cúantos miembros sois?" name="" class="form-control" [(ngModel)]="newSquad.number"></div>
+    <ion-datetime style="margin: 0 auto" class="inputIon" label-placement="floating" fill="outline" placeholder="¿Fecha fundación?" [(ngModel)]="newSquad.date"></ion-datetime>
+    <div class="inputbox mt-3"> <input type="text" placeholder="Logo" name="" class="form-control" [(ngModel)]="newSquad.logo"></div>
+    <br>
+    <ion-button color="success" (click)="createSquad()">Crear formación</ion-button>
+  </ion-grid>
+</body>

@@ -16,7 +16,7 @@
       <div class="title-controller f-row">
         <h3 *ngIf="!finder">Mis formaciones</h3>
         <h3 *ngIf="finder">Resultado de la busqueda</h3>
-        <a href="#" *ngIf="!finder">Crear</a>
+        <a href="#" *ngIf="!finder" routerLink="/crearformacion">Crear</a>
       </div>
       <div *ngIf="!finder" class="box">
         <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>

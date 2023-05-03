@@ -13,13 +13,17 @@ export class NavegacionComponent {
     this.generalService.logOut();
   }
 
+  searchNav = false
+
   searchBar(){
     const search:any = document.getElementById('search');
-    if (search.style.display === 'none'){
+    if (this.searchNav === false){
       search.style.display = 'block'
+      this.searchNav = true;
     }
     else {
       search.style.display = 'none';
+      this.searchNav = false;
     }
   }
 
