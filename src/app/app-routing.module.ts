@@ -7,6 +7,7 @@ import {RegistroComponent} from "./views/pages/registro/registro.component";
 import {SquadCreateComponent} from "./views/pages/squad-create/squad-create.component";
 import {ProfileComponent} from "./views/pages/profile/profile.component";
 import {PasswordComponent} from "./views/pages/password/password.component";
+import {RepertoryComponent} from "./views/pages/repertory/repertory.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'password',
     component: PasswordComponent
+  },
+  {
+    path: 'repertory',
+    component: RepertoryComponent
   }
 ]
 @NgModule({
