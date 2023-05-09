@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
 import { User } from "../../../shared/models/user.model";
 import { IonicModule } from '@ionic/angular';
 import {LoginService} from "./service/login.service";
 import {Router} from "@angular/router";
-
+import {ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-login',
@@ -14,22 +14,38 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router, private toastController: ToastController) {}
   currentUser: User = { user: '', password: '' };
-  async login(){
-    const body = {
-      "email": this.currentUser.user,
-      "password": this.currentUser.password
-    };
-    await this.loginService.loginMethod(body).subscribe((data: any) => {
-      console.log(data)
-      if (data.token === 0){
-        alert(data.error)
+
+  async presentToast(message:string, color:string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color
+    });
+
+    await toast.present();
+  }
+  async login() {
+    try {
+      const body = {
+        email: this.currentUser.user,
+        password: this.currentUser.password
+      };
+      const response = await this.loginService.loginMethod(body).toPromise();
+      console.log(response);
+      // @ts-ignore
+      localStorage.setItem('Authorization', 'Bearer ' + response.token);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error(error);
+      if (error instanceof HttpErrorResponse && error.status === 400) {
+        const token = error.error.token
+        if (token === 0) {
+          this.presentToast('Usuario o contraseña erronea.', 'danger')
+        }
       }
-      else{
-        localStorage.setItem('Authorization', 'Bearer ' + data.token)
-        this.router.navigate(['/home'])
-      }
-    })
+    }
   }
 }

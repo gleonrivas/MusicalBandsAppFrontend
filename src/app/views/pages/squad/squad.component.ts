@@ -24,10 +24,13 @@ export class SquadComponent{
 
   repertory: any;
   async ngOnInit(){
-    let squad = this.formationService.getFormation()
+    let squad = await this.formationService.getFormation().toPromise();
+    // @ts-ignore
     console.log('Squad:', squad.name);
     this.finalSquad = {
+      // @ts-ignore
       'name': squad.name,
+      // @ts-ignore
       'image': squad.logo,
       'repertory': '',
     };
@@ -35,6 +38,7 @@ export class SquadComponent{
     console.log('Numero', this.repertory)
 
   }
+
 
   async openLink(){
     const linkSpace:any = document.getElementById('invitationLink');

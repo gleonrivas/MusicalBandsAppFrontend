@@ -16,6 +16,7 @@ export class FormationService {
 
   setFormation(formation: FormationType) {
     this.formation = formation;
+    // @ts-ignore
     sessionStorage.setItem('idFormation', formation.id)
   }
   getFormation(): Observable<FormationType> {
