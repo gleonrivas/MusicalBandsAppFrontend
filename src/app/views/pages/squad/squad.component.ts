@@ -21,16 +21,18 @@ export class SquadComponent{
   invitation: any;
 
   id: any;
-  ngOnInit(){
+
+  repertory: any;
+  async ngOnInit(){
     let squad = this.formationService.getFormation()
     console.log('Squad:', squad.name);
     this.finalSquad = {
       'name': squad.name,
       'image': squad.logo,
+      'repertory': '',
     };
-    this.id = squad.id;
-    console.log(this.id)
-    console.log(this.finalSquad)
+    this.repertory = await this.squadService.checkRepertory(1);
+    console.log('Numero', this.repertory)
 
   }
 

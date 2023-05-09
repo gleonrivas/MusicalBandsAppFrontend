@@ -18,6 +18,7 @@ import {NgxEchartsModule} from "ngx-echarts";
 import { SquadCreateComponent } from './views/pages/squad-create/squad-create.component';
 import { ProfileComponent } from './views/pages/profile/profile.component';
 import { PasswordComponent } from './views/pages/password/password.component';
+import { BorrowComponent } from './views/pages/borrow/borrow.component';
 import { RepertoryComponent } from './views/pages/repertory/repertory.component';
 
 @NgModule({
@@ -32,7 +33,9 @@ import { RepertoryComponent } from './views/pages/repertory/repertory.component'
     SquadCreateComponent,
     ProfileComponent,
     PasswordComponent,
-    RepertoryComponent
+    RepertoryComponent,
+    PasswordComponent,
+    BorrowComponent,
   ],
   imports: [
     BrowserModule,
