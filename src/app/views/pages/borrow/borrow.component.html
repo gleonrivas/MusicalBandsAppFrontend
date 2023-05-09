@@ -1,0 +1,41 @@
+<head>
+  <link rel="stylesheet" href="borrow.component.css">
+</head>
+<body>
+  <app-navegacion></app-navegacion>
+  <ion-grid class="containerCreate">
+    <br>
+    <br>
+    <br>
+    <h1>Instrumentos</h1>
+    <ion-text>Aquí podrás ver los instrumentos que tienes dentro de la formación.</ion-text>
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item><ion-label>Pokemon</ion-label><ion-button  color="danger"><ion-icon name="plus"></ion-icon></ion-button></ion-item>
+          <ion-item><ion-label>Pokemon</ion-label></ion-item>
+          <ion-item><ion-label>Pokemon</ion-label></ion-item>
+          <ion-item><ion-label>Pokemon</ion-label></ion-item>
+        </ion-list>
+      </ion-col>
+
+      <ion-col>
+
+      </ion-col>
+
+      <ion-col>
+        <div class="inputbox mt-3"> <input type="text" placeholder="Nombre" name="" class="form-control" [(ngModel)]="newMaterial.name"></div>
+        <ion-select class="inputbox mt-3" [(ngModel)]="selectedValue" class="inputIon" label-placement="floating" fill="outline" placeholder="Tipo de material" [(ngModel)]="newMaterial.type">
+          <ion-select-option value="0">Uniforme</ion-select-option>
+          <ion-select-option value="1">Instrumento</ion-select-option>
+        </ion-select>
+        <input type="hidden" value="1" [(ngModel)]="newMaterial.idFormation">
+        <br>
+        <ion-button color="success" (click)="createMaterial()" >Crear material</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</body>
