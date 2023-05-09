@@ -1,0 +1,55 @@
+<head>
+  <link rel="stylesheet" href="repertory.component.css">
+  <title>Inicio Sesión</title>
+</head>
+<body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
+
+<app-navegacion></app-navegacion>
+  <br>
+  <br>
+  <br>
+  <div class="repertory-parent with-border">
+    <div class="tittle-container">
+      <h4 class="tittle">Repertorios</h4>
+      <h4 class="add-new" (click)="setOpen(true)">Crear</h4>
+    </div>
+    <div class="repertory-child">
+      <div class="repertory-child-sub">
+        <!--<div class="repertory">
+          <div class="ms-3">
+            <h4>Titulo</h4>
+            <p>Descripción</p>
+          </div>
+          <h5 class="add-new me-3 mt-auto mb-auto">Eliminar</h5>
+        </div>-->
+        <div *ngFor="let repertory of repertories" class="repertory with-border">
+          <div class="m-auto ">
+            <h4 class="text-center w-75 m-auto text-secondary">{{repertory.name}}</h4>
+            <p class="text-center m-auto mt-3 mb-3">{{repertory.description}}</p>
+          </div>
+          <div class="d-flex flex-row gap-2 justify-content-around">
+            <h6 class="add-new with-border">Ver</h6>
+            <h6 class="add-new with-border bg-light text-dark">Eliminar</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<ion-modal [isOpen]="isModalOpen" id="modal" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+  <ng-template>
+        <div class="tittle-container">
+          <h4 class="tittle">Nuevo Repertorio</h4>
+          <h4 class="add-new" (click)="setOpen(false)">X</h4>
+        </div>
+    <div class="repertory-child-modal">
+      <div class="inputbox">Nombre: *<input  type="text" placeholder="" name="" class="form-control"  required="required"> </div>
+      <div class="inputbox">Descripción: *<textarea   class="form-control"  required="required"></textarea> </div>
+    </div>
+    <p class="text-danger p-2 mt-2 m-auto h-auto">Todos los miembros tienen acceso a los repertorios y sus piezas musicales</p>
+    <h4 class="save">Guardar</h4>
+  </ng-template>
+</ion-modal>
+
+
+</body>
