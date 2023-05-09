@@ -22,4 +22,13 @@ export class SquadService {
     return this.http.post('http://localhost:8080/InvitationLink/create/' + id, body, {headers: headers, params: params})
   }
 
+  async checkRepertory(id: any): Promise<number> {
+    const token: string | null = localStorage.getItem('Authorization')
+    const headers = new HttpHeaders({'Authorization': token!})
+    const data = await this.http.get('http://localhost:8080/repertory/list/' + id, { headers }).toPromise();
+    // @ts-ignore
+    const count = Object.keys(data).length;
+    return count;
+  }
+
 }
