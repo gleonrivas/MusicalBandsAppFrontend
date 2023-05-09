@@ -40,6 +40,7 @@ export class SquadComponent{
     const linkSpace:any = document.getElementById('invitationLink');
     if (this.link === false){
       await this.squadService.createLink(this.id).subscribe((data: any) => {
+        console.log(data);
         this.invitation = data.link
       })
       console.log(this.invitation)
