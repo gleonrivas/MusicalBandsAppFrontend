@@ -10,9 +10,9 @@
 <br>
 <ion-searchbar placeholder="Busca una formación por nombre." [(ngModel)]="finder" (keyup)="searchFormation()"></ion-searchbar><div class="super-container">
 
-  <div class="home-container">
+  <div class="home-container ">
 
-    <div class="scroll">
+    <div class="scroll with-border">
       <div class="title-controller f-row">
         <h3 *ngIf="!finder">Mis formaciones</h3>
         <h3 *ngIf="finder">Resultado de la busqueda</h3>
@@ -20,7 +20,7 @@
       </div>
       <div *ngIf="!finder" class="box">
         <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
-        <div class="formacion flex-row" *ngFor="let formation of userFormations">
+        <div class="formacion flex-row with-border" *ngFor="let formation of userFormations">
           <!--        <div class="formacion flex-row">-->
           <h5 class="">LOGO</h5>
           <div class="formacion-info f-col">
