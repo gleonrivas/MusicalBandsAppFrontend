@@ -19,7 +19,7 @@ export class SquadService {
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     const body = {'':''}
-    return this.http.post('http://localhost:8080/InvitationLink/create/' + id, body, {headers: headers, params: params})
+    return this.http.post('http://localhost:8080/InvitationLink/create/' + 1, body, {headers: headers, params: params})
   }
 
   async checkRepertory(id: any): Promise<number> {

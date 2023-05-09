@@ -18,9 +18,11 @@
       <ion-select-option value="BANDS_OF_MUSIC">Banda de música</ion-select-option>
       <ion-select-option value="SYMPHONY_ORCHESTRA">Orquesta sinfónica</ion-select-option>
     </ion-select>
-    <div class="inputbox mt-3"> <input type="text" placeholder="Localidad" name="" class="form-control" [(ngModel)]="newSquad.location"></div>
-    <div class="inputbox mt-3"> <input type="number" placeholder="¿Cúantos miembros sois?" name="" class="form-control" [(ngModel)]="newSquad.number"></div>
-    <ion-datetime style="margin: 0 auto" class="inputIon" label-placement="floating" fill="outline" placeholder="¿Fecha fundación?" [(ngModel)]="newSquad.date"></ion-datetime>
+    <ion-row>
+      <div class="inputbox mt-3"> <input type="text" placeholder="Localidad" name="" class="form-control" [(ngModel)]="newSquad.location"></div>
+      <div class="inputbox mt-3"> <input type="number" placeholder="¿Cúantos miembros sois?" name="" class="form-control" [(ngModel)]="newSquad.number"></div>
+      <ion-datetime style="margin: 0 auto" class="inputIon" label-placement="floating" fill="outline" placeholder="¿Fecha fundación?" [(ngModel)]="newSquad.date"></ion-datetime>
+    </ion-row>
     <div class="inputbox mt-3"> <input type="text" placeholder="Logo" name="" class="form-control" [(ngModel)]="newSquad.logo"></div>
     <br>
     <ion-button color="success" (click)="createSquad()">Crear formación</ion-button>
