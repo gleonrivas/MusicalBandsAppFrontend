@@ -17,6 +17,24 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router, private toastController: ToastController) {}
   currentUser: User = { user: '', password: '' };
 
+  isModalOpen = false;
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  modalOpen(){
+    const search:any = document.getElementById('modal');
+    if (this.isModalOpen === false){
+      search.style.display = 'block'
+      this.isModalOpen = true;
+    }
+    else {
+      search.style.display = 'none';
+      this.isModalOpen = false;
+    }
+  }
+
   async presentToast(message:string, color:string) {
     const toast = await this.toastController.create({
       message: message,
@@ -28,6 +46,7 @@ export class LoginComponent {
     await toast.present();
   }
   async login() {
+    this.modalOpen();
     try {
       const body = {
         email: this.currentUser.user,
@@ -37,12 +56,14 @@ export class LoginComponent {
       console.log(response);
       // @ts-ignore
       localStorage.setItem('Authorization', 'Bearer ' + response.token);
+      this.modalOpen();
       this.router.navigate(['/home']);
     } catch (error) {
       console.error(error);
       if (error instanceof HttpErrorResponse && error.status === 400) {
         const token = error.error.token
         if (token === 0) {
+          this.modalOpen();
           this.presentToast('Usuario o contraseña erronea.', 'danger')
         }
       }

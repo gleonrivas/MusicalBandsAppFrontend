@@ -3,6 +3,7 @@ import {SquadService} from "./service/squad.service";
 import {FormationService} from "../../../shared/services/formation.service";
 import {EChartsOption} from "echarts";
 import {FormationType} from "../../../shared/models/formationType.model";
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-squad',
@@ -23,8 +24,13 @@ export class SquadComponent{
   id: any;
 
   repertory: any;
+
   async ngOnInit(){
+    const elements:any = document.getElementsByClassName('container');
+
     let squad = await this.formationService.getFormation().toPromise();
+    // @ts-ignore
+    this.id = squad.id;
     // @ts-ignore
     console.log('Squad:', squad.name);
     this.finalSquad = {

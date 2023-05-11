@@ -35,6 +35,7 @@ export class SquadCreateComponent {
         'logo': this.newSquad.logo
       };
     console.log(body)
+    console.log(this.newSquad.date)
     this.squadCreateService.sendNewSquad(body);
     this.router.navigate(['/home'])
   }

@@ -1,21 +1,13 @@
 <head>
   <title>{{finalSquad.name}}</title>
 </head>
-<body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
+<body>
 <app-navegacion></app-navegacion>
 
-<ion-grid  class="container">
+<ion-grid class="container">
   <br>
   <br>
   <br>
-  <ion-row>
-    <h1>{{finalSquad.name}}</h1>
-    <ion-thumbnail>
-      <img src="{{finalSquad.image}}" style="float: right" />
-    </ion-thumbnail>
-    <br>
-  </ion-row>
-
   <ion-row>
     <ion-col>
       <ion-chip color="primary">
@@ -45,10 +37,10 @@
       </ion-chip>
     </ion-col>
     <ion-col>
-      <ion-button routerLink="/instrumentos" color="danger">
-        <ion-icon name="arrow-redo-outline"></ion-icon>
-        <ion-label>Instrumentos</ion-label>
-      </ion-button>
+      <ion-chip routerLink="/instrumentos" color="danger">
+        <ion-icon name="microphone"></ion-icon>
+        <ion-label>Material</ion-label>
+      </ion-chip>
     </ion-col>
 
   </ion-row>
@@ -68,7 +60,7 @@
           <ion-icon name="musical-notes"></ion-icon> Por ahora, no se han programado actuaciones.
         </ion-card-content>
 
-        <ion-button color="success">Nueva actuación</ion-button>
+        <ion-button color="danger">Nueva actuación</ion-button>
 
       </ion-card>
     </ion-col>
@@ -83,7 +75,7 @@
           <ion-icon name="microphone"></ion-icon> Por ahora, no hay programado ensayos.
         </ion-card-content>
 
-        <ion-button color="success">Nuevo ensayo</ion-button>
+        <ion-button color="danger">Nuevo ensayo</ion-button>
       </ion-card>
     </ion-col>
 
@@ -95,13 +87,15 @@
         </ion-card-header>
 
         <ion-card-content>
-          Activar link de invitación <ion-toggle (click)="openLink()"></ion-toggle>
+          Activar link de invitación <ion-toggle color="danger" (click)="openLink()"></ion-toggle>
           <ion-input id="invitationLink" label="URL" [value]="invitation" placeholder="URL para invitar"></ion-input>
         </ion-card-content>
 
-        <ion-button fill="clear">Whatsapp</ion-button>
-        <ion-button fill="clear">Facebook</ion-button>
-        <ion-button fill="clear">Correok</ion-button>
+        <ion-row style="float: left">
+          <ion-button fill="clear"><ion-icon color="danger" name="logo-whatsapp"></ion-icon></ion-button>
+          <ion-button fill="clear"><ion-icon color="danger" name="logo-facebook"></ion-icon></ion-button>
+        </ion-row>
+
       </ion-card>
     </ion-col>
   </ion-row>

@@ -1,12 +1,5 @@
 /* Estilos personalizados para ion-input */
-.mi-input {
-  border-radius: 3vh;
-  background-color: #f7f7f7;
-  border: 1px solid #ccc;
-  font-size: 1.2rem;
-  padding: 0.7rem;
-  color: #444;
-}
+
 
 /* Estilos cuando se enfoca el ion-input */
 .mi-input:focus {
@@ -29,4 +22,54 @@
 
 .mi-input::placeholder {
   color: #999;
+}
+
+ion-select.inputbox {
+  background-color: #f2f2f2;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+  margin-top: 3px;
+  border-radius: 5px;
+}
+
+ion-select.inputbox:focus {
+  border-color: lightcoral;
+  box-shadow: none;
+}
+
+ion-select::part(text) {
+  color: #333;
+  font-weight: normal;
+}
+
+ion-select::part(placeholder) {
+  color: #212529;
+}
+
+ion-datetime {
+  vertical-align: middle;
+  line-height: 1.5;
+  height: inherit;
+  padding: 0.5rem;
+  font-size: 16px;
+  color: #333;
+  background-color: #f2f2f2;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+ion-datetime.inputIon:focus {
+  border-color: lightcoral;
+  box-shadow: none;
+}
+
+ion-datetime::part(label) {
+  color: #666;
+  font-size: 14px;
+}
+
+ion-datetime::part(placeholder) {
+  color: #ccc;
 }
