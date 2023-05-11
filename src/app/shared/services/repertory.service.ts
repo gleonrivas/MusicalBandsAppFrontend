@@ -10,7 +10,15 @@ export class RepertoryService {
   constructor(private restService:RestService) { }
 
   getRepertoryByIdFormation(idFormation:number){
-    return this.restService.get<RepertoryType[]>('http://localhost:8080/repertory/list/'+idFormation)
+    return this.restService.get<RepertoryType[]>('http://localhost:8080/repertory/list/'+idFormation);
+  }
+
+  saveRepertory(repertory:RepertoryType){
+    return this.restService.post('http://localhost:8080/repertory/create', repertory);
+  }
+
+  deleteRepertory(idRepertory:number){
+    return this.restService.delete('http://localhost:8080/repertory/delete/'+idRepertory);
   }
 
 }
