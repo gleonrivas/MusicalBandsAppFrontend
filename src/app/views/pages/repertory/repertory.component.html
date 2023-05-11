@@ -1,5 +1,4 @@
 <head>
-  <link rel="stylesheet" href="repertory.component.css">
   <title>Inicio Sesión</title>
 </head>
 <body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
@@ -24,12 +23,12 @@
         </div>-->
         <div *ngFor="let repertory of repertories" class="repertory with-border">
           <div class="m-auto ">
-            <h4 class="text-center w-75 m-auto text-secondary">{{repertory.name}}</h4>
-            <p class="text-center m-auto mt-3 mb-3">{{repertory.description}}</p>
+            <h4 class="text-center w-75 m-auto text-secondary" style="overflow-wrap: break-word; ">{{repertory.name}}</h4>
+            <p class="text-center w-auto m-auto mt-3 mb-3">{{repertory.description}}</p>
           </div>
           <div class="d-flex flex-row gap-2 justify-content-around">
             <h6 class="add-new with-border">Ver</h6>
-            <h6 class="add-new with-border bg-light text-dark">Eliminar</h6>
+            <h6 (click)="deleteRepertory(repertory.id!)" class="add-new with-border bg-light text-dark">Eliminar</h6>
           </div>
         </div>
       </div>
@@ -43,11 +42,11 @@
           <h4 class="add-new" (click)="setOpen(false)">X</h4>
         </div>
     <div class="repertory-child-modal">
-      <div class="inputbox">Nombre: *<input  type="text" placeholder="" name="" class="form-control"  required="required"> </div>
-      <div class="inputbox">Descripción: *<textarea   class="form-control"  required="required"></textarea> </div>
+      <div class="inputbox">Nombre: *<input [(ngModel)]="name"  type="text" placeholder="" name="" class="form-control"  required="required"> </div>
+      <div class="inputbox">Descripción: *<textarea [(ngModel)]="description"  class="form-control"  required="required"></textarea> </div>
     </div>
     <p class="text-danger p-2 mt-2 m-auto h-auto">Todos los miembros tienen acceso a los repertorios y sus piezas musicales</p>
-    <h4 class="save">Guardar</h4>
+    <h4 class="save" (click)="sendRepertory()">Guardar</h4>
   </ng-template>
 </ion-modal>
 
