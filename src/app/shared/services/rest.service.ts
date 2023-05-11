@@ -25,4 +25,10 @@ export class RestService {
     });
   }
 
+  public delete<K, T = Object>(url: string) {
+    return this.http.delete<T>(url, {
+      headers: this.getHeaders()
+    });
+  }
+
 }
