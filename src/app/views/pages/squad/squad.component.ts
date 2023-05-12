@@ -5,6 +5,12 @@ import {EChartsOption} from "echarts";
 import {FormationType} from "../../../shared/models/formationType.model";
 import { trigger, transition, style, animate } from '@angular/animations';
 
+export const fadeInAnimation = trigger('fadeInAnimation', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('0.5s', style({ opacity: 1 })),
+  ]),
+]);
 @Component({
   selector: 'app-squad',
   templateUrl: './squad.component.html',
