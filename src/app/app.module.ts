@@ -20,6 +20,8 @@ import { ProfileComponent } from './views/pages/profile/profile.component';
 import { PasswordComponent } from './views/pages/password/password.component';
 import { BorrowComponent } from './views/pages/borrow/borrow.component';
 import { RepertoryComponent } from './views/pages/repertory/repertory.component';
+import { MusicalPieceComponent } from './views/pages/musical-piece/musical-piece.component';
+import {EncryptionService} from "./shared/services/encryption.service";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { RepertoryComponent } from './views/pages/repertory/repertory.component'
     RepertoryComponent,
     PasswordComponent,
     BorrowComponent,
+    MusicalPieceComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { RepertoryComponent } from './views/pages/repertory/repertory.component'
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [EncryptionService],
   bootstrap: [AppComponent]
 })
 
