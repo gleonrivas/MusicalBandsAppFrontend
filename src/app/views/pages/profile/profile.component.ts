@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit{
     if (this.dni!=''&& !this.comprobarDNI(this.dni!)){
       this.dni = null
     }
-    if (!this.birthDate){
+    if (!this.birthDate || this.birthDate==''){
       this.birthDate = null
     }
 

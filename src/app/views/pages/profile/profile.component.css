@@ -26,7 +26,7 @@ input:not([type="submit"]) {
   margin: 0;
 }
 .div-img{
-  margin: auto;
+  margin: 1rem auto;
   width: 20rem;
   height: 25rem;
   border-radius: 5rem;
@@ -34,6 +34,7 @@ input:not([type="submit"]) {
 }
 .div-img img {
   object-fit: contain;
+  border-radius: inherit;
 }
 
 @media (max-width: 1200px) {
@@ -41,6 +42,7 @@ input:not([type="submit"]) {
   .div-img{
     width: 15rem;
     height: 15rem;
+    margin: 0 auto 3rem auto;
     border-radius: 3rem;
   }
 
