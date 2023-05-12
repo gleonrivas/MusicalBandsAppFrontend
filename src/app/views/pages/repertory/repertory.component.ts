@@ -6,6 +6,7 @@ import {RepertoryType} from "../../../shared/models/repertoryType.model";
 import {AlertController, ToastController} from "@ionic/angular";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FormationType} from "../../../shared/models/formationType.model";
+import {EncryptionService} from "../../../shared/services/encryption.service";
 
 @Component({
   selector: 'app-repertory',
@@ -27,6 +28,7 @@ export class RepertoryComponent implements OnInit{
     public formationService:FormationService,
     private alertController: AlertController,
     private toastController: ToastController,
+    private encryptionService: EncryptionService
   ) {
   }
 
@@ -57,7 +59,7 @@ export class RepertoryComponent implements OnInit{
   ngOnInit(){
     this.name = ''
     this.description = ''
-    this.repertoryService.getRepertoryByIdFormation(parseInt(sessionStorage.getItem('idFormation')!)).subscribe((data) => {
+    this.repertoryService.getRepertoryByIdFormation(parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idFormation')!))).subscribe((data) => {
       this.repertories = data
     });
     this.formationService.getFormation().subscribe((data: FormationType) =>{
@@ -116,5 +118,4 @@ export class RepertoryComponent implements OnInit{
   }
 
 
-  protected readonly localStorage = localStorage;
 }
