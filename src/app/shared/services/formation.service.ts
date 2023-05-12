@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {RestService} from "./rest.service";
 import {FormationType} from "../models/formationType.model";
-import {EnumFormationType} from "../models/Enum/EnumFormationType";
+import { EncryptionService } from './encryption.service';
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -10,7 +10,10 @@ import {Observable} from "rxjs";
 export class FormationService {
 
   public apikey = localStorage.getItem('Authorization')
-  constructor(private rest: RestService) { }
+  constructor(
+    private rest: RestService,
+    private encryptionService: EncryptionService
+  ) { }
 
   private formation!:FormationType;
 
@@ -18,9 +21,18 @@ export class FormationService {
     this.formation = formation;
     // @ts-ignore
     sessionStorage.setItem('idFormation', formation.id)
+    /*
+    console.log(formation.id!.toString())
+    // @ts-ignore
+    sessionStorage.setItem('idFormation', this.encryptionService.encrypt(formation.id!.toString()))
+    console.log(this.encryptionService.encrypt(formation.id!.toString()))
+
+    */
   }
   getFormation(): Observable<FormationType> {
     return this.getFormationById(parseInt(sessionStorage.getItem('idFormation')!));
+    // return this.getFormationById(this.encryptionService.decrypt(sessionStorage.getItem('idFormation')!));
+
   }
 
   formationFinder(formationName:string){
