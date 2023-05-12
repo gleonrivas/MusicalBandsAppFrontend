@@ -17,11 +17,18 @@ export class BorrowComponent {
   newMaterial: newMaterial = { name: '', type: 0, date: new Date(), idFormation: 0}
 
   createMaterial(){
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const formatedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
     const body =
-      {'transferredMateria':this.newMaterial.name,
-        'materialType':this.newMaterial.type,
-        'fullDate': formatDate(new Date(), 'yyyy/MM/dd', 'en'),
-        'idFormation': 1
+      {"transferredMaterial" : this.newMaterial.name,
+        "materialType" : this.newMaterial.type,
+        "fullDate" : formatedDate,
+        "idFormation" : sessionStorage.getItem('idFormacionC')
       };
     console.log(body)
     this.borrowService.sendNewMaterial(body);

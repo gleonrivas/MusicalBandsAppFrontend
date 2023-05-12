@@ -5,6 +5,7 @@ import {newSquad} from "../../../shared/models/newSquad.model";
 import {RegisterService} from "../registro/service/register.service";
 import {SquadCreateService} from "./service/squad-create.service";
 import {Router} from "@angular/router";
+import {ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-squad-create',
@@ -16,7 +17,7 @@ import {Router} from "@angular/router";
 
 export class SquadCreateComponent {
 
-  constructor(private squadCreateService: SquadCreateService, private router: Router) {}
+  constructor(private squadCreateService: SquadCreateService, private router: Router, private toastController: ToastController) {}
 
   selectedValue: any;
 
@@ -31,12 +32,28 @@ export class SquadCreateComponent {
         'name':this.newSquad.name,
         'designation':'musical',
         'type':this.newSquad.type,
-        'fundationDate':this.newSquad.date,
+        'fundationDate':this.newSquad.date + 'T04:20:00',
         'logo': this.newSquad.logo
       };
-    console.log(body)
-    console.log(this.newSquad.date)
-    this.squadCreateService.sendNewSquad(body);
-    this.router.navigate(['/home'])
+    const isEmpty = Object.values(body).some(value => value === '');
+    if (isEmpty){
+      this.presentToast('Debes rellenar todos los campos.', 'danger')
+    }
+    else {
+      this.squadCreateService.sendNewSquad(body);
+      this.presentToast('¡Formación creada!', 'success')
+      this.router.navigate(['/home'])
+    }
+  }
+
+  async presentToast(message:string, color:string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color
+    });
+
+    await toast.present();
   }
 }
