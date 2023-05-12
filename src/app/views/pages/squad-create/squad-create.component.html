@@ -11,14 +11,19 @@
   <ion-text>Empieza a organizar ensayos y conciertos de forma fácil</ion-text>
   <br>
   <br>
-  <div class="inputbox mt-3"> <input type="text" placeholder="Nombre" name="" class="form-control" [(ngModel)]="newSquad.name"></div>
+  <div class="inputbox mt-3"> <label>Nombre</label> <input type="text" placeholder="Nombre" name="" class="form-control" [(ngModel)]="newSquad.name"></div>
+  <label>Localidad</label>
   <input type="text" placeholder="Localidad" name="" class="form-control" [(ngModel)]="newSquad.location">
   <ion-row>
     <ion-col class="inputbox mt-3" style="margin-right: 41%">
-      <ion-datetime presentation="date" [(ngModel)]="newSquad.date"></ion-datetime>
+      <label>Fundación</label>
+      <input [(ngModel)]="newSquad.date" class="form-control" type="date">
+      <label style="margin-top: 5vh">¿Cúantos miembros sois?</label>
+      <input type="number" placeholder="¿Cúantos miembros sois?" name="" class="form-control" [(ngModel)]="newSquad.number" >
     </ion-col>
 
     <ion-col class="inputbox" style="width: 100%; float: right">
+      <label style="margin-top: 1vh">Tipo de formación</label>
       <ion-select class="inputbox mt-3" placeholder="Tipo de grupo" [(ngModel)]="newSquad.type">
         <ion-select-option value="BUGLE_AND_DRUM_BAND">Banda de cornetas y tambores</ion-select-option>
         <ion-select-option value="MUSICAL_GROUP">Agrupación músical</ion-select-option>
@@ -26,12 +31,12 @@
         <ion-select-option value="SYMPHONY_ORCHESTRA">Orquesta sinfónica</ion-select-option>
       </ion-select>
 
-      <input type="number" placeholder="¿Cúantos miembros sois?" name="" class="form-control" [(ngModel)]="newSquad.number" style="margin-top: 5vh">
-
-      <input type="text" placeholder="Logo" name="" class="form-control" [(ngModel)]="newSquad.logo" style="margin-top: 5vh">
-
-      <ion-button color="danger" (click)="createSquad()" style="margin-top: 5vh">Crear formación</ion-button>
+      <label style="margin-top: 2vh">Logo</label>
+      <input type="text" placeholder="Logo" name="" class="form-control" [(ngModel)]="newSquad.logo">
     </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-button color="danger" (click)="createSquad()" style="margin-top: 5vh">Crear formación</ion-button>
   </ion-row>
 </ion-grid>
 </body>

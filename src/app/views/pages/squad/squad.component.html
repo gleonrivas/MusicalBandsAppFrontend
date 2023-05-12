@@ -1,5 +1,5 @@
 <head>
-  <title>{{finalSquad.name}}</title>
+  <title>Formación</title>
 </head>
 <body>
 <app-navegacion></app-navegacion>
@@ -31,15 +31,15 @@
     </ion-col>
 
     <ion-col>
-      <ion-chip color="primary">
+      <ion-chip color="primary" routerLink="/repertory">
         <ion-icon name="radio"></ion-icon>
-        <ion-label><b>{{repertory}}</b> Repertorio </ion-label>
+        <ion-label><b>{{repertory}}</b> Repertorios </ion-label>
       </ion-chip>
     </ion-col>
     <ion-col>
       <ion-chip routerLink="/instrumentos" color="danger">
-        <ion-icon name="microphone"></ion-icon>
-        <ion-label>Material</ion-label>
+        <ion-icon name="albums"></ion-icon>
+        <ion-label>Materiales</ion-label>
       </ion-chip>
     </ion-col>
 
@@ -47,7 +47,7 @@
 
 </ion-grid>
 
-<ion-grid class="container">
+<ion-grid class="container" >
   <ion-row>
 
     <ion-col>
@@ -105,7 +105,7 @@
     </ion-col>
     <ion-col>
       <ion-card>
-        <ion-title> Perfil usuario</ion-title>
+        <ion-title> {{finalSquad.name}} <img src="{{finalSquad.logo}}" style="height: 10%; width: 20%; border-radius: 50px"></ion-title>
       </ion-card>
     </ion-col>
   </ion-row>

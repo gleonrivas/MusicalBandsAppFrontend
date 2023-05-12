@@ -5,6 +5,12 @@ import {EChartsOption} from "echarts";
 import {FormationType} from "../../../shared/models/formationType.model";
 import { trigger, transition, style, animate } from '@angular/animations';
 
+export const fadeInAnimation = trigger('fadeInAnimation', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('0.5s', style({ opacity: 1 })),
+  ]),
+]);
 @Component({
   selector: 'app-squad',
   templateUrl: './squad.component.html',
@@ -31,21 +37,23 @@ export class SquadComponent{
     let squad = await this.formationService.getFormation().toPromise();
     // @ts-ignore
     this.id = squad.id;
+    sessionStorage.setItem('idFormacionC', this.id);
+    console.log(squad)
+    console.log('ID: ' + sessionStorage.getItem('idFormacionC'))
+
     // @ts-ignore
     console.log('Squad:', squad.name);
     this.finalSquad = {
       // @ts-ignore
-      'name': squad.name,
+      'name': squad?.name,
       // @ts-ignore
-      'image': squad.logo,
+      'logo': squad?.logo,
       'repertory': '',
     };
-    this.repertory = await this.squadService.checkRepertory(1);
+    this.repertory = await this.squadService.checkRepertory(this.id);
     console.log('Numero', this.repertory)
 
   }
-
-
   async openLink(){
     const linkSpace:any = document.getElementById('invitationLink');
     if (this.link === false){
@@ -69,7 +77,7 @@ export class SquadComponent{
   };
 
   options: EChartsOption = {
-    color: ['#3398DB'],
+    color: ['rgba(234,103,103,0.79)'],
     tooltip: {
       trigger: 'axis',
       axisPointer: {
