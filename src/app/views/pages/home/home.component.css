@@ -11,6 +11,17 @@ ion-searchbar{
   --border-radius: .5rem;
 }
 
+.div-img{
+  width: 5rem;
+  height: 3rem;
+  border-radius: inherit;
+}
+img{
+  width: 5rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: inherit;
+}
 
 body::-webkit-scrollbar{
   display: none;
@@ -75,15 +86,6 @@ body::-webkit-scrollbar{
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.20);
 }
 
-.formacion h5{
-  border: 2px solid #C63535;
-  padding: .5rem;
-  border-radius: .3rem;
-}
-.formacion h5 {
-  width: max-content;
-  margin: 0;
-}
 .formacion-info{
   width: 90%;
 }

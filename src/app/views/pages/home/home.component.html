@@ -22,7 +22,7 @@
         <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
         <div class="formacion flex-row with-border" *ngFor="let formation of userFormations">
           <!--        <div class="formacion flex-row">-->
-          <h5 class="">LOGO</h5>
+          <div class="div-img"><img src="{{formation.logo}}"></div>
           <div class="formacion-info f-col">
             <p class="fw-bold">{{formation.name}}</p>
             <!--            <p class="fw-bold">Solfamidas</p>-->
