@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {RepertoryType} from "../../../shared/models/repertoryType.model";
 import {AlertController, ToastController} from "@ionic/angular";
 import {HttpErrorResponse} from "@angular/common/http";
+import {FormationType} from "../../../shared/models/formationType.model";
 
 @Component({
   selector: 'app-repertory',
@@ -15,6 +16,7 @@ export class RepertoryComponent implements OnInit{
 
   isModalOpen = false;
   public repertories:RepertoryType[]=[]
+  formationData!:FormationType;
 
   public name = '';
   public description = '';
@@ -22,7 +24,7 @@ export class RepertoryComponent implements OnInit{
   constructor(
     private rt:Router,
     private repertoryService:RepertoryService,
-    private formationService:FormationService,
+    public formationService:FormationService,
     private alertController: AlertController,
     private toastController: ToastController,
   ) {
@@ -58,6 +60,9 @@ export class RepertoryComponent implements OnInit{
     this.repertoryService.getRepertoryByIdFormation(parseInt(sessionStorage.getItem('idFormation')!)).subscribe((data) => {
       this.repertories = data
     });
+    this.formationService.getFormation().subscribe((data: FormationType) =>{
+      this.formationData = data
+    })
   }
 
   sendRepertory(){
@@ -96,7 +101,7 @@ export class RepertoryComponent implements OnInit{
     this.repertoryService.deleteRepertory(idRepertory).subscribe(
       (response) => {
         this.presentToast('Se ha eliminado correctamente el repertorio.', 'success');
-        this.rt.navigateByUrl('/repertory');
+        this.ngOnInit()
       },
       (error: HttpErrorResponse) => {
         this.presentToast('Hubo un problema, inténtalo más tarde.', 'danger');
@@ -105,5 +110,11 @@ export class RepertoryComponent implements OnInit{
     );
   }
 
+  showMusicalPiece(id:number){
+    sessionStorage.setItem('idRepertory', id)
+    this.rt.navigateByUrl('/musicalPiece')
+  }
 
+
+  protected readonly localStorage = localStorage;
 }
