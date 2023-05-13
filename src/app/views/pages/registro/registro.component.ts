@@ -5,6 +5,7 @@ import {User} from "../../../shared/models/user.model";
 import {RegisterService} from "./service/register.service";
 import {Router} from "@angular/router";
 import {ToastController} from "@ionic/angular";
+import {GeneralService} from "../../../shared/services/general.service";
 
 @Component({
   selector: 'app-registro',
@@ -14,7 +15,7 @@ import {ToastController} from "@ionic/angular";
 })
 export class RegistroComponent {
 
-  constructor(private registerService: RegisterService, private router: Router, private toastController: ToastController) {
+  constructor(private registerService: RegisterService, private router: Router, private generalService: GeneralService) {
   }
   newUser: Register = { name: '', surname: '', email: '', password: '' }
   registerUser(){
@@ -26,23 +27,12 @@ export class RegistroComponent {
     console.log(body)
     const isEmpty = Object.values(body).some(value => value === '');
     if (isEmpty){
-      this.presentToast('Debes rellenar todos los campos.', 'danger')
+      this.generalService.presentToast('Debes rellenar todos los campos.', 'danger')
     }
     else {
       this.registerService.registerMethod(body);
-      this.presentToast('¡Registro completado', 'success')
+      this.generalService.presentToast('¡Registro completado', 'success')
       this.router.navigate(['/login'])
     }
-  }
-
-  async presentToast(message:string, color:string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000,
-      position: 'bottom',
-      color: color
-    });
-
-    await toast.present();
   }
 }
