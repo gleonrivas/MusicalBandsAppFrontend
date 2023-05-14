@@ -13,7 +13,14 @@ import {GeneralService} from "../../../shared/services/general.service";
 export class BorrowComponent {
   constructor(private borrowService: BorrowService, private generalService: GeneralService) {}
 
+  selectedMaterialName: any;
+  selectedMateriaType: any;
+
+  selectedMaterialId: any;
+
   selectedValue: any;
+
+  editMaterial: newMaterial = { name: '', type: 0, date: new Date(), idFormation: 0}
 
   newMaterial: newMaterial = { name: '', type: 0, date: new Date(), idFormation: 0}
 
@@ -33,26 +40,23 @@ export class BorrowComponent {
       console.log(data)
     })
   }
-
-
   async createMaterial(){
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    const formatedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-
+    const formatedDate = this.borrowService.createDate();
     const body =
       {"transferredMaterial" : this.newMaterial.name,
         "materialType" : this.newMaterial.type,
         "fullDate" : formatedDate,
         "idFormation" : sessionStorage.getItem('idFormacionC')
       };
-    console.log(body)
-    await this.borrowService.sendNewMaterial(body);
-    this.generalService.presentToast('Material creado', 'success')
-    this.checkMaterials()
+    const isEmpty = this.generalService.emptyChecker(body);
+    if (isEmpty){
+      this.generalService.presentToast('Debes rellenar todos los campos.', 'danger')
+    }
+    else {
+      await this.borrowService.sendNewMaterial(body);
+      this.generalService.presentToast('Material creado', 'success')
+      this.checkMaterials()
+    }
   }
 
   async deleteMaterial(id:any){
@@ -62,10 +66,29 @@ export class BorrowComponent {
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
-
   openEdit(material:any){
-    this.materialEdit = material;
-    console.log(this.materialEdit);
+    console.log(material)
+    this.selectedMaterialName = material.transferredMaterial;
+    if (material.materialType === 0){
+      this.selectedMateriaType = 'Uniforme'
+    }
+    if (material.materialType === 1){
+      this.selectedMateriaType = 'Instrumento'
+    }
     this.setOpen(true);
   }
+
+  async editerMaterial(){
+    const formatedDate = this.borrowService.createDate();
+    const body =
+      {"transferredMaterial" : this.editMaterial.name,
+        "materialType" : this.editMaterial.type,
+        "fullDate" : formatedDate,
+        "idFormation" : sessionStorage.getItem('idFormacionC')
+      };
+    await this.borrowService.editMaterial(body);
+    this.generalService.presentToast('Material editado', 'success')
+    this.checkMaterials()
+  }
+
 }

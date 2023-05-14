@@ -26,6 +26,26 @@ export class BorrowService {
       }
     });
   }
+  editMaterial(body: any): Promise<any>{
+    const token: string | null = localStorage.getItem('Authorization')
+    const headers = new HttpHeaders({'Authorization': token!})
+    const params = new HttpParams();
+    return new Promise((resolve, reject) => {
+      try {
+        this.http.put('http://localhost:8080/material/update', body, { headers: headers, params: params }).subscribe(
+          response => {
+            console.log(response);
+            resolve(response); // Resuelve la promesa con la respuesta del servidor
+          },
+          error => {
+            reject(error); // Rechaza la promesa con el error
+          }
+        );
+      } catch (error) {
+        reject(error); // Rechaza la promesa con el error
+      }
+    });
+  }
 
   getMaterial(id:any){
     return this.http.get('http://localhost:8080/material/listMaterialIdFormation/' + id)
@@ -51,6 +71,16 @@ export class BorrowService {
         reject(error); // Rechaza la promesa con el error
       }
     });
+  }
 
+  createDate(){
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const formatedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+    return formatedDate
   }
 }

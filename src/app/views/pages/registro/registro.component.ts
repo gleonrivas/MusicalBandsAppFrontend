@@ -24,8 +24,7 @@ export class RegistroComponent {
         'secondname':this.newUser.surname,
         'email':this.newUser.email,
         'password':this.newUser.password};
-    console.log(body)
-    const isEmpty = Object.values(body).some(value => value === '');
+    const isEmpty = this.generalService.emptyChecker(body)
     if (isEmpty){
       this.generalService.presentToast('Debes rellenar todos los campos.', 'danger')
     }

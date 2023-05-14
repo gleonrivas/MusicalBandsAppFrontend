@@ -26,4 +26,9 @@ export class GeneralService{
     await toast.present();
   }
 
+  emptyChecker(body:any){
+    const isEmpty = Object.values(body).some(value => value === '');
+    return isEmpty
+  }
+
 }
