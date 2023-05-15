@@ -54,7 +54,7 @@
         <button class="add-new" (click)="setOpen(false)">X</button>
       </div>
       <div class="repertory-child-modal">
-        <div class="inputboxEditar">Nombre: <input type="text" placeholder="{{selectedMaterialName}}" [(ngModel)]="editMaterial.name" class="form-control"></div>
+        <div class="inputboxEditar">Nombre: <input type="text" [(ngModel)]="editMaterial.name" class="form-control" ></div>
           <div class="inputboxEditar">Tipo:
             <ion-select class="inputbox mt-3" placeholder="{{selectedMateriaType}}" [(ngModel)]="editMaterial.type" >
               <ion-select-option value="0">Uniforme</ion-select-option>

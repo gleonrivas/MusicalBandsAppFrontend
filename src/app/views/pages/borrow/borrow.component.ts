@@ -42,13 +42,12 @@ export class BorrowComponent {
   }
   async createMaterial(){
     const formatedDate = this.borrowService.createDate();
-    const body =
-      {"transferredMaterial" : this.newMaterial.name,
-        "materialType" : this.newMaterial.type,
-        "fullDate" : formatedDate,
-        "idFormation" : sessionStorage.getItem('idFormacionC')
-      };
+    const name = this.newMaterial.name;
+    const materialType = this.newMaterial.type;
+    const body = this.borrowService.createBody(name, materialType);
+
     const isEmpty = this.generalService.emptyChecker(body);
+
     if (isEmpty){
       this.generalService.presentToast('Debes rellenar todos los campos.', 'danger')
     }
@@ -61,31 +60,37 @@ export class BorrowComponent {
 
   async deleteMaterial(id:any){
     await this.borrowService.deleteMaterial(id);
+    this.generalService.presentToast('Material borrado', 'success')
     this.checkMaterials();
   }
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
   openEdit(material:any){
-    console.log(material)
-    this.selectedMaterialName = material.transferredMaterial;
+    sessionStorage.setItem('idMaterial', material.id)
+    this.editMaterial.name = material.transferredMaterial;
     if (material.materialType === 0){
       this.selectedMateriaType = 'Uniforme'
+      this.editMaterial.type = 0
     }
     if (material.materialType === 1){
       this.selectedMateriaType = 'Instrumento'
+      this.editMaterial.type = 1
     }
     this.setOpen(true);
   }
 
   async editerMaterial(){
-    const formatedDate = this.borrowService.createDate();
+    const formatedDate = this.borrowService.createDate()
+
     const body =
-      {"transferredMaterial" : this.editMaterial.name,
+      {"id": sessionStorage.getItem('idMaterial'),
+        "transferredMaterial" : this.editMaterial.name,
         "materialType" : this.editMaterial.type,
         "fullDate" : formatedDate,
         "idFormation" : sessionStorage.getItem('idFormacionC')
       };
+    console.log(body)
     await this.borrowService.editMaterial(body);
     this.generalService.presentToast('Material editado', 'success')
     this.checkMaterials()
