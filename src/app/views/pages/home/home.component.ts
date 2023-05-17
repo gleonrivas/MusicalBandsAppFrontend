@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit{
   public userFormations:FormationType[]=[]
   public auth = localStorage.getItem('Authorization');
   public finder: string = '';
-  public searchedFormations: FormationType[] | null | undefined;
+  public formationByLink!: FormationType;
 
   constructor(
     private formationService:FormationService,
@@ -59,37 +59,35 @@ export class HomeComponent implements OnInit{
   }
 
   searchFormation() {
-    this.searchedFormations = [];
-    if (!this.finder) {
-      return;
+    if (!this.finder && this.finder.length<30) {
+      !this.formationByLink;
+      console.log(this.formationByLink)
+    }else {
+      this.formationService.getUserFormationByInvitation({link: this.finder}).subscribe((data) => {
+        this.formationByLink = data
+        console.log(data)
+
+        if (!this.finder || this.finder.length<30) {
+          !this.formationByLink;
+        }
+      });
     }
 
-    this.formationService.formationFinder(this.finder).subscribe((data) => {
-      this.searchedFormations = [];
-      data.forEach((result: any) => {
-        const {id, active, designation, foundationYear, logo, name, type} = result;
-        this.searchedFormations!.push({
-          id:id,
-          active:active,
-          designation:designation,
-          foundationYear:foundationYear,
-          logo:logo,
-          name:name,
-          type:type,
-          origin:'Propietario'
-        });
-      });
-      if (!this.finder) {
-        this.searchedFormations = [];
-      }
-    });
+
   }
 
 
   viewFormation(formation:FormationType){
     this.formationService.setFormation(formation);
-    this.route.navigateByUrl('/formacion');
+    this.route.navigate(['/formacion']);
   }
+
+
+  buscarIdEnFormaciones():boolean {
+    const formationEncontrada = this.userFormations.find(formation => formation.id === this.formationByLink.id);
+    return !!formationEncontrada;
+  }
+
 
 
 }

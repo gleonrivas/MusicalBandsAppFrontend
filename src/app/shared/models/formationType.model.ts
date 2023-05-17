@@ -6,6 +6,7 @@ export type FormationType = {
   id?:number,
   active?:boolean,
   designation?:string,
+  fundationDate?:string,
   foundationYear?:string,
   logo?:string,
   name?:string,

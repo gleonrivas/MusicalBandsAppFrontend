@@ -50,6 +50,9 @@ export class FormationService {
   getUserFormationsByUser(){
     return this.rest.get<FormationType[]>('http://localhost:8080/formation/listByOwner')
   }
+  getUserFormationByInvitation(invitation:any){
+    return this.rest.post<FormationType>('http://localhost:8080/formation/findByInvitationLink', invitation)
+  }
 
 
 

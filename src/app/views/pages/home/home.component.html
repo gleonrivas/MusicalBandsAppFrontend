@@ -15,9 +15,23 @@
     <div class="scroll with-border">
       <div class="title-controller f-row">
         <h3 *ngIf="!finder">Mis formaciones</h3>
-        <h3 *ngIf="finder">Resultado de la busqueda</h3>
+        <h3 *ngIf="finder && finder.length>=30">Ohh una invitación :D</h3>
+        <h3 *ngIf="finder && finder.length<30">Vaya... Eso no es una invitación :(</h3>
         <a href="/crearformacion" *ngIf="!finder">Crear</a>
       </div>
+
+      <div *ngIf="finder && finder.length>=30 && formationByLink" class="invitation-card">
+        <div>
+          <img src="{{formationByLink.logo}}">
+        </div>
+        <h1>{{formationByLink.name}}</h1>
+        <p>{{formationByLink.designation}}</p>
+        <p>{{formationByLink.fundationDate | slice: 0:10}}</p>
+
+        <a *ngIf="buscarIdEnFormaciones" (click)="viewFormation(formationByLink)">Aceptar</a>
+        <a *ngIf="!buscarIdEnFormaciones">Ya formas parte</a>
+      </div>
+
       <div *ngIf="!finder" class="box">
         <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
         <div class="formacion flex-row with-border" *ngFor="let formation of userFormations">
@@ -33,7 +47,7 @@
 
       </div>
       <div *ngIf="finder" class="box">
-        <div class="formacion flex-row" *ngIf="searchedFormations!.length " >No se encuentran coincidencias.</div>
+        <div class="formacion flex-row" *ngIf="!formationByLink && finder.length>=30" >Pero no está disponible :(</div>
 
        <!-- <div class="formacion flex-row" *ngFor="let formation of userFormations">
           <h5 class="">LOGO</h5>

@@ -63,6 +63,7 @@ body::-webkit-scrollbar{
 .title-controller a{
   text-align: center;
   font-size: 1rem;
+  color: white;
   margin: .5rem 0;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
   padding: 1rem 2rem;
