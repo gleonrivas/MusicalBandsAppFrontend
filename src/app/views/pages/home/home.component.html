@@ -19,20 +19,18 @@
         <h3 *ngIf="finder && finder.length<30">Vaya... Eso no es una invitación :(</h3>
         <a href="/crearformacion" *ngIf="!finder">Crear</a>
       </div>
-
-      <div *ngIf="finder && finder.length>=30 && formationByLink" class="invitation-card">
+      <div *ngIf="finder && finder.length>=30 && formationByLink" class="invitation-card with-border">
         <div>
           <img src="{{formationByLink.logo}}">
         </div>
-        <h1>{{formationByLink.name}}</h1>
-        <p>{{formationByLink.designation}}</p>
-        <p>{{formationByLink.fundationDate | slice: 0:10}}</p>
-
-        <a *ngIf="buscarIdEnFormaciones" (click)="viewFormation(formationByLink)">Aceptar</a>
-        <a *ngIf="!buscarIdEnFormaciones">Ya formas parte</a>
+        <h1 class="m-0">{{formationByLink.name | titlecase}}</h1>
+        <h5 class="m-0">{{formationByLink.designation | titlecase}}</h5>
+        <a *ngIf="buscarIdEnFormaciones" (click)="viewFormation(formationByLink)" class=" bg-white border-white text-dark mt-3">Aceptar</a>
+        <a *ngIf="!buscarIdEnFormaciones" class="bg-transparent fw-bold border border-2 border-white mt-3">Ya formas parte</a>
+        <p class="w-auto text-center mt-1" >Fundada en {{formationByLink.fundationDate | slice: 0:4}}</p>
       </div>
 
-      <div *ngIf="!finder" class="box">
+      <div *ngIf="!finder || !formationByLink" class="box">
         <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
         <div class="formacion flex-row with-border" *ngFor="let formation of userFormations">
           <!--        <div class="formacion flex-row">-->
