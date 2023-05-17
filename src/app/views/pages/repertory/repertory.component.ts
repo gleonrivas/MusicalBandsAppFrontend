@@ -71,14 +71,14 @@ export class RepertoryComponent implements OnInit{
 
     if (this.name && this.description){
       if (this.name.length > 25){
-        this.inputErrorAlert('Solo se permiten 25 caracteres en el nombre.')
-      } else if (this.description.length > 100){
-        this.inputErrorAlert('Solo se permiten 100 caracteres en la descrioción.')
+        this.inputErrorAlert('Solo se admiten 25 caracteres en el nombre.')
+      } else if (this.description.length > 30){
+        this.inputErrorAlert('Solo se admiten 60 caracteres en la descripción.')
       }else {
         var newRepertory:RepertoryType = {
           name:this.name,
           description:this.description,
-          idFormation:sessionStorage.getItem('idFormation')!
+          idFormation:this.encryptionService.decrypt(sessionStorage.getItem('idFormation')!)
         }
         this.repertoryService.saveRepertory(newRepertory).subscribe(
           respone =>{},

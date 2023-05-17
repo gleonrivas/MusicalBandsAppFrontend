@@ -88,10 +88,16 @@ body{
   margin: 1rem;
   width: 14rem;
   max-width: 17rem;
-  height: 13rem;
+  height: 15rem;
   border-radius: .5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
   justify-content: center;
+}
+.repertory div *{
+  word-wrap: break-word; /* Aplicar "wrap" a las palabras largas */
+}
+.repertory div > p{
+  width: 90%;
 }
 .repertory-child-sub div h6{
   width: 45%;
