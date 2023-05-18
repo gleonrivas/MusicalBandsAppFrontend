@@ -1,0 +1,23 @@
+.home-container{
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 40%;
+  margin: 3rem auto;
+  height: 60vh;
+}
+.body{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 85%;
+  margin: auto;
+}
+.assistanceList{
+  width: 30%;
+}
+.infoEvent{
+  width: 60%;
+}
+.scroll{
+  overflow-y: scroll;
+  height: 300px
+}

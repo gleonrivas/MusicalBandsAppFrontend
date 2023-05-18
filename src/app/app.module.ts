@@ -22,6 +22,8 @@ import { BorrowComponent } from './views/pages/borrow/borrow.component';
 import { RepertoryComponent } from './views/pages/repertory/repertory.component';
 import { MusicalPieceComponent } from './views/pages/musical-piece/musical-piece.component';
 import {EncryptionService} from "./shared/services/encryption.service";
+import {EventComponent} from "./views/pages/event/event.component";
+
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import {EncryptionService} from "./shared/services/encryption.service";
     PasswordComponent,
     BorrowComponent,
     MusicalPieceComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,

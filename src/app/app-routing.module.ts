@@ -10,6 +10,7 @@ import {PasswordComponent} from "./views/pages/password/password.component";
 import {RepertoryComponent} from "./views/pages/repertory/repertory.component";
 import {BorrowComponent} from "./views/pages/borrow/borrow.component";
 import {MusicalPieceComponent} from "./views/pages/musical-piece/musical-piece.component";
+import {EventComponent} from "./views/pages/event/event.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'musicalPiece',
     component: MusicalPieceComponent
+  },
+  {
+    path: 'event/:id_event',
+    component: EventComponent
   }
 ]
 @NgModule({
