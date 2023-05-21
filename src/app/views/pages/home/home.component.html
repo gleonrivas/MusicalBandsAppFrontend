@@ -13,50 +13,46 @@
   <div class="home-container ">
 
     <div class="scroll with-border">
+
       <div class="title-controller f-row">
         <h3 *ngIf="!finder">Mis formaciones</h3>
         <h3 *ngIf="finder && finder.length>=30">Ohh una invitación :D</h3>
         <h3 *ngIf="finder && finder.length<30">Vaya... Eso no es una invitación :(</h3>
         <a href="/crearformacion" *ngIf="!finder">Crear</a>
       </div>
+      <div class="formacion flex-row" *ngIf="!formationByLink && finder.length>=30" >Pero no está disponible :(</div>
+
       <div *ngIf="finder && finder.length>=30 && formationByLink" class="invitation-card with-border">
         <div>
           <img src="{{formationByLink.logo}}">
         </div>
         <h1 class="m-0">{{formationByLink.name | titlecase}}</h1>
         <h5 class="m-0">{{formationByLink.designation | titlecase}}</h5>
-        <a *ngIf="buscarIdEnFormaciones" (click)="viewFormation(formationByLink)" class=" bg-white border-white text-dark mt-3">Aceptar</a>
-        <a *ngIf="!buscarIdEnFormaciones" class="bg-transparent fw-bold border border-2 border-white mt-3">Ya formas parte</a>
-        <p class="w-auto text-center mt-1" >Fundada en {{formationByLink.fundationDate | slice: 0:4}}</p>
+        <a *ngIf="!verifyYourFormations()" (click)="acceptInvitation(formationByLink, finder)" class=" bg-white border-white text-dark mt-3">Aceptar</a>
+        <a *ngIf="verifyYourFormations()" class="bg-transparent fw-bold border border-2 border-white mt-3">Ya formas parte</a>
+        <p class="w-auto text-center m-auto mt-1 mb-2 " >Fundada en {{formationByLink.fundationDate | slice: 0:4}}</p>
       </div>
 
-      <div *ngIf="!finder || !formationByLink" class="box">
-        <div class="formacion flex-row" *ngIf="!auth&&!userFormations" >No hay ninguna formación</div>
-        <div class="formacion flex-row with-border" *ngFor="let formation of userFormations">
-          <!--        <div class="formacion flex-row">-->
+      <div *ngIf="!finder" class="box">
+        <div class="formacion flex-row" *ngIf="!ownFormations&&!isPartFormations" >No hay ninguna formación</div>
+        <h3 *ngIf="ownFormations.length!=0">Eres Titular</h3>
+        <div class="formacion flex-row with-border" *ngFor="let formation of ownFormations">
           <div class="div-img"><img src="{{formation.logo}}"></div>
           <div class="formacion-info f-col">
             <p class="fw-bold">{{formation.name}}</p>
-            <!--            <p class="fw-bold">Solfamidas</p>-->
-            <p>{{formation.origin}}</p>
           </div>
-          <a class="text-light" (click)="viewFormation(formation)">Ver</a>
+          <a class="text-light" (click)="openFormation(formation)">Ver</a>
         </div>
-
-      </div>
-      <div *ngIf="finder" class="box">
-        <div class="formacion flex-row" *ngIf="!formationByLink && finder.length>=30" >Pero no está disponible :(</div>
-
-       <!-- <div class="formacion flex-row" *ngFor="let formation of userFormations">
-          <h5 class="">LOGO</h5>
+        <h3 *ngIf="isPartFormations.length!=0">Formas parte</h3>
+        <div class="formacion flex-row with-border" *ngFor="let formation of isPartFormations">
+          <div class="div-img"><img src="{{formation.logo}}"></div>
           <div class="formacion-info f-col">
             <p class="fw-bold">{{formation.name}}</p>
-            <p>{{formation.origin}}</p>
           </div>
-          <a class="text-light" (click)="viewFormation(formation)">Ver</a>
-        </div>-->
-
+          <a class="text-light" (click)="openFormation(formation)">Ver</a>
+        </div>
       </div>
+
     </div>
 
 
@@ -65,49 +61,8 @@
   <div class="home-container">
     <h3 class="">Calendario</h3>
 
-<!--
-    <div class="scroll">
-      <div class="box">
-        <div class="evento flex-column" >
-          <div class="tit-evento d-flex flex-row">
-            <h6 class="fw-bold">Ensayo "Callejuela de la O"</h6>
-            <div>2023-04-25</div>
-          </div>
-          <p class="">Conservatorio profesional de música Francisco Guerrero.</p>
-        </div>
-        <div class="evento flex-column" >
-          <div class="tit-evento d-flex flex-row">
-            <h6 class="fw-bold">Ensayo "Callejuela de la O"</h6>
-            <div>2023-04-25</div>
-          </div>
-          <p class="">Conservatorio profesional de música Francisco Guerrero.</p>
-        </div>
-        <div class="evento flex-column" >
-          <div class="tit-evento d-flex flex-row">
-            <h6 class="fw-bold">Ensayo "Callejuela de la O"</h6>
-            <div>2023-04-25</div>
-          </div>
-          <p class="">Conservatorio profesional de música Francisco Guerrero.</p>
-        </div>
-        <div class="evento flex-column" >
-          <div class="tit-evento d-flex flex-row">
-            <h6 class="fw-bold">Ensayo "Callejuela de la O"</h6>
-            <div>2023-04-25</div>
-          </div>
-          <p class="">Conservatorio profesional de música Francisco Guerrero.</p>
-        </div>
-      </div>
-    </div>
--->
-
 
   </div>
-
-
-
-
-
-
 
 
 
