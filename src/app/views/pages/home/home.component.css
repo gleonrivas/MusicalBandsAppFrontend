@@ -226,7 +226,7 @@ a{
   background: linear-gradient(172deg, rgba(198,53,53,1) 0%, rgba(187,47,47,1) 44%, rgba(128,12,12,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c63535",endColorstr="#800c0c",GradientType=1);  border-radius: .5rem;
   padding: 2rem 2rem 1rem 2rem;
-  width: 80%;
+  width: 70%;
   height: max-content;
   text-align: center;
   margin: auto;
