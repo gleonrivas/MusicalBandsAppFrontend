@@ -53,6 +53,9 @@ export class FormationService {
   getUserFormationByInvitation(invitation:any){
     return this.rest.post<FormationType>('http://localhost:8080/formation/findByInvitationLink', invitation)
   }
+  acceptFormationByInvitation(invitation:any){
+    return this.rest.post('http://localhost:8080/formation/addUser', invitation)
+  }
 
 
 
