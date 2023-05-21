@@ -38,7 +38,7 @@ body::-webkit-scrollbar{
   flex-flow: column nowrap;
   min-width: 40%;
   margin: 3rem auto;
-  height: 60vh;
+  height: 65vh;
 }
 
 .scroll{
