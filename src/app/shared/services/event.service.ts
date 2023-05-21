@@ -16,4 +16,8 @@ export class EventService{
   getEventById(eventID:number){
     return this.rest.get<EventResponse>('http://localhost:8080/calendar/findEvent/'+eventID);
   }
+
+  getFormationByIdCalendar(eventID:number){
+    return this.rest.get<FormationType>('http://localhost:8080/calendar/findFormation/'+eventID);
+  }
 }
