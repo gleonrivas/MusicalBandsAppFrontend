@@ -26,7 +26,11 @@ export class EventComponent {
     amount: -1,
     penaltyPonderation: -1
   }
-
+  public day:number = -1;
+  public monthList:string[] = ["Enero", "Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Noviembre","Diciembre"];
+  public numberMonth:number= -1;
+  public fecha:Date=new Date();
+  public  month:string= "";
   ngOnInit() {
 
     this.router.paramMap.subscribe((value) => {
@@ -38,6 +42,14 @@ export class EventComponent {
 
     this.eventService.getEventById(this.id_event).subscribe((data) => {
       this.event = data;
+      this.fecha= this.event.date;
+      let fechastring = this.fecha.toString();
+      console.log(fechastring);
+      let cadena:string = fechastring.slice(5,-3);
+      this.numberMonth = parseInt(cadena);
+      this.month = this.monthList[this.numberMonth-1];
+      this.day=Math.abs(parseInt(fechastring.slice(7)));
+
     })
 
   }
