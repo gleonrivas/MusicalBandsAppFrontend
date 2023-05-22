@@ -1,0 +1,35 @@
+<head>
+  <link rel="stylesheet" href="rehearsal.component.css">
+</head>
+<body>
+  <app-navegacion></app-navegacion>
+  <ion-grid class="containerCreate">
+    <br>
+    <br>
+    <br>
+    <h1><button routerLink="/formacion" style="background-color: transparent"><ion-icon name="arrow-round-back"  style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon></button> Crear ensayo </h1>
+    <ion-text>Crea un nuevo ensayo.</ion-text>
+    <br>
+    <ion-col>
+      <label style="margin-top: 0.3vh">Título</label>
+      <div class="inputbox mt-3"> <input type="text" placeholder="¿Un nombre?" name="" class="form-control" [(ngModel)]="newRehearsal.title"></div>
+      <label style="margin-top: 0.3vh">Localización</label>
+      <div class="inputbox mt-3"> <input type="text" placeholder="¿Dónde se hará?" name="" class="form-control" [(ngModel)]="newRehearsal.place"></div>
+      <label style="margin-top: 0.3vh">Descripción</label>
+      <div class="inputbox mt-3"> <input type="text" placeholder="¿De qué trata?" name="" class="form-control" [(ngModel)]="newRehearsal.description"/></div>
+      <br>
+    </ion-col>
+    <ion-col>
+      <label style="margin-top: 0.3vh">Fecha</label>
+      <div class="inputbox mt-3"> <input [(ngModel)]="newRehearsal.date" class="form-control" type="date"></div>
+      <label style="margin-top: 0.3vh">Precio</label>
+      <div class="inputbox mt-3"> <input type="text" placeholder="Precio" name="" class="form-control" [(ngModel)]="newRehearsal.amount"></div>
+      <label style="margin-top: 0.3vh">Penalización</label>
+      <div class="inputbox mt-3"> <input type="text" placeholder="Penalización" name="" class="form-control" [(ngModel)]="newRehearsal.penaltyPonderation"/></div>
+      <br>
+    </ion-col>
+    <ion-button color="danger" (click)="createRehearsal()" >Crear actuación</ion-button>
+  </ion-grid>
+
+
+</body>
