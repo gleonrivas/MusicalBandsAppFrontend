@@ -1,28 +1,42 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './views/pages/login/login.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {LoginComponent} from './views/pages/login/login.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 // Con el import de abajo, podemos traer iconos a la aplicación de forma nativa, sin necesidad de JPG ni nada. Ahí declaramos qué icono queremos.
-import {faHome, faMessage, faBell, faHashtag, faWrench, faPerson, faPlus, faShare, faXmark, faSearch, faHeart, faSignOut} from '@fortawesome/free-solid-svg-icons';
-import { NavegacionComponent } from './views/components/navegacion/navegacion.component';
+import {
+  faBell,
+  faHashtag,
+  faHeart,
+  faHome,
+  faMessage,
+  faPerson,
+  faPlus,
+  faSearch,
+  faShare,
+  faSignOut,
+  faWrench,
+  faXmark
+} from '@fortawesome/free-solid-svg-icons';
+import {NavegacionComponent} from './views/components/navegacion/navegacion.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { RegistroComponent } from './views/pages/registro/registro.component';
-import { HomeComponent } from './views/pages/home/home.component';
+import {RegistroComponent} from './views/pages/registro/registro.component';
+import {HomeComponent} from './views/pages/home/home.component';
 import {IonicModule} from "@ionic/angular";
 import {HttpClientModule} from "@angular/common/http";
-import { SquadComponent } from './views/pages/squad/squad.component';
+import {SquadComponent} from './views/pages/squad/squad.component';
 import {NgxEchartsModule} from "ngx-echarts";
-import { SquadCreateComponent } from './views/pages/squad-create/squad-create.component';
-import { ProfileComponent } from './views/pages/profile/profile.component';
-import { PasswordComponent } from './views/pages/password/password.component';
-import { BorrowComponent } from './views/pages/borrow/borrow.component';
-import { RepertoryComponent } from './views/pages/repertory/repertory.component';
-import { MusicalPieceComponent } from './views/pages/musical-piece/musical-piece.component';
+import {SquadCreateComponent} from './views/pages/squad-create/squad-create.component';
+import {ProfileComponent} from './views/pages/profile/profile.component';
+import {PasswordComponent} from './views/pages/password/password.component';
+import {BorrowComponent} from './views/pages/borrow/borrow.component';
+import {RepertoryComponent} from './views/pages/repertory/repertory.component';
+import {MusicalPieceComponent} from './views/pages/musical-piece/musical-piece.component';
 import {EncryptionService} from "./shared/services/encryption.service";
 import {EventComponent} from "./views/pages/event/event.component";
+
 
 
 @NgModule({

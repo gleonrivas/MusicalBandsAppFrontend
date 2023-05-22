@@ -16,7 +16,7 @@
   width: 40%;
 }
 .infoEvent{
-  width: 100%;
+  width: 96%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
@@ -59,7 +59,7 @@
   margin-left: 50%;
 }
 .calendar{
-  margin:.25em 10px 10px 0;
+  margin:1.25em 10px 10px 0;
   padding-top:5px;
   float:left;
   width:80px;
@@ -123,4 +123,30 @@
 .calendar em:after{right:13px;}
 .cuerpo{
   width: 60%;
+}
+.imagen{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+
+}
+.namecheckbox{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+}
+ion-icon {
+  font-size: 100px !important;
+  color: #C63535;
+}
+.formationName{
+  margin: auto 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 183%;
+  font-weight: bold;
+  text-align: end;
+  width: 93%;
 }
