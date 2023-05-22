@@ -10,8 +10,8 @@ import {PasswordComponent} from "./views/pages/password/password.component";
 import {RepertoryComponent} from "./views/pages/repertory/repertory.component";
 import {BorrowComponent} from "./views/pages/borrow/borrow.component";
 import {MusicalPieceComponent} from "./views/pages/musical-piece/musical-piece.component";
-import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
-import {AuthGuard} from "./shared/auth/auth";
+import {PerformanceComponent as ActuacionComponent} from "./views/pages/performance/performance.component";
+import {RehearsalComponent} from "./views/pages/rehearsal/rehearsal.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -37,7 +37,7 @@ const routes: Routes = [
     component: SquadComponent
   },
   {
-    path: 'home', canActivate: [AuthGuard],
+    path: 'home',
     component: HomeComponent
   },
   {
@@ -49,20 +49,28 @@ const routes: Routes = [
     component: SquadCreateComponent
   },
   {
-    path: 'profile', canActivate: [AuthGuard],
+    path: 'profile',
     component: ProfileComponent
   },
   {
-    path: 'password', canActivate: [AuthGuard],
+    path: 'password',
     component: PasswordComponent
   },
   {
-    path: 'repertory', canActivate: [AuthGuard],
+    path: 'repertory',
     component: RepertoryComponent
   },
   {
-    path: 'pleaseLoggin',
-    component: NoAuthPageComponent
+    path: 'musicalPiece',
+    component: MusicalPieceComponent
+  },
+  {
+    path: 'crearactuacion',
+    component: ActuacionComponent
+  },
+  {
+    path: 'crearensayo',
+    component: RehearsalComponent
   }
 ]
 @NgModule({

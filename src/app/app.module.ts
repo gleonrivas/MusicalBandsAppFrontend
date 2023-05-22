@@ -22,7 +22,9 @@ import { BorrowComponent } from './views/pages/borrow/borrow.component';
 import { RepertoryComponent } from './views/pages/repertory/repertory.component';
 import { MusicalPieceComponent } from './views/pages/musical-piece/musical-piece.component';
 import {EncryptionService} from "./shared/services/encryption.service";
-import { NoAuthPageComponent } from './views/pages/no-auth-page/no-auth-page.component';
+import { PerformanceComponent } from './views/pages/performance/performance.component';
+import { SquadPlayComponent } from './views/pages/squad-play/squad-play.component';
+import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { NoAuthPageComponent } from './views/pages/no-auth-page/no-auth-page.com
     PasswordComponent,
     BorrowComponent,
     MusicalPieceComponent,
-    NoAuthPageComponent,
+    PerformanceComponent,
+    SquadPlayComponent,
+    RehearsalComponent,
   ],
   imports: [
     BrowserModule,
