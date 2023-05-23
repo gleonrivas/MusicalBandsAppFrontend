@@ -56,7 +56,7 @@ import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component'
     PasswordComponent,
     BorrowComponent,
     MusicalPieceComponent,
-    EventComponent
+    EventComponent,
     PerformanceComponent,
     SquadPlayComponent,
     RehearsalComponent,
