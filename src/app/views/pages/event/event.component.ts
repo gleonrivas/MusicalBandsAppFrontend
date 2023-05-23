@@ -5,11 +5,8 @@ import {EventService} from "../../../shared/services/event.service";
 import {FormationType} from "../../../shared/models/formationType.model";
 import {EnumFormationType} from "../../../shared/models/Enum/EnumFormationType";
 import {UserFormation} from "../../../shared/models/UserFormation";
-import {RoleDTO} from "../../../shared/models/roleDTO";
 import {FormationService} from "../../../shared/services/formation.service";
-
 import {UserInfo} from "../../../shared/models/user-info";
-import jwtDecode from "jwt-decode";
 import {GetMeService} from "../../../shared/services/get-me.service";
 
 @Component({
