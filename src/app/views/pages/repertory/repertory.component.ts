@@ -112,7 +112,8 @@ export class RepertoryComponent implements OnInit{
     );
   }
 
-  showMusicalPiece(id:string){//esto era un number, pero lo he cambiado porque no me compilaba
+  showMusicalPiece(id:number){
+    // @ts-ignore
     sessionStorage.setItem('idRepertory', id)
     this.rt.navigateByUrl('/musicalPiece')
   }

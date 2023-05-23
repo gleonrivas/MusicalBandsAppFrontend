@@ -36,8 +36,9 @@ import {RepertoryComponent} from './views/pages/repertory/repertory.component';
 import {MusicalPieceComponent} from './views/pages/musical-piece/musical-piece.component';
 import {EncryptionService} from "./shared/services/encryption.service";
 import {EventComponent} from "./views/pages/event/event.component";
-
-
+import { PerformanceComponent } from './views/pages/performance/performance.component';
+import { SquadPlayComponent } from './views/pages/squad-play/squad-play.component';
+import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,9 @@ import {EventComponent} from "./views/pages/event/event.component";
     BorrowComponent,
     MusicalPieceComponent,
     EventComponent
+    PerformanceComponent,
+    SquadPlayComponent,
+    RehearsalComponent,
   ],
   imports: [
     BrowserModule,

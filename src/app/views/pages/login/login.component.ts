@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import {LoginService} from "./service/login.service";
 import {Router} from "@angular/router";
 import {ToastController} from "@ionic/angular";
+import {GeneralService} from "../../../shared/services/general.service";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import {ToastController} from "@ionic/angular";
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService, private router: Router, private toastController: ToastController) {}
+  constructor(private loginService: LoginService, private router: Router, private generalService: GeneralService) {}
   currentUser: User = { user: '', password: '' };
 
   isModalOpen = false;
@@ -33,17 +34,6 @@ export class LoginComponent {
       search.style.display = 'none';
       this.isModalOpen = false;
     }
-  }
-
-  async presentToast(message:string, color:string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000,
-      position: 'bottom',
-      color: color
-    });
-
-    await toast.present();
   }
   async login() {
     this.modalOpen();
@@ -64,7 +54,7 @@ export class LoginComponent {
         const token = error.error.token
         if (token === 0) {
           this.modalOpen();
-          this.presentToast('Usuario o contraseña erronea.', 'danger')
+          this.generalService.presentToast('Usuario o contraseña erronea.', 'danger')
         }
       }
     }

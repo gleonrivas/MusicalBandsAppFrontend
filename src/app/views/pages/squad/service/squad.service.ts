@@ -14,12 +14,24 @@ export class SquadService {
 
   }
 
+  checkLink(id: any) {
+    const token: string | null = localStorage.getItem('Authorization');
+    const headers = new HttpHeaders({ 'Authorization': token! });
+    return this.http.get('http://localhost:8080/InvitationLink/' + id, { headers });
+  }
+
   createLink(id: any){
     const token: string | null = localStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     const body = {'':''}
-    return this.http.post('http://localhost:8080/InvitationLink/create/' + 1, body, {headers: headers, params: params})
+    return this.http.post('http://localhost:8080/InvitationLink/create/' + id, body, {headers: headers, params: params})
+  }
+
+  async deleteLink(id:any){
+    const token: string | null = localStorage.getItem('Authorization')
+    const headers = new HttpHeaders({'Authorization': token!})
+    return await this.http.patch('http://localhost:8080/InvitationLink/' + id, {}, {headers}).toPromise();
   }
 
   async checkRepertory(id: any): Promise<number> {
@@ -30,5 +42,7 @@ export class SquadService {
     const count = Object.keys(data).length;
     return count;
   }
+
+
 
 }
