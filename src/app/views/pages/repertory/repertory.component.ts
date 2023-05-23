@@ -113,6 +113,7 @@ export class RepertoryComponent implements OnInit{
   }
 
   showMusicalPiece(id:number){
+    // @ts-ignore
     sessionStorage.setItem('idRepertory', this.encryptionService.encrypt(id.toString()))
     this.rt.navigateByUrl('/musicalPiece')
   }

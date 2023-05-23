@@ -60,7 +60,7 @@
           <ion-icon name="musical-notes"></ion-icon> Por ahora, no se han programado actuaciones.
         </ion-card-content>
 
-        <ion-button color="danger">Nueva actuación</ion-button>
+        <ion-button color="danger" routerLink="/crearactuacion">Nueva actuación</ion-button>
 
       </ion-card>
     </ion-col>
@@ -75,7 +75,7 @@
           <ion-icon name="microphone"></ion-icon> Por ahora, no hay programado ensayos.
         </ion-card-content>
 
-        <ion-button color="danger">Nuevo ensayo</ion-button>
+        <ion-button color="danger" routerLink="/crearensayo">Nuevo ensayo</ion-button>
       </ion-card>
     </ion-col>
 
@@ -87,8 +87,9 @@
         </ion-card-header>
 
         <ion-card-content>
-          Activar link de invitación <ion-toggle color="danger" (click)="openLink()"></ion-toggle>
-          <ion-input id="invitationLink" label="URL" [value]="invitation" placeholder="URL para invitar"></ion-input>
+          Activar link de invitación <ion-toggle color="danger" [checked]="{link}" (click)="openLink()"></ion-toggle>
+          <ion-input id="invitationLink" label="URL" [value]="invitation" placeholder="URL para invitar" [(ngModel)]="invitation"></ion-input>
+
         </ion-card-content>
 
         <ion-row style="float: left">

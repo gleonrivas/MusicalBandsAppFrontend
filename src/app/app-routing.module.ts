@@ -10,6 +10,8 @@ import {PasswordComponent} from "./views/pages/password/password.component";
 import {RepertoryComponent} from "./views/pages/repertory/repertory.component";
 import {BorrowComponent} from "./views/pages/borrow/borrow.component";
 import {MusicalPieceComponent} from "./views/pages/musical-piece/musical-piece.component";
+import {PerformanceComponent as ActuacionComponent} from "./views/pages/performance/performance.component";
+import {RehearsalComponent} from "./views/pages/rehearsal/rehearsal.component";
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
 import {AuthGuard} from "./shared/auth/auth";
 
@@ -67,6 +69,18 @@ const routes: Routes = [
   {
     path: 'pleaseLoggin',
     component: NoAuthPageComponent
+  },
+  {
+    path: 'musicalPiece', canActivate: [AuthGuard],
+    component: MusicalPieceComponent
+  },
+  {
+    path: 'crearactuacion',
+    component: ActuacionComponent
+  },
+  {
+    path: 'crearensayo',
+    component: RehearsalComponent
   }
 ]
 @NgModule({
