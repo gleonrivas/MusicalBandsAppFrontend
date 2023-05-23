@@ -61,6 +61,10 @@ const routes: Routes = [
     component: RepertoryComponent
   },
   {
+    path: 'musicalPiece', canActivate: [AuthGuard],
+    component: MusicalPieceComponent
+  },
+  {
     path: 'pleaseLoggin',
     component: NoAuthPageComponent
   }
