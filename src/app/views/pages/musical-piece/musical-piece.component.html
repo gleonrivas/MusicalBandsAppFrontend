@@ -1,6 +1,5 @@
-<!--
 <head>
-  <title>Inicio Sesión</title>
+  <title>{{repertory.name | titlecase}}</title>
 </head>
 <body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
 
@@ -10,26 +9,20 @@
 <br>
 <div class="repertory-parent with-border">
   <div class="tittle-container">
-    <h4 class="tittle">Repertorios de "{{formationData.name}}"</h4>
+    <h4 class="tittle">Piezas musicales de {{repertory.name | titlecase}}</h4>
     <h4 class="add-new" (click)="setOpen(true)">Crear</h4>
   </div>
   <div class="repertory-child">
     <div class="repertory-child-sub">
-      &lt;!&ndash;<div class="repertory">
-        <div class="ms-3">
-          <h4>Titulo</h4>
-          <p>Descripción</p>
+      <h4 class="w-100 text-dark text-center m-auto" *ngIf="musicalPieces.length<1">Aún no hay piezas musicales.</h4>
+      <div *ngFor="let musicalPiece of musicalPieces" class="repertory with-border">
+        <div class="d-flex flex-column justify-content-center mt-auto mb-auto">
+          <h4 class="text-center mt-3 w-75 m-auto text-secondary" style="overflow-wrap: break-word; ">{{musicalPiece.name}}</h4>
+          <p class="text-center mt-3 mb-3 m-auto ">{{repertory.description}}</p>
         </div>
-        <h5 class="add-new me-3 mt-auto mb-auto">Eliminar</h5>
-      </div>&ndash;&gt;
-      <div *ngFor="let repertory of repertories" class="repertory with-border">
-        <div class="m-auto ">
-          <h4 class="text-center w-75 m-auto text-secondary" style="overflow-wrap: break-word; ">{{repertory.name}}</h4>
-          <p class="text-center w-auto m-auto mt-3 mb-3">{{repertory.description}}</p>
-        </div>
-        <div class="d-flex flex-row gap-2 justify-content-around">
+        <div class="d-flex flex-row gap-2 justify-content-around mt-auto">
           <h6 class="add-new with-border">Ver</h6>
-          <h6 (click)="deleteRepertory(repertory.id!)" class="add-new with-border bg-light text-dark">Eliminar</h6>
+          <h6 (click)="deleteMusicalPiece(musicalPiece.id!)" class="add-new with-border bg-light text-dark">Eliminar</h6>
         </div>
       </div>
     </div>
@@ -39,18 +32,19 @@
 <ion-modal [isOpen]="isModalOpen" id="modal" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
   <ng-template>
     <div class="tittle-container">
-      <h4 class="tittle">Nuevo Repertorio</h4>
+      <h4 class="tittle">Nueva P. Musical</h4>
       <h4 class="add-new" (click)="setOpen(false)">X</h4>
     </div>
     <div class="repertory-child-modal">
-      <div class="inputbox">Nombre: *<input [(ngModel)]="name"  type="text" placeholder="" name="" class="form-control"  required="required"> </div>
-      <div class="inputbox">Descripción: *<textarea [(ngModel)]="description"  class="form-control"  required="required"></textarea> </div>
+      <div class="inputbox">Nombre: *<input [(ngModel)]="name" maxlength="25" type="text" placeholder="Max. 25 caracteres." name="" class="form-control"  required="required">
+        <p class="m-0">{{name!.length}}/25</p></div>
+      <div class="inputbox">Autor/a: *<input [(ngModel)]="author" maxlength="25" type="text" placeholder="Max. 25 caracteres." name="" class="form-control"  required="required">
+        <p class="m-0">{{author!.length}}/25</p></div>
+      <div class="inputbox">Duración: *<input [(ngModel)]="duration" maxlength="25" type="text" placeholder="Max. 25 caracteres." name="" class="form-control"  required="required"></div>
     </div>
-    <p class="text-danger p-2 mt-2 m-auto h-auto">Todos los miembros tienen acceso a los repertorios y sus piezas musicales</p>
-    <h4 class="save" (click)="sendRepertory()">Guardar</h4>
+    <h4 class="save" (click)="sendMusicalPiece()">Guardar</h4>
   </ng-template>
 </ion-modal>
 
 
 </body>
--->
