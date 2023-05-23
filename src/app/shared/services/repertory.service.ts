@@ -25,4 +25,8 @@ export class RepertoryService {
     return this.restService.delete('http://localhost:8080/repertory/delete/'+idRepertory);
   }
 
+  getRepertoryByCalendar(idEvento:number){
+    return this.restService.get<RepertoryType>('http://localhost:8080/repertory/list/calendar/'+idEvento)
+  }
+
 }

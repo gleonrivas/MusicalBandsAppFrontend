@@ -8,6 +8,8 @@ import {UserFormation} from "../../../shared/models/UserFormation";
 import {FormationService} from "../../../shared/services/formation.service";
 import {UserInfo} from "../../../shared/models/user-info";
 import {GetMeService} from "../../../shared/services/get-me.service";
+import {RepertoryType} from "../../../shared/models/repertoryType.model";
+import {RepertoryService} from "../../../shared/services/repertory.service";
 
 @Component({
   selector: 'app-event',
@@ -19,6 +21,7 @@ export class EventComponent {
               private readonly eventService: EventService,
               private readonly formationService: FormationService,
               private readonly getMeService: GetMeService,
+              private readonly repertoryService:RepertoryService,
               private readonly route: Router) {
   }
 
@@ -63,6 +66,16 @@ export class EventComponent {
     exp: -1,
   }
 
+  public repertoryByFormation: RepertoryType[] = []
+
+  public repertoryByCalendar:RepertoryType={
+    id:-1,
+    active:true,
+    name:"",
+    description:"",
+    idFormation:-1
+  }
+
   ngOnInit() {
 
     const id = this.getMeService.id;
@@ -96,7 +109,19 @@ export class EventComponent {
             }
           }
         }
+
+        if(this.formation.id){
+          this.repertoryService.getRepertoriesByIdFormation(this.formation.id).subscribe((data)=>{
+            this.repertoryByFormation=data;
+          })
+          this.repertoryService.getRepertoryByCalendar(this.id_event).subscribe((data)=>{
+            this.repertoryByCalendar = data;
+          })
+        }
+
       })
+
+
 
     })
 

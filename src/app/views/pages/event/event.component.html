@@ -59,11 +59,26 @@
 
       </ion-card>
       <ion-accordion-group expand="inset">
-        <ion-accordion value="first">
-          <ion-item slot="header" color="light">
-            <ion-label>Repertorio</ion-label>
+        <ion-accordion value="first" color="dark" disabled="true" *ngIf="repertoryByCalendar.id==-1 && !rolList.includes('OWNER')">
+          <ion-item slot="header"   class="acordeon">
+            <ion-label>No existe un repertorio asociado al evento</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">First Content</div>
+        </ion-accordion>
+        <ion-accordion value="first" color="dark" *ngIf="repertoryByCalendar.id==-1 && rolList.includes('OWNER')">
+          <ion-item slot="header"   class="acordeon">
+            <ion-label>Asocia un repertorio a este evento</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div >wer</div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="first" *ngIf="repertoryByCalendar.id!=-1 ">
+          <ion-item slot="header" color="light">
+            <ion-label>Repertorio {{repertoryByCalendar.name}}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div ></div>
+          </div>
         </ion-accordion>
         <ion-accordion value="second">
           <ion-item slot="header" color="light">
