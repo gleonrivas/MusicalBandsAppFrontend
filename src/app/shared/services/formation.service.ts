@@ -3,6 +3,7 @@ import {RestService} from "./rest.service";
 import {FormationType} from "../models/formationType.model";
 import { EncryptionService } from './encryption.service';
 import {Observable} from "rxjs";
+import {UserFormation} from "../models/UserFormation";
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,10 @@ export class FormationService {
   }
   acceptFormationByInvitation(invitation:any){
     return this.rest.post('http://localhost:8080/formation/addUser', invitation)
+  }
+
+  getUsersByFormation(idFormation?:number){
+    return this.rest.get<UserFormation[]>('http://localhost:8080/formation/listUsers/'+idFormation);
   }
 
 
