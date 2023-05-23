@@ -10,7 +10,7 @@ import {UserFormation} from "../models/UserFormation";
 })
 export class FormationService {
 
-  public apikey = localStorage.getItem('Authorization')
+  public apikey = sessionStorage.getItem('Authorization')
   constructor(
     private rest: RestService,
     private encryptionService: EncryptionService

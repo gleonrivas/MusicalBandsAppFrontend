@@ -8,7 +8,7 @@ import {EventResponse} from "../models/eventModels/eventResponse";
   providedIn: 'root'
 })
 export class EventService{
-  public apikey = localStorage.getItem('Authorization')
+  public apikey = sessionStorage.getItem('Authorization')
   constructor(
     private rest: RestService,
     private encryptionService: EncryptionService

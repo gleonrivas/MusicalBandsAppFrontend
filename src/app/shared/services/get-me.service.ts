@@ -9,7 +9,7 @@ import {UserInfo} from "../models/user-info";
 export class GetMeService {
 
   private decodeToken() {
-    const token = localStorage.getItem("Authorization");
+    const token = sessionStorage.getItem("Authorization");
 
     if (token) {
       return jwtDecode<UserInfo>(token)

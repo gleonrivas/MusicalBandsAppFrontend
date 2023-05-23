@@ -12,12 +12,12 @@ export class GeneralService{
   constructor(private route: Router, private toastController:ToastController, private http: HttpClient) {
   }
   logOut(){
-    localStorage.setItem('token', '');
+    sessionStorage.setItem('token', '');
     this.route.navigate(['/login']);
   }
 
   getToken(){
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     return headers
   }
@@ -39,7 +39,7 @@ export class GeneralService{
   }
 
   sendNewEvent(body: any): Promise<any>{
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     return new Promise((resolve, reject) => {
@@ -60,7 +60,7 @@ export class GeneralService{
   }
 
   checkEvents(id:any) {
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     const body= { 'formationId': id};

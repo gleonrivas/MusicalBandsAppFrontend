@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit() {
 
-    if (!localStorage.getItem('Authorization') || localStorage.getItem('Authorization') ==''){
+    if (!sessionStorage.getItem('Authorization') || sessionStorage.getItem('Authorization') ==''){
       this.rt.navigateByUrl('/login')
     }
 
