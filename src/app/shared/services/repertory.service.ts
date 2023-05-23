@@ -9,8 +9,12 @@ export class RepertoryService {
 
   constructor(private restService:RestService) { }
 
-  getRepertoryByIdFormation(idFormation:number){
+  getRepertoriesByIdFormation(idFormation:number){
     return this.restService.get<RepertoryType[]>('http://localhost:8080/repertory/list/'+idFormation);
+  }
+
+  getRepertoryById(id:number){
+    return this.restService.get<RepertoryType>('http://localhost:8080/repertory/1'+id);
   }
 
   saveRepertory(repertory:RepertoryType){
