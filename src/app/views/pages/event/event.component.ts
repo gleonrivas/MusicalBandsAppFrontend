@@ -10,6 +10,10 @@ import {UserInfo} from "../../../shared/models/user-info";
 import {GetMeService} from "../../../shared/services/get-me.service";
 import {RepertoryType} from "../../../shared/models/repertoryType.model";
 import {RepertoryService} from "../../../shared/services/repertory.service";
+import {AbscenceModel} from "../../../shared/models/abscence.model";
+import {AbsenceService} from "../../../shared/services/absence.service";
+
+
 
 @Component({
   selector: 'app-event',
@@ -22,6 +26,7 @@ export class EventComponent {
               private readonly formationService: FormationService,
               private readonly getMeService: GetMeService,
               private readonly repertoryService:RepertoryService,
+              private readonly absenceService: AbsenceService,
               private readonly route: Router) {
   }
 
@@ -57,8 +62,10 @@ export class EventComponent {
   public month: string = "";
   public userList: UserFormation[] = [];
   public idUser?: string | null = "";
-  public id_perfil: number | null = -1;
+  public isToday:boolean=true;
   public rolList: string[] = [];
+
+
   public userInfo: UserInfo = {
     id: -1,
     sub: "",
@@ -76,7 +83,12 @@ export class EventComponent {
     idFormation:-1
   }
 
+  private absenceList:AbscenceModel={
+    calendarEventId:'',
+    listOfUserId: []
+  }
   ngOnInit() {
+
 
     const id = this.getMeService.id;
 
@@ -96,6 +108,10 @@ export class EventComponent {
       this.numberMonth = parseInt(cadena);
       this.month = this.monthList[this.numberMonth - 1];
       this.day = Math.abs(parseInt(fechastring.slice(7)));
+      let todayDate:Date = new Date();
+      if(this.fecha.getDate() == todayDate.getDate()){
+        this.isToday=false;
+      }
 
     })
     this.eventService.getFormationByIdCalendar(this.id_event).subscribe((data) => {
@@ -125,6 +141,26 @@ export class EventComponent {
 
     })
 
+
+  }
+
+  abscenceRegistrer(event:any, userId:number){
+
+    if(event.target.checked == false){
+      this.absenceList.listOfUserId.push(userId.toString())
+
+    }
+
+
+  }
+
+  saveAbscence(){
+    this.absenceList.calendarEventId = this.id_event.toString();
+    let list = Array.from(new Set(this.absenceList.listOfUserId));
+    this.absenceList.listOfUserId = list
+    console.log(this.absenceList)
+    this.absenceService.postAbsenceList(this.absenceList)
+    this.isToday = false;
 
   }
 

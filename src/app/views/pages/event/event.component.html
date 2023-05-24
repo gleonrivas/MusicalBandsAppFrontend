@@ -91,7 +91,8 @@
     <div class="assistanceList">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Lista de usuarios</ion-card-title>
+          <ion-card-title>Lista de usuarios <ion-button *ngIf="rolList.includes('OWNER')" color="danger" fill="outline" (click)="saveAbscence()">Guardar</ion-button> </ion-card-title>
+                                                                                                           <!--                  disabled="{{isToday}}"-->
           <ion-card-subtitle>{{userList.length}} usuarios en total</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
@@ -102,8 +103,9 @@
                   <img alt="Silhouette of mountains" src="{{user.image}}"/>
                 </ion-thumbnail>
                 <div class="namecheckbox">
-                  <ion-label>{{user.name}} {{user.surName}}  </ion-label>
-                  <ion-checkbox *ngIf="rolList.includes('OWNER')" [indeterminate]="false"></ion-checkbox>
+                  <ion-label >{{user.name}} {{user.surName}}  </ion-label>
+                  <ion-checkbox *ngIf="rolList.includes('OWNER')" [indeterminate]="false" color="danger" (click)="abscenceRegistrer($event, user.id)"></ion-checkbox>
+                                                                                        <!--                  disabled="{{isToday}}"-->
                 </div>
               </ion-item>
             </div>
