@@ -4,6 +4,7 @@ import {FormationService} from "../../../shared/services/formation.service";
 import {EChartsOption} from "echarts";
 import {FormationType} from "../../../shared/models/formationType.model";
 import { trigger, transition, style, animate } from '@angular/animations';
+import {GeneralService} from "../../../shared/services/general.service";
 
 export const fadeInAnimation = trigger('fadeInAnimation', [
   transition(':enter', [
@@ -19,7 +20,7 @@ export const fadeInAnimation = trigger('fadeInAnimation', [
 })
 export class SquadComponent{
 
-  constructor(private formationService:FormationService, private squadService:SquadService) {}
+  constructor(private formationService:FormationService, private squadService:SquadService, private generalService: GeneralService) {}
 
 
   finalSquad: any;
@@ -31,16 +32,31 @@ export class SquadComponent{
 
   repertory: any;
 
+  actualLink: any;
+
   async ngOnInit(){
     const elements:any = document.getElementsByClassName('container');
-
     let squad = await this.formationService.getFormation().toPromise();
     // @ts-ignore
     this.id = squad.id;
     sessionStorage.setItem('idFormacionC', this.id);
-    console.log(squad)
-    console.log('ID: ' + sessionStorage.getItem('idFormacionC'))
+    await this.squadService.checkLink(this.id).subscribe(
+      response => {
+        // @ts-ignore
+        console.log(response.link)
+        // @ts-ignore
+        if (response.link !== null){
+          console.log('No es nulo')
+          const linkSpace:any = document.getElementById('invitationLink');
+          linkSpace.style.display = 'block'
+          // @ts-ignore
+          this.invitation = response.link
+          this.link = true
+        }
+      }
+    )
 
+    console.log('ID: ' + sessionStorage.getItem('idFormacionC'))
     // @ts-ignore
     console.log('Squad:', squad.name);
     this.finalSquad = {
@@ -60,11 +76,12 @@ export class SquadComponent{
       await this.squadService.createLink(this.id).subscribe((data: any) => {
         this.invitation = data.link
       })
-      console.log(this.invitation)
+      this.generalService.presentToast('Link creado con exito', 'success')
       linkSpace.style.display = 'block';
       this.link = true;
     }
     else{
+      this.generalService.presentToast('Link eliminado', 'success')
       linkSpace.style.display = 'none'
       this.link = false;
     }

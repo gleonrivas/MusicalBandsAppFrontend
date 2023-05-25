@@ -7,7 +7,7 @@
     <br>
     <br>
     <br>
-    <h1><ion-icon name="arrow-round-back" routerLink="/formacion" style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon> Crear material </h1>
+    <h1><button routerLink="/formacion" style="background-color: transparent"><ion-icon name="arrow-round-back"  style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon></button> Crear material </h1>
     <ion-text>Crea materiales para prestar a tu formación.</ion-text>
     <br>
     <ion-col>
@@ -20,9 +20,51 @@
       <br>
     </ion-col>
     <ion-button color="danger" (click)="createMaterial()" >Crear material</ion-button>
-
-
-
-
   </ion-grid>
+
+  <ion-grid class="containerCreate">
+    <ion-row>
+      <h1>Materiales de tu formación</h1>
+      <br>
+    </ion-row>
+
+    <div class="box">
+      <div class="formacion flex-row" *ngIf="listaMateriales.length===0" >No se encuentran materiales.</div>
+
+      <ion-row class="formacion flex-row" *ngFor="let material of listaMateriales">
+        <div class="formacion-info f-col">
+          <ion-row>
+            <ion-col>
+              <p>{{material.transferredMaterial}}, <b *ngIf="material.materialType===1">Instrumento</b> <b *ngIf="material.materialType===0">Uniforme</b> </p>
+            </ion-col>
+            <ion-col>
+              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="deleteMaterial(material.id)"><ion-icon name="close-outline" style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="openEdit(material)"><ion-icon name="pencil-outline" style="background-color: #ffc409; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-row>
+    </div>
+  </ion-grid>
+
+  <ion-modal [isOpen]="isModalOpen" id="modal" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+    <ng-template>
+      <div class="tittle-container">
+        <h4 class="tittle">Editar material</h4>
+        <button class="add-new" (click)="setOpen(false)">X</button>
+      </div>
+      <div class="repertory-child-modal">
+        <div class="inputboxEditar">Nombre: <input type="text" [(ngModel)]="editMaterial.name" class="form-control" ></div>
+          <div class="inputboxEditar">Tipo:
+            <ion-select class="inputbox mt-3" placeholder="{{selectedMateriaType}}" [(ngModel)]="editMaterial.type" >
+              <ion-select-option value="0">Uniforme</ion-select-option>
+              <ion-select-option value="1">Instrumento</ion-select-option>
+            </ion-select>
+          </div>
+      </div>
+      <h4 class="save" (click)="editerMaterial()" >Guardar</h4>
+    </ng-template>
+  </ion-modal>
+
+
 </body>

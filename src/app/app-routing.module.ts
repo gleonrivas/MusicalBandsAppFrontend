@@ -10,8 +10,11 @@ import {PasswordComponent} from "./views/pages/password/password.component";
 import {RepertoryComponent} from "./views/pages/repertory/repertory.component";
 import {BorrowComponent} from "./views/pages/borrow/borrow.component";
 import {MusicalPieceComponent} from "./views/pages/musical-piece/musical-piece.component";
+import {PerformanceComponent as ActuacionComponent} from "./views/pages/performance/performance.component";
+import {RehearsalComponent} from "./views/pages/rehearsal/rehearsal.component";
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
 import {AuthGuard} from "./shared/auth/auth";
+import {EventComponent} from "./views/pages/event/event.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -61,8 +64,24 @@ const routes: Routes = [
     component: RepertoryComponent
   },
   {
+    path: 'musicalPiece', canActivate: [AuthGuard],
+    component: MusicalPieceComponent
+  },
+  {
     path: 'pleaseLoggin',
     component: NoAuthPageComponent
+  },
+  {
+    path: 'event/:id_event',
+    component: EventComponent
+  },
+  {
+    path: 'crearactuacion',
+    component: ActuacionComponent
+  },
+  {
+    path: 'crearensayo',
+    component: RehearsalComponent
   }
 ]
 @NgModule({
