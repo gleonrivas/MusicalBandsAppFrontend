@@ -14,7 +14,7 @@
   <h1 class="m-auto">Perfil</h1>
 
     <div class="form d-flex m-auto">
-      <div class="div-img bg-light border-secondary border-opacity-25"><img src="https://lh3.googleusercontent.com/UmEbOrNTVtWLyM_yMr_j2JZXlxPf0fhuKg36BTmY2Pl9HWi5UXtR_-SgbJTYMT5LqvniWelGe7p-9bkKlSATuo7AuIRO-i-hUBKcW0iK" alt=""></div>
+      <div class="div-img bg-light border-secondary border-opacity-25"><img src="{{url}}" id="imgProfile" alt=""></div>
       <div class="form d-flex flex-column">
         <div class="inputbox">Nombre: *<input [(ngModel)]="name"  type="text" class="form-control"  required="required"> </div>
         <div class="text-danger" *ngIf="name==''">El nombre no puede estar vacío.</div>
@@ -26,6 +26,7 @@
         <div class="text-danger" *ngIf="dni!='' && comprobarDNI(dni) == false">Uy, hay un error con este DNI, no se guardará si continúas.</div>
         <div class="text-success" *ngIf="dni!='' &&comprobarDNI(dni) == true">DNI verificado.</div>
         <div class="inputbox">Fecha de nacimiento: <input [(ngModel)]="birthDate" class="form-control" type="date"></div>
+        <div class="inputbox">Foto de perfil:<input [(ngModel)]="fake" type="file" class="inputbox" id="imputfile" required="required" (change)="readUrl($event)"></div>
       </div>
     </div>
     <div class="d-flex flex-column justify-content-between align-items-center gap-2 mt3 mb-5">
@@ -36,5 +37,15 @@
     </div>
   </div>
 
+<script>
+  function changeTypeFile(){
+    var input = document.getElementById("inputFile");
+    var fReader = new FileReader();
+    fReader.readAsDataURL(input.files[0]);
+    document.getElementById("inputFile").value = fReader.toString().split(".")[0].split("\\");
 
+  }
+
+
+</script>
 </body>

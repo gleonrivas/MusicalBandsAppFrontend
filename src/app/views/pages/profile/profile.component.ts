@@ -24,8 +24,11 @@ export class ProfileComponent implements OnInit{
   public name?:string
   public surName?:string
   public email?:string
+  public url?:string | ArrayBuffer | null
   public dni:any
   public birthDate:any;
+  public file:FileReader | undefined;
+  public fake?:any ;
 
   comprobarDNI(dni: string): boolean {
     const regexDNI = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/;
@@ -47,6 +50,9 @@ export class ProfileComponent implements OnInit{
     });
 
     await toast.present();
+
+
+
   }
 
 
@@ -61,6 +67,8 @@ export class ProfileComponent implements OnInit{
       this.name = data.name;
       this.surName = data.surName;
       this.email = data.email;
+      this.url = data.url;
+      this.fake = data.fake;
       this.dni = data.dni!;
       if (!data.birthDate){
         this.birthDate = null
@@ -70,23 +78,34 @@ export class ProfileComponent implements OnInit{
     })
     console.log(this.profile)
   }
+  readUrl(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent) => {
+
+        this.url = (<FileReader>event.target).result;
+      }
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+  }
 
   sendData(){
 
-    if (this.dni!=''&& !this.comprobarDNI(this.dni!)){
-      this.dni = null
-    }
-    if (!this.birthDate || this.birthDate==''){
-      this.birthDate = null
-    }
 
 
     var newProfile: UserType = {
+
+
       name: this.name,
       surName: this.surName,
       email: this.email,
+      url: this.url,
       dni: this.dni,
       birthDate: this.birthDate,
+      fake: this.fake.toString().split("\\")[2].split(".")[0],
     }
     if (this.name && this.surName && this.email){
       this.profileService.postProfileData(newProfile).subscribe(
@@ -103,7 +122,9 @@ export class ProfileComponent implements OnInit{
 
     console.log(newProfile)
 
-
   }
+
+
+
 
 }
