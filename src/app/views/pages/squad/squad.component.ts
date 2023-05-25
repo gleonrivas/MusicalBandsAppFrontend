@@ -24,7 +24,8 @@ export class SquadComponent{
 
 
   finalSquad: any;
-  link = false;
+  // @ts-ignore
+  link: boolean;
 
   invitation: any;
 
@@ -53,12 +54,11 @@ export class SquadComponent{
           this.invitation = response.link
           this.link = true
         }
+        else{
+          this.link = false
+        }
       }
     )
-
-    console.log('ID: ' + sessionStorage.getItem('idFormacionC'))
-    // @ts-ignore
-    console.log('Squad:', squad.name);
     this.finalSquad = {
       // @ts-ignore
       'name': squad?.name,
@@ -67,23 +67,22 @@ export class SquadComponent{
       'repertory': '',
     };
     this.repertory = await this.squadService.checkRepertory(this.id);
-    console.log('Numero', this.repertory)
-
   }
   async openLink(){
     const linkSpace:any = document.getElementById('invitationLink');
-    if (this.link === false){
+    if (!this.link){
       await this.squadService.createLink(this.id).subscribe((data: any) => {
         this.invitation = data.link
       })
       this.generalService.presentToast('Link creado con exito', 'success')
       linkSpace.style.display = 'block';
-      this.link = true;
+      this.ngOnInit()
     }
     else{
+      this.squadService.deleteLink(this.id)
       this.generalService.presentToast('Link eliminado', 'success')
       linkSpace.style.display = 'none'
-      this.link = false;
+      this.ngOnInit()
     }
   }
 
