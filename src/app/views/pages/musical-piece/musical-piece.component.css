@@ -1,3 +1,23 @@
-/*
-@import "app/views/pages/repertory/repertory.component.css";
-*/
+@import "src/app/views/pages/repertory/repertory.component.css";
+
+.repertory-child-sub{
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto !important;
+}
+
+.musical{
+  flex: 0 1 auto;
+  margin: 1rem;
+  display: flex;
+  height: min-content;
+  flex-flow: row nowrap;
+  min-width: 45%;
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+}
+.musical div{
+  margin: auto 0;
+  width: 50%;
+}
+
