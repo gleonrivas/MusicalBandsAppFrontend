@@ -171,6 +171,19 @@ a{
 
 }
 
+.owner{
+  font-size: 12px;
+  padding: .1rem .8rem;
+  border-radius: 1rem;
+  background-color: #C63535;
+  color: white;
+}
+.is-part{
+  font-size: 12px;
+  padding: .1rem .8rem;
+  border-radius: 1rem;
+}
+
 
 
 
