@@ -20,8 +20,8 @@ export class MusicalPieceService {
     return this.rest.post('http://localhost:8080/musicalPiece/create', musicalPiece)
   }
 
-  deleteMusicalPiece(musicalPieceId:number){
-    return this.rest.delete('http://localhost:8080/musicalPiece/delete/'+ musicalPieceId)
+  deleteMusicalPiece(musicalPieceId:number, repertoryId:number){
+    return this.rest.delete('http://localhost:8080/musicalPiece/delete/'+ musicalPieceId +'/'+ repertoryId)
   }
 
 

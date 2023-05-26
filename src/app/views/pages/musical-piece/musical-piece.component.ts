@@ -23,7 +23,7 @@ export class MusicalPieceComponent {
   public name?:string;
   public author?:string;
   public duration?:number;
-  public idRepertory?:string;
+  public idRepertory = parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idRepertory')!));
 
   constructor(
     private rt:Router,
@@ -62,25 +62,27 @@ export class MusicalPieceComponent {
   ngOnInit(){
     this.musicalPieceService.getMusicalPieceByRepertoryId(parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idRepertory')!))).subscribe((data) => {
       this.musicalPieces = data
+      console.log(data)
     });
     this.repertoryService.getRepertoryById(parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idRepertory')!))).subscribe((data)=>{
       this.repertory = data
+      console.log(this.encryptionService.decrypt(sessionStorage.getItem('idRepertory')!))
     })
   }
 
   sendMusicalPiece(){
 
-    if (this.name && this.author && this.duration && this.idRepertory){
+    if (this.name && this.author && this.duration){
 
         var newMusicalPiece:MusicalPieceType = {
           name: this.name,
           author: this.author,
           length: this.duration,
-          idRepertory: parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idRepertory')!))
+          idRepertory: this.idRepertory
         }
         this.musicalPieceService.createMusicalPiece(newMusicalPiece).subscribe(
-          respone =>{},
-          (error: HttpErrorResponse) => {
+          () =>{},
+          () => {
             this.presentToast('Hubo un problema, inténtalo mas tarde.', 'danger');
           },
           () =>{
@@ -96,8 +98,8 @@ export class MusicalPieceComponent {
 
   deleteMusicalPiece(musicalPieceId:number){
 
-    this.musicalPieceService.deleteMusicalPiece(musicalPieceId).subscribe(
-      (response) => {
+    this.musicalPieceService.deleteMusicalPiece(musicalPieceId, this.idRepertory).subscribe(
+      () => {
         this.presentToast('Se ha eliminado correctamente la pieza musical.', 'success');
         this.ngOnInit()
       },
