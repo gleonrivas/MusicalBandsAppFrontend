@@ -14,7 +14,7 @@ export class RepertoryService {
   }
 
   getRepertoryById(id:number){
-    return this.restService.get<RepertoryType>('http://localhost:8080/repertory/1'+id);
+    return this.restService.get<RepertoryType>('http://localhost:8080/repertory/'+id);
   }
 
   saveRepertory(repertory:RepertoryType){
