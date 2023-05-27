@@ -87,7 +87,7 @@
         </ion-card-header>
 
         <ion-card-content>
-          Activar link de invitación <ion-toggle color="danger" [checked]="{link}" (click)="openLink()"></ion-toggle>
+          Activar link de invitación <ion-toggle color="danger" [(ngModel)]="link" (click)="openLink()"></ion-toggle>
           <ion-input id="invitationLink" label="URL" [value]="invitation" placeholder="URL para invitar" [(ngModel)]="invitation"></ion-input>
 
         </ion-card-content>
