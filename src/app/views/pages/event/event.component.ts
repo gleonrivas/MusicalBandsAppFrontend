@@ -147,15 +147,14 @@ export class EventComponent {
         if (this.formation.id) {
           this.repertoryService.getRepertoriesByIdFormation(this.formation.id).subscribe((data) => {
             this.repertoryByFormation = data;
+            console.log( this.repertoryByFormation)
           })
           this.repertoryService.getRepertoryByCalendar(this.id_event).subscribe((data) => {
             this.repertoryByCalendar = data;
-            console.log(this.repertoryByCalendar.id)
             if(this.repertoryByCalendar.id){
               this.musicalPieceService.getMusicalPieceByRepertoryId(this.repertoryByCalendar.id).subscribe((data)=>{
 
                 this.musicalPieceList=data;
-                console.log(this.musicalPieceList)
               })
             }
           })
@@ -194,6 +193,9 @@ export class EventComponent {
     },error => {
 
     })
+  }
+  saveRepertory(){
+
   }
 
 }

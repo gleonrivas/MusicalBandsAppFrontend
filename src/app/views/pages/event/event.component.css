@@ -160,3 +160,9 @@ ion-icon {
   justify-content: space-between;
   color: #C63535;
 }
+.createRepertory{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: space-around;
+}

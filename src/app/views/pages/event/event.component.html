@@ -73,24 +73,29 @@
             <ion-label>Asocia un repertorio a este evento</ion-label>
           </ion-item>
           <div *ngIf="repertoryByFormation.length==0" class="ion-padding" slot="content">
-            <p>La Formación no incluye ningún repertorio</p>
-            <ion-button *ngIf="rolList.includes('OWNER')" color="danger" href="/repertory">
-              Crear
-            </ion-button>
+            <div class="createRepertory">
+              <p>La Formación no incluye ningún repertorio</p>
+              <ion-button *ngIf="rolList.includes('OWNER')" color="danger" href="/repertory">
+                Crear
+              </ion-button>
+            </div>
           </div>
-          <div *ngIf="repertoryByFormation.length<0" class="ion-padding" slot="content">
-            <ion-list>
+          <div *ngIf="repertoryByFormation.length!=0" class="ion-padding" slot="content">
+            <ion-list >
               <ion-list-header>
-                <ion-label> Single Selection </ion-label>
+                <ion-label> Repertorios disponibles</ion-label>
               </ion-list-header>
 
               <ion-item>
-                <ion-label>Gender</ion-label>
-                <ion-select placeholder="Select One">
-                  <ion-select-option value="f">Female</ion-select-option>
-                  <ion-select-option value="m">Male</ion-select-option>
+                <ion-label>Repertorios de {{formation.name}}</ion-label>
+                <ion-select placeholder="Selecciona uno de la lista" >
+                  <ion-select-option *ngFor="let repertory of repertoryByFormation" >{{repertory.name}}</ion-select-option>
                 </ion-select>
+                <ion-button *ngIf="rolList.includes('OWNER')" color="danger" (click)="saveRepertory()" >
+                   Guardar
+                </ion-button>
               </ion-item>
+
             </ion-list>
           </div>
         </ion-accordion>
@@ -98,8 +103,8 @@
           <ion-item slot="header" color="light">
             <ion-label>Repertorio {{repertoryByCalendar.name}}</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content" >
-            <ion-list  *ngFor="let musicalPiece of musicalPieceList">
+          <div class="ion-padding" slot="content">
+            <ion-list *ngFor="let musicalPiece of musicalPieceList">
               <div id="musicalPieceInfo">
                 <p>{{musicalPiece.name}}</p>
                 <p>{{musicalPiece.author}}</p>
@@ -121,23 +126,25 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title>Lista de asistencia
-            <ion-button disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')" color="danger" fill="outline" (click)="saveAbscence()">
+            <ion-button disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')" color="danger"
+                        fill="outline" (click)="saveAbscence()">
               Guardar
             </ion-button>
           </ion-card-title>
 
-          <ion-card-subtitle >{{userList.length}} usuarios en total</ion-card-subtitle>
+          <ion-card-subtitle>{{userList.length}} usuarios en total</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           <ion-list class="scroll">
-            <div *ngFor="let user of userList" >
+            <div *ngFor="let user of userList">
               <ion-item disabled="{{!isToday || isSaved}}">
                 <ion-thumbnail slot="start">
                   <img alt="Silhouette of mountains" src="{{user.image}}"/>
                 </ion-thumbnail>
                 <div class="namecheckbox">
                   <ion-label>{{user.name}} {{user.surName}}  </ion-label>
-                  <ion-checkbox disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')" [indeterminate]="false" color="danger"
+                  <ion-checkbox disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')"
+                                [indeterminate]="false" color="danger"
                                 (click)="abscenceRegistrer($event, user.id)"></ion-checkbox>
                 </div>
               </ion-item>
