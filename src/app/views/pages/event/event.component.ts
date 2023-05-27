@@ -15,6 +15,7 @@ import {AbsenceService} from "../../../shared/services/absence.service";
 import {MusicalPieceType} from "../../../shared/models/musicalPieceType.model";
 import {MusicalPieceService} from "../../../shared/services/musical-piece.service";
 import {ToastController} from "@ionic/angular";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -190,7 +191,7 @@ export class EventComponent {
     this.absenceService.postAbsenceList(this.absenceList).subscribe(response=>{
       this.isSaved=true;
       this.presentToast('Se han guardado los datos correctamente', 'success')// Accede al status del error
-    },error => {
+    },(error: HttpErrorResponse) => {
 
     })
   }
