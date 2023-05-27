@@ -12,7 +12,9 @@ import {RepertoryType} from "../../../shared/models/repertoryType.model";
 import {RepertoryService} from "../../../shared/services/repertory.service";
 import {AbscenceModel} from "../../../shared/models/abscence.model";
 import {AbsenceService} from "../../../shared/services/absence.service";
-
+import {MusicalPieceType} from "../../../shared/models/musicalPieceType.model";
+import {MusicalPieceService} from "../../../shared/services/musical-piece.service";
+import {ToastController} from "@ionic/angular";
 
 
 @Component({
@@ -25,8 +27,10 @@ export class EventComponent {
               private readonly eventService: EventService,
               private readonly formationService: FormationService,
               private readonly getMeService: GetMeService,
-              private readonly repertoryService:RepertoryService,
+              private readonly repertoryService: RepertoryService,
               private readonly absenceService: AbsenceService,
+              private readonly musicalPieceService: MusicalPieceService,
+              private toastController: ToastController,
               private readonly route: Router) {
   }
 
@@ -54,6 +58,7 @@ export class EventComponent {
     type: EnumFormationType.BANDS_OF_MUSIC,
     origin: "",
   }
+  public musicalPieceList: MusicalPieceType[]= []
   public day: number = -1;
   public formationId?: number = -1;
   public monthList: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre"];
@@ -62,8 +67,11 @@ export class EventComponent {
   public month: string = "";
   public userList: UserFormation[] = [];
   public idUser?: string | null = "";
-  public isToday:boolean=true;
+  public isToday: boolean = true;
   public rolList: string[] = [];
+  public isUserChecked: number[] = [];
+  public isSaved: boolean=false;
+
 
 
   public userInfo: UserInfo = {
@@ -75,18 +83,28 @@ export class EventComponent {
 
   public repertoryByFormation: RepertoryType[] = []
 
-  public repertoryByCalendar:RepertoryType={
-    id:-1,
-    active:true,
-    name:"",
-    description:"",
-    idFormation:-1
+  public repertoryByCalendar: RepertoryType = {
+    id: -1,
+    active: true,
+    name: "",
+    description: "",
+    idFormation: -1
   }
 
-  private absenceList:AbscenceModel={
-    calendarEventId:'',
+  private absenceList: AbscenceModel = {
+    calendarEventId: '',
     listOfUserId: []
   }
+  async presentToast(message:string, color:string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color
+    });
+    await toast.present();
+  }
+
   ngOnInit() {
 
 
@@ -108,9 +126,9 @@ export class EventComponent {
       this.numberMonth = parseInt(cadena);
       this.month = this.monthList[this.numberMonth - 1];
       this.day = Math.abs(parseInt(fechastring.slice(7)));
-      let todayDate:Date = new Date();
-      if(this.fecha.getDate() == todayDate.getDate()){
-        this.isToday=false;
+      let todayDate: Date = new Date();
+      if (this.fecha.getDate() == todayDate.getDate()) {
+        this.isToday = false;
       }
 
     })
@@ -118,25 +136,33 @@ export class EventComponent {
       this.formation = data;
       this.formationService.getUsersByFormation(this.formation.id).subscribe((data) => {
         this.userList = data;
-        for(let user of this.userList){
-          if(user.id==id){
-            for(let rol of user.roleDTOList){
+        for (let user of this.userList) {
+          if (user.id == id) {
+            for (let rol of user.roleDTOList) {
               this.rolList.push(rol.type)
             }
           }
         }
 
-        if(this.formation.id){
-          this.repertoryService.getRepertoriesByIdFormation(this.formation.id).subscribe((data)=>{
-            this.repertoryByFormation=data;
+        if (this.formation.id) {
+          this.repertoryService.getRepertoriesByIdFormation(this.formation.id).subscribe((data) => {
+            this.repertoryByFormation = data;
           })
-          this.repertoryService.getRepertoryByCalendar(this.id_event).subscribe((data)=>{
+          this.repertoryService.getRepertoryByCalendar(this.id_event).subscribe((data) => {
             this.repertoryByCalendar = data;
+            console.log(this.repertoryByCalendar.id)
+            if(this.repertoryByCalendar.id){
+              this.musicalPieceService.getMusicalPieceByRepertoryId(this.repertoryByCalendar.id).subscribe((data)=>{
+
+                this.musicalPieceList=data;
+                console.log(this.musicalPieceList)
+              })
+            }
           })
+
         }
 
       })
-
 
 
     })
@@ -144,24 +170,30 @@ export class EventComponent {
 
   }
 
-  abscenceRegistrer(event:any, userId:number){
+  abscenceRegistrer(event: any, userId: number) {
 
-    if(event.target.checked == false){
-      this.absenceList.listOfUserId.push(userId.toString())
+    if (event.target.checked == false) {
+      this.isUserChecked.push(userId)
 
     }
 
 
   }
 
-  saveAbscence(){
+  saveAbscence() {
     this.absenceList.calendarEventId = this.id_event.toString();
-    let list = Array.from(new Set(this.absenceList.listOfUserId));
-    this.absenceList.listOfUserId = list
-    console.log(this.absenceList)
-    this.absenceService.postAbsenceList(this.absenceList)
-    this.isToday = false;
+    let list = Array.from(new Set(this.isUserChecked));
+    for (let idUser of this.userList) {
+      if (!list.includes(idUser.id)) {
+        this.absenceList.listOfUserId.push(idUser.id.toString())
+      }
+    }
+    this.absenceService.postAbsenceList(this.absenceList).subscribe(response=>{
+      this.isSaved=true;
+      this.presentToast('Se han guardado los datos correctamente', 'success')// Accede al status del error
+    },error => {
 
+    })
   }
 
 }

@@ -1,9 +1,8 @@
 import {Injectable} from "@angular/core";
 import {RestService} from "./rest.service";
 import {EncryptionService} from "./encryption.service";
-import {FormationType} from "../models/formationType.model";
-import {EventResponse} from "../models/eventModels/eventResponse";
 import {AbscenceModel} from "../models/abscence.model";
+import {ResponseStringModel} from "../models/responseString.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +15,6 @@ export class AbsenceService{
   ) { }
 
   postAbsenceList(abscenseList:AbscenceModel){
-    return this.rest.post('http://localhost:8080/absence/RegisterAbsence', abscenseList)
+    return this.rest.post<AbscenceModel, ResponseStringModel>('http://localhost:8080/absence/RegisterAbsence', abscenseList)
   }
 }
