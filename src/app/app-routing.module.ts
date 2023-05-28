@@ -12,6 +12,9 @@ import {BorrowComponent} from "./views/pages/borrow/borrow.component";
 import {MusicalPieceComponent} from "./views/pages/musical-piece/musical-piece.component";
 import {PerformanceComponent as ActuacionComponent} from "./views/pages/performance/performance.component";
 import {RehearsalComponent} from "./views/pages/rehearsal/rehearsal.component";
+import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
+import {AuthGuard} from "./shared/auth/auth";
+import {EventComponent} from "./views/pages/event/event.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -37,7 +40,7 @@ const routes: Routes = [
     component: SquadComponent
   },
   {
-    path: 'home',
+    path: 'home', canActivate: [AuthGuard],
     component: HomeComponent
   },
   {
@@ -49,20 +52,28 @@ const routes: Routes = [
     component: SquadCreateComponent
   },
   {
-    path: 'profile',
+    path: 'profile', canActivate: [AuthGuard],
     component: ProfileComponent
   },
   {
-    path: 'password',
+    path: 'password', canActivate: [AuthGuard],
     component: PasswordComponent
   },
   {
-    path: 'repertory',
+    path: 'repertory', canActivate: [AuthGuard],
     component: RepertoryComponent
   },
   {
-    path: 'musicalPiece',
+    path: 'musicalPiece', canActivate: [AuthGuard],
     component: MusicalPieceComponent
+  },
+  {
+    path: 'pleaseLoggin',
+    component: NoAuthPageComponent
+  },
+  {
+    path: 'event/:id_event',
+    component: EventComponent
   },
   {
     path: 'crearactuacion',

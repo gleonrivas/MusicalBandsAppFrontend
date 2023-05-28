@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit{
 
   public ownFormations:FormationType[]=[]
   public isPartFormations:FormationType[]=[]
-  public auth = localStorage.getItem('Authorization');
+  public auth = sessionStorage.getItem('Authorization');
   public finder: string = '';
   public formationByLink!: FormationType;
 

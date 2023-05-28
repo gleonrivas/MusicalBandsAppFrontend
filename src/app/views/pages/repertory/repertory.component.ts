@@ -59,7 +59,7 @@ export class RepertoryComponent implements OnInit{
   ngOnInit(){
     this.name = ''
     this.description = ''
-    this.repertoryService.getRepertoryByIdFormation(parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idFormation')!))).subscribe((data) => {
+    this.repertoryService.getRepertoriesByIdFormation(parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idFormation')!))).subscribe((data) => {
       this.repertories = data
     });
     this.formationService.getFormation().subscribe((data: FormationType) =>{
@@ -78,7 +78,7 @@ export class RepertoryComponent implements OnInit{
         var newRepertory:RepertoryType = {
           name:this.name,
           description:this.description,
-          idFormation:this.encryptionService.decrypt(sessionStorage.getItem('idFormation')!)
+          idFormation: parseInt(this.encryptionService.decrypt(sessionStorage.getItem('idFormation')!))
         }
         this.repertoryService.saveRepertory(newRepertory).subscribe(
           respone =>{},
@@ -114,7 +114,7 @@ export class RepertoryComponent implements OnInit{
 
   showMusicalPiece(id:number){
     // @ts-ignore
-    sessionStorage.setItem('idRepertory', id)
+    sessionStorage.setItem('idRepertory', this.encryptionService.encrypt(id.toString()))
     this.rt.navigateByUrl('/musicalPiece')
   }
 

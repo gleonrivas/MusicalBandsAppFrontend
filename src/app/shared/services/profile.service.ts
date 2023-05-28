@@ -13,7 +13,7 @@ export class ProfileService {
     return this.rest.get<UserType>('http://localhost:8080/user/profile')
   }
   postProfileData(user:UserType){
-    return this.rest.post('http://localhost:8080/user/editProfile', user)
+    return this.rest.post('http://localhost:8080/user/editProfile/' + user.fake, user)
   }
 
   postPasswordData(password:Object){

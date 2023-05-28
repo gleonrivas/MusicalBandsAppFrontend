@@ -8,7 +8,7 @@ export class RestService {
 
   constructor(private http: HttpClient) {}
   private getHeaders() {
-    const apiToken = localStorage.getItem("Authorization");
+    const apiToken = sessionStorage.getItem("Authorization");
     const headers = new HttpHeaders();
     return headers.set("Authorization", apiToken!);
   }
@@ -25,10 +25,16 @@ export class RestService {
     });
   }
 
-  public delete<K, T = Object>(url: string) {
+  public delete<T = Object>(url: string) {
     return this.http.delete<T>(url, {
       headers: this.getHeaders()
     });
+  }
+
+  public put<K,T =Object>(url:string, body:K){
+    return this.http.put<T>(url, body, {
+      headers: this.getHeaders()
+    })
   }
 
 }

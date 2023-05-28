@@ -15,13 +15,13 @@ export class SquadService {
   }
 
   checkLink(id: any) {
-    const token: string | null = localStorage.getItem('Authorization');
+    const token: string | null = sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders({ 'Authorization': token! });
     return this.http.get('http://localhost:8080/InvitationLink/check/' + id, { headers });
   }
 
   createLink(id: any){
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     const body = {'':''}
@@ -29,13 +29,13 @@ export class SquadService {
   }
 
   async deleteLink(id:any){
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     return await this.http.delete('http://localhost:8080/InvitationLink/' + id).toPromise();
   }
 
   async checkRepertory(id: any): Promise<number> {
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     const data = await this.http.get('http://localhost:8080/repertory/list/' + id, { headers }).toPromise();
     // @ts-ignore

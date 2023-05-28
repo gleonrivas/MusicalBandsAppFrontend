@@ -4,6 +4,6 @@ export type RepertoryType = {
   active?:boolean,
   name?:string,
   description?:string,
-  idFormation?:string
+  idFormation?:number
 
 }

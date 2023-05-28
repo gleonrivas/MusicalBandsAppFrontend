@@ -86,6 +86,15 @@ export class SquadComponent{
     }
   }
 
+  async openLinkWhassapp(){
+    window.open("https://api.whatsapp.com/send?text=" + this.invitation );
+  }
+
+  async openLinkFacebook(){
+    window.open("http://www.facebook.com/sharer.php?u=" + this.invitation );
+  }
+
+
   initOpts = {
     renderer: 'svg',
     width: 850,

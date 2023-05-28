@@ -9,8 +9,12 @@ export class RepertoryService {
 
   constructor(private restService:RestService) { }
 
-  getRepertoryByIdFormation(idFormation:number){
+  getRepertoriesByIdFormation(idFormation:number){
     return this.restService.get<RepertoryType[]>('http://localhost:8080/repertory/list/'+idFormation);
+  }
+
+  getRepertoryById(id:number){
+    return this.restService.get<RepertoryType>('http://localhost:8080/repertory/'+id);
   }
 
   saveRepertory(repertory:RepertoryType){
@@ -19,6 +23,10 @@ export class RepertoryService {
 
   deleteRepertory(idRepertory:number){
     return this.restService.delete('http://localhost:8080/repertory/delete/'+idRepertory);
+  }
+
+  getRepertoryByCalendar(idEvento:number){
+    return this.restService.get<RepertoryType>('http://localhost:8080/repertory/list/calendar/'+idEvento)
   }
 
 }

@@ -45,7 +45,7 @@ export class LoginComponent {
       const response = await this.loginService.loginMethod(body).toPromise();
       console.log(response);
       // @ts-ignore
-      localStorage.setItem('Authorization', 'Bearer ' + response.token);
+      sessionStorage.setItem('Authorization', 'Bearer ' + response.token);
       this.modalOpen();
       this.router.navigate(['/home']);
     } catch (error) {

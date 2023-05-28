@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event</title>
+</head>
+<body>
+<app-navegacion></app-navegacion>
+<br>
+<br>
+
+<div class="home-container ">
+
+  <div *ngIf="event.id == -1" class="noExiste">
+
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>El evento no existe</ion-card-title>
+          <ion-card-subtitle>Vuelva a la página de inicio</ion-card-subtitle>
+        </ion-card-header>
+      </div>
+    </ion-card>
+
+  </div>
+
+  <div id="title" *ngIf="event.id != -1">
+    <h3 class="formationName">{{formation.name}}</h3>
+    <br>
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>{{event.title}}</ion-card-title>
+          <ion-card-subtitle>{{event.description}}</ion-card-subtitle>
+        </ion-card-header>
+        <img src="/assets/icons8-eliminar-80.png" class="borrar">
+      </div>
+    </ion-card>
+  </div>
+  <br>
+  <div class="body" *ngIf="event.id != -1">
+    <div class="cuerpo">
+      <ion-card class="infoEvent">
+        <p class="calendar">{{day}} <em>{{month}}</em></p>
+        <div class="imagen">
+          <img src="assets/icons8-reloj-80.png">
+          <p>20:30</p>
+        </div>
+        <div class="imagen">
+          <img src="assets/icons8-ubicación-100.png">
+          <p>{{event.place}}</p>
+        </div>
+        <div class="imagen">
+          <img src="assets/icons8-foco-64.png">
+          <p>{{event.type}}</p>
+        </div>
+
+      </ion-card>
+      <ion-accordion-group expand="inset">
+        <ion-accordion value="first" color="dark" disabled="true"
+                       *ngIf="repertoryByCalendar.id==-1 && !rolList.includes('OWNER')">
+          <ion-item slot="header" class="acordeon">
+            <ion-label>No existe un repertorio asociado al evento</ion-label>
+          </ion-item>
+        </ion-accordion>
+        <ion-accordion value="first" color="dark" *ngIf="repertoryByCalendar.id==-1 && rolList.includes('OWNER')">
+          <ion-item slot="header" class="acordeon">
+            <ion-label>Asocia un repertorio a este evento</ion-label>
+          </ion-item>
+          <div *ngIf="repertoryByFormation.length==0" class="ion-padding" slot="content">
+            <div class="createRepertory">
+              <p>La Formación no incluye ningún repertorio</p>
+              <ion-button *ngIf="rolList.includes('OWNER')" color="danger" href="/repertory">
+                Crear
+              </ion-button>
+            </div>
+          </div>
+          <div *ngIf="repertoryByFormation.length!=0" class="ion-padding" slot="content">
+            <ion-list >
+              <ion-list-header>
+                <ion-label> Repertorios disponibles</ion-label>
+              </ion-list-header>
+
+              <ion-item>
+                <ion-label>Repertorios de {{formation.name}}</ion-label>
+                <ion-select placeholder="Selecciona uno de la lista" >
+                  <ion-select-option *ngFor="let repertory of repertoryByFormation" >{{repertory.name}}</ion-select-option>
+                </ion-select>
+                <ion-button *ngIf="rolList.includes('OWNER')" color="danger" (click)="saveRepertory()" >
+                   Guardar
+                </ion-button>
+              </ion-item>
+
+            </ion-list>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="first" *ngIf="repertoryByCalendar.id!=-1 ">
+          <ion-item slot="header" color="light">
+            <ion-label>Repertorio {{repertoryByCalendar.name}}</ion-label>
+          </ion-item>
+
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Archivos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content"><ion-input type="file" value="333"></ion-input>
+          </div>
+          <div class="ion-padding" slot="content">
+            <ion-select placeholder="Selecciona uno de la lista" >
+              <ion-select-option *ngFor="let user of userList" >{{user.name}} {{user.surName}}
+                <p *ngFor="let role of user.roleDTOList">{{role.type}}</p></ion-select-option>
+            </ion-select>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </div>
+    <div class="assistanceList">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Lista de asistencia
+            <ion-button disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')" color="danger"
+                        fill="outline" (click)="saveAbscence()">
+              Guardar
+            </ion-button>
+          </ion-card-title>
+
+          <ion-card-subtitle>{{userList.length}} usuarios en total</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list class="scroll">
+            <div *ngFor="let user of userList">
+              <ion-item disabled="{{!isToday || isSaved}}">
+                <ion-thumbnail slot="start">
+                  <img alt="Silhouette of mountains" src="{{user.image}}"/>
+                </ion-thumbnail>
+                <div class="namecheckbox">
+                  <ion-label>{{user.name}} {{user.surName}}  </ion-label>
+                  <ion-checkbox disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')"
+                                [indeterminate]="false" color="danger"
+                                (click)="abscenceRegistrer($event, user.id)"></ion-checkbox>
+                </div>
+              </ion-item>
+            </div>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+</div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>

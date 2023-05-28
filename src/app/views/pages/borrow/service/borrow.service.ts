@@ -8,7 +8,7 @@ export class BorrowService {
 
   constructor(private http: HttpClient, private generalService: GeneralService) { }
   sendNewMaterial(body: any): Promise<any>{
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     return new Promise((resolve, reject) => {
@@ -28,7 +28,7 @@ export class BorrowService {
     });
   }
   editMaterial(body: any): Promise<any>{
-    const token: string | null = localStorage.getItem('Authorization')
+    const token: string | null = sessionStorage.getItem('Authorization')
     const headers = new HttpHeaders({'Authorization': token!})
     const params = new HttpParams();
     return new Promise((resolve, reject) => {
@@ -53,7 +53,7 @@ export class BorrowService {
   }
 
   deleteMaterial(id: any): Promise<any> {
-    const token: string | null = localStorage.getItem('Authorization');
+    const token: string | null = sessionStorage.getItem('Authorization');
     const headers = new HttpHeaders({ 'Authorization': token! });
     const params = new HttpParams();
 
