@@ -16,6 +16,7 @@ import {MusicalPieceType} from "../../../shared/models/musicalPieceType.model";
 import {MusicalPieceService} from "../../../shared/services/musical-piece.service";
 import {ToastController} from "@ionic/angular";
 import {HttpErrorResponse} from "@angular/common/http";
+import {RoleDTO} from "../../../shared/models/roleDTO";
 
 
 @Component({
@@ -145,10 +146,15 @@ export class EventComponent {
           }
         }
 
+        for(let user of this.userList){
+         user.roleDTOList = this.convertRole(user.roleDTOList)
+        }
+
+
+
         if (this.formation.id) {
           this.repertoryService.getRepertoriesByIdFormation(this.formation.id).subscribe((data) => {
             this.repertoryByFormation = data;
-            console.log( this.repertoryByFormation)
           })
           this.repertoryService.getRepertoryByCalendar(this.id_event).subscribe((data) => {
             this.repertoryByCalendar = data;
@@ -197,6 +203,111 @@ export class EventComponent {
   }
   saveRepertory(){
 
+  }
+
+  convertRole(roleList: RoleDTO[]){
+    let response:RoleDTO[]=[];
+
+    for(let role of roleList){
+
+      if(role.type=="OWNER"){
+        let finalRole:RoleDTO = {
+          type: 'PROPIETARIO'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="PRESIDENT"){
+        let finalRole:RoleDTO = {
+          type: 'PRESIDENTE'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="DIRECTOR_MUSICAL"){
+        let finalRole:RoleDTO = {
+          type: 'DIRECTOR MUSICAL'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="VOCALIST"){
+        let finalRole:RoleDTO = {
+          type: 'VOCALISTA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="TREASURER"){
+        let finalRole:RoleDTO = {
+          type: 'TESORERO'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="ADMINISTRATOR"){
+        let finalRole:RoleDTO = {
+          type: 'ADMINISTRADOR'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="ARCHIVIST"){
+        let finalRole:RoleDTO = {
+          type: 'ARCHIVERO'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="ASSISTANCE_CONTROL"){
+        let finalRole:RoleDTO = {
+          type: 'CONTROL DE ASISTENCIA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="PERCUSSION"){
+        let finalRole:RoleDTO = {
+          type: 'PERCUSIONISTA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="HAND_PERCUSSION_DE_MANO"){
+        let finalRole:RoleDTO = {
+          type: 'PERCUSIONISTA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="KEYBOARD_INSTRUMENT"){
+        let finalRole:RoleDTO = {
+          type: 'TECLISTA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="ELECTRONIC_INSTRUMENT"){
+        let finalRole:RoleDTO = {
+          type: 'INSTRUMENTO ELECTRÓNICO'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="PULSED_STRINGS"){
+        let finalRole:RoleDTO = {
+          type: 'CUERDA PULSADA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="BOWED_STRINGS"){
+        let finalRole:RoleDTO = {
+          type: 'CUERDA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="BRASS_INSTRUMENT"){
+        let finalRole:RoleDTO = {
+          type: 'VIENTO MADERA'
+        };
+        response.push(finalRole)
+      }
+      if(role.type=="COMPONENT"){
+        let finalRole:RoleDTO = {
+          type: 'COMPONENTE'
+        };
+        response.push(finalRole)
+      }
+    }
+    return response
   }
 
 }
