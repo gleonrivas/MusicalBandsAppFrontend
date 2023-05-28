@@ -18,8 +18,9 @@ import {ToastController} from "@ionic/angular";
 import {HttpErrorResponse} from "@angular/common/http";
 import {RoleDTO} from "../../../shared/models/roleDTO";
 import {CalendarEventUpdateDTO} from "../../../shared/models/eventModels/calendarEventUpdateDTO";
-import {ExternalMusicianModel} from "../../../shared/models/externalMusician.model";
+
 import {ExternalMusicianService} from "../../../shared/services/externalMusician.service";
+import {ExternalMusicianModel} from "../../../shared/models/externalMusician.model";
 
 
 @Component({
