@@ -23,7 +23,7 @@
 }
 .scroll{
   overflow-y: scroll;
-  height: 300px
+  height: 500px;
 }
 .volver{
   display:flex;
@@ -37,6 +37,9 @@
 .conjunto{
   width: 90%;
   margin: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between
 }
 .boton{
   width: 20%;
@@ -164,5 +167,102 @@ ion-icon {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
+  justify-content: space-around;
+}
+.add-new{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.with-border{
+  border: 2px solid rgb(199,52,52);
+  background-color: inherit;
+}
+.buttonsUpdateDelete{
+  display:flex;
+  flex-flow: column nowrap;
+  width: 10%;
+  align-items: baseline;
+}
+.add-new-delete{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.tittle2{
+  margin: auto;
+  width: 90%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.tittle-container{
+  display: flex;
+  flex-flow: row nowrap;
+  margin: auto;
+  width: 95%;
+  gap: 1rem;
+}
+.add-new2{
+  margin: auto;
+  width: 15%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.event-child-modal{
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  border-radius: inherit;
+  width: 100%;
+  height: fit-content;
+  margin: auto ;
+  gap: 2rem;
+}
+.inputboxEditar{
+  margin: 0 auto;
+  width: 90%;
+}
+.inputbox{
+  margin-bottom: 15px
+}
+.save{
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+  margin: auto;
+  width: 35%;
+}
+.update{
+  width: fit-content;
+  margin:2%
+
+}
+.margin{
+  margin: 2%;
+}
+.margin-bottom{
+  margin-bottom: 2%;
+}
+.externalMusician{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
   justify-content: space-around;
 }

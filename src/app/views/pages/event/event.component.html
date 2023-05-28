@@ -38,7 +38,12 @@
           <ion-card-title>{{event.title}}</ion-card-title>
           <ion-card-subtitle>{{event.description}}</ion-card-subtitle>
         </ion-card-header>
-        <img src="/assets/icons8-eliminar-80.png" class="borrar">
+
+      </div>
+      <div class="buttonsUpdateDelete">
+        <h6 class="add-new with-border bg-light text-dark" (click)="openEdit(event)">
+          Editar</h6>
+        <h6 (click)="deleteCalendar(event.id)" class="add-new-delete with-border">Eliminar</h6>
       </div>
     </ion-card>
   </div>
@@ -81,18 +86,19 @@
             </div>
           </div>
           <div *ngIf="repertoryByFormation.length!=0" class="ion-padding" slot="content">
-            <ion-list >
+            <ion-list>
               <ion-list-header>
                 <ion-label> Repertorios disponibles</ion-label>
               </ion-list-header>
 
               <ion-item>
                 <ion-label>Repertorios de {{formation.name}}</ion-label>
-                <ion-select placeholder="Selecciona uno de la lista" >
-                  <ion-select-option *ngFor="let repertory of repertoryByFormation" >{{repertory.name}}</ion-select-option>
+                <ion-select placeholder="Selecciona uno de la lista">
+                  <ion-select-option
+                    *ngFor="let repertory of repertoryByFormation">{{repertory.name}}</ion-select-option>
                 </ion-select>
-                <ion-button *ngIf="rolList.includes('OWNER')" color="danger" (click)="saveRepertory()" >
-                   Guardar
+                <ion-button *ngIf="rolList.includes('OWNER')" color="danger" (click)="saveRepertory()">
+                  Guardar
                 </ion-button>
               </ion-item>
 
@@ -109,11 +115,12 @@
           <ion-item slot="header" color="light">
             <ion-label>Archivos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content"><ion-input type="file" value="333"></ion-input>
+          <div class="ion-padding" slot="content">
+            <ion-input type="file" value="333"></ion-input>
           </div>
           <div class="ion-padding" slot="content">
-            <ion-select placeholder="Selecciona uno de la lista" >
-              <ion-select-option *ngFor="let user of userList" >{{user.name}} {{user.surName}}
+            <ion-select placeholder="Selecciona uno de la lista">
+              <ion-select-option *ngFor="let user of userList">{{user.name}} {{user.surName}}
                 <p *ngFor="let role of user.roleDTOList">{{role.type}}</p></ion-select-option>
             </ion-select>
           </div>
@@ -121,6 +128,18 @@
       </ion-accordion-group>
     </div>
     <div class="assistanceList">
+      <ion-card *ngIf="rolList.includes('OWNER')" class="externalMusician">
+
+          <ion-list-header>
+            <ion-label> Músicos externos</ion-label>
+          </ion-list-header>
+          <ion-button *ngIf="rolList.includes('OWNER')" color="danger"
+                      fill="outline" (click)="openMusicalExternForm()">
+            Añadir
+          </ion-button>
+
+      </ion-card>
+
       <ion-card>
         <ion-card-header>
           <ion-card-title>Lista de asistencia
@@ -154,6 +173,61 @@
   </div>
 
 </div>
+<ion-modal [isOpen]="isModalOpen" id="modal" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+  <ng-template>
+    <ion-list class="scroll margin">
+      <div class="tittle-container">
+        <h4 class="tittle2">Editar Evento</h4>
+        <button class="add-new2" (click)="setOpen(false)">X</button>
+      </div>
+      <div class="event-child-modal">
+        <div class="inputboxEditar">Nombre: <input disabled="{{isPast}}" type="text" [(ngModel)]="event.title" class="form-control"></div>
+        <div class="inputboxEditar">Tipo:
+          <ion-select disabled="{{isPast}}" class="inputbox mt-3" placeholder="tipo" [(ngModel)]="calendarUpdate.enumTypeActuation">
+            <ion-select-option value="0">Concierto</ion-select-option>
+            <ion-select-option value="1">Ensayo</ion-select-option>
+          </ion-select>
+        </div>
+        <div class="inputboxEditar">Lugar <input disabled="{{isPast}}" type="text" [(ngModel)]="event.place" class="form-control"></div>
+        <div class="inputboxEditar">Fecha: <input disabled="{{isPast}}" type="date" [(ngModel)]="event.date" class="form-control"></div>
+        <div class="inputboxEditar">Descripción: <input  type="text" [(ngModel)]="event.description"
+                                                        class="form-control">
+        </div>
+        <div class="inputboxEditar">¿Se ha recibido el pago?
+          <ion-checkbox [(ngModel)]="calendarUpdate.paid" color="danger"></ion-checkbox>
+        </div>
+        <div class="inputboxEditar">Cantidad a ganar <input disabled="{{isPast}}" type="text" [(ngModel)]="event.amount" class="form-control">
+        </div>
+
+        <div class="inputboxEditar margin-bottom">Penalización por no asistir (en porcentaje) <input disabled="{{isPast}}" type="text"
+                                                                       [(ngModel)]="event.penaltyPonderation"
+                                                                       class="form-control"></div>
+      </div>
+      <h4 class="save" (click)="editerEvento()">Guardar</h4>
+    </ion-list>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="musicianExternanFormOpened" id="modalExternan" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+  <ng-template>
+    <ion-list class="scroll margin">
+      <div class="tittle-container">
+        <h4 class="tittle2">Añade un músico externo</h4>
+        <button class="add-new2" (click)="setOpen(false)">X</button>
+      </div>
+      <div class="event-child-modal">
+        <div class="inputboxEditar">Nombre: <input  type="text" [(ngModel)]="externalMusician.name" class="form-control"></div>
+        <div class="inputboxEditar">Apellidos: <input  type="text" [(ngModel)]="externalMusician.surname" class="form-control"></div>
+        <div class="inputboxEditar">Teléfono: <input  type="text" [(ngModel)]="externalMusician.phone" class="form-control"></div>
+        <div class="inputboxEditar">Email: <input  type="text" [(ngModel)]="externalMusician.email" class="form-control"></div>
+        <div class="inputboxEditar">DNI: <input  type="text" [(ngModel)]="externalMusician.dni" class="form-control"></div>
+        <div class="inputboxEditar">Cantidad a abonar <input type="number" [(ngModel)]="externalMusician.amount" class="form-control"></div>
+        <div class="inputboxEditar">Cuenta Bancaria: <input  type="text" [(ngModel)]="externalMusician.bankAccount" class="form-control"></div>
+      </div>
+      <h4 class="save" (click)="createExternalMusician()">Guardar</h4>
+    </ion-list>
+  </ng-template>
+</ion-modal>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
