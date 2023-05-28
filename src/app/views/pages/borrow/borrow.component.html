@@ -40,12 +40,26 @@
             <ion-col>
               <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="deleteMaterial(material.id)"><ion-icon name="close-outline" style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon></button>
               <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="openEdit(material)"><ion-icon name="pencil-outline" style="background-color: #ffc409; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="showPeople(material.id)"><ion-icon name="caret-down-outline" style="background-color: #CCCCCC; border-radius: 50px; color: whitesmoke"></ion-icon></button>
             </ion-col>
           </ion-row>
+          <div *ngIf="material.showPeople">
+            <ion-row>
+              <ion-col *ngIf="listaUsuarios.length === 0">
+                <p>No se encuentran personas</p>
+              </ion-col>
+              <ion-col *ngIf="listaUsuarios.length !== 0">
+                <ul>
+                  <li *ngFor="let person of material.people">{{person.name}}</li>
+                </ul>
+              </ion-col>
+            </ion-row>
+          </div>
         </div>
       </ion-row>
-    </div>
+   </div>
   </ion-grid>
+
 
   <ion-modal [isOpen]="isModalOpen" id="modal" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
     <ng-template>

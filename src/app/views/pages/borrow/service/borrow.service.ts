@@ -103,4 +103,9 @@ export class BorrowService {
       };
     return body;
   }
+
+  getUsers(){
+    const id = sessionStorage.getItem('idFormacionC');
+    return this.http.get('http://localhost:8080/formation/listUsers/' + id)
+  }
 }

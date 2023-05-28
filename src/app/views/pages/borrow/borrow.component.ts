@@ -27,6 +27,7 @@ export class BorrowComponent {
   isModalOpen = false;
 
   listaMateriales: any;
+  listaUsuarios: any;
 
   materialEdit: any;
   ngOnInit(){
@@ -94,6 +95,18 @@ export class BorrowComponent {
     await this.borrowService.editMaterial(body);
     this.generalService.presentToast('Material editado', 'success')
     this.checkMaterials()
+  }
+
+  showPeople(material: any) {
+    if (material.showPeople) {
+      material.showPeople = false; // Oculta la lista de personas si ya está visible
+    } else {
+      this.borrowService.getUsers().subscribe((data: any)=> {
+        this.listaUsuarios = data
+        console.log(data)
+      })
+      material.showPeople = true; // Muestra la lista de personas
+    }
   }
 
 }
