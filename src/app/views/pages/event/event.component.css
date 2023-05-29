@@ -1,3 +1,9 @@
+body{
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
 .home-container{
   display: flex;
   flex-flow: column nowrap;
@@ -12,6 +18,7 @@
   margin: auto;
   justify-content: space-between;
 }
+
 .assistanceList{
   width: 40%;
 }
@@ -265,4 +272,8 @@ ion-icon {
   width: 100%;
   align-items: center;
   justify-content: space-around;
+}
+.totalscroll{
+  overflow-y: scroll;
+  height: 100%;
 }

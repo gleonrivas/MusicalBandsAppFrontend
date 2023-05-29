@@ -20,7 +20,8 @@ import {RoleDTO} from "../../../shared/models/roleDTO";
 import {CalendarEventUpdateDTO} from "../../../shared/models/eventModels/calendarEventUpdateDTO";
 
 import {ExternalMusicianService} from "../../../shared/services/externalMusician.service";
-import {ExternalMusicianModel} from "../../../shared/models/externalMusician.model";
+import {ExternalMusicianModel, ExternalMusicianResponse} from "../../../shared/models/externalMusician.model";
+import {Location} from "@angular/common";
 
 
 @Component({
@@ -30,6 +31,7 @@ import {ExternalMusicianModel} from "../../../shared/models/externalMusician.mod
 })
 export class EventComponent {
   constructor(private readonly router: ActivatedRoute,
+              private readonly location:Location,
               private readonly eventService: EventService,
               private readonly formationService: FormationService,
               private readonly getMeService: GetMeService,
@@ -55,7 +57,7 @@ export class EventComponent {
   }
 
   public externalMusician:ExternalMusicianModel= {
-    amount: -1,
+    amount: 0,
     dni: "",
     name: "",
     surname: "",
@@ -90,29 +92,22 @@ export class EventComponent {
   }
   public musicalPieceList: MusicalPieceType[]= []
   public day: number = -1;
-  public formationId?: number = -1;
   public monthList: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre"];
   public numberMonth: number = -1;
   public fecha: Date = new Date();
   public month: string = "";
   public userList: UserFormation[] = [];
-  public idUser?: string | null = "";
   public isToday: boolean = true;
   public rolList: string[] = [];
   public isUserChecked: number[] = [];
   public isSaved: boolean=false;
   public isModalOpen = false;
   public musicianExternanFormOpened = false;
+  public viewMusicianExternanFormOpened = false;
   public isPast : boolean = false;
+  public time:string = '';
+  public externalMusicianList:ExternalMusicianResponse[]=[]
 
-
-
-  public userInfo: UserInfo = {
-    id: -1,
-    sub: "",
-    iat: -1,
-    exp: -1,
-  }
 
   public repertoryByFormation: RepertoryType[] = []
 
@@ -154,6 +149,8 @@ export class EventComponent {
     this.eventService.getEventById(this.id_event).subscribe((data) => {
       this.event = data;
       this.fecha = this.event.date;
+      this.time= this.event.date.toString().slice(11,16)
+      console.log(this.fecha)
       let fechastring = this.fecha.toString();
       let cadena: string = fechastring.slice(5, -3);
       this.numberMonth = parseInt(cadena);
@@ -170,6 +167,10 @@ export class EventComponent {
       }
 
     })
+    this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data)=>{
+      this.externalMusicianList = data
+      console.log(this.externalMusicianList)
+    })
     this.eventService.getFormationByIdCalendar(this.id_event).subscribe((data) => {
       this.formation = data;
       this.formationService.getUsersByFormation(this.formation.id).subscribe((data) => {
@@ -181,6 +182,7 @@ export class EventComponent {
             }
           }
         }
+
 
         for(let user of this.userList){
          user.roleDTOList = this.convertRole(user.roleDTOList)
@@ -238,6 +240,17 @@ export class EventComponent {
     })
   }
   saveRepertory(){
+
+  }
+
+  timeToString(date:Date){
+    let hours= date.getHours()
+    let minutes=date.getMinutes()
+
+    let time = date.toString()
+    let response = time.split('T')[1]
+    let response2 = response.substring(-4)
+    return response
 
   }
 
@@ -365,18 +378,7 @@ export class EventComponent {
       }else{
         this.presentToast('No se ha podido borrar el evento', 'danger')
       }
-      // Acceder a la respuesta del servidor en caso de error
-      // if (error.error instanceof ErrorEvent) {
-      //   // Error de cliente (ejemplo: error de red)
-      //   if(error.error.message =="The event has already occurred, it is not possible to delete it."){
-      //     this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
-      //   }
-      //   console.log('Error de cliente:', error.error.message);
-      // } else {
-      //   // Error del servidor
-      //   console.log('Error del servidor:', error.status);
-      //   console.log('Respuesta del servidor:', error.error); // Aquí puedes acceder a la respuesta del servidor
-      // }
+
     })
     this.route.navigate(['/home']);
   }
@@ -390,6 +392,12 @@ export class EventComponent {
   }
   setOpenExternalMusicianForm(isOpen: boolean) {
     this.musicianExternanFormOpened = isOpen;
+  }
+  setViewOpenExternalMusicianForm(isOpen: boolean) {
+    this.viewMusicianExternanFormOpened = isOpen;
+  }
+  openviewExternalMusician(){
+    this.setViewOpenExternalMusicianForm(true)
   }
   openMusicalExternForm(){
     this.setOpenExternalMusicianForm(true)
@@ -448,15 +456,26 @@ export class EventComponent {
     if(this.externalMusician.name){
       this.externalMusicianService.createMusician(this.externalMusician).subscribe(response=>{
         this.presentToast('El músico externo se ha creado correctamente', 'success')// Accede al status del error
+        this.route.navigate(['/event/',this.event.id]);
       },(error: HttpErrorResponse) => {
         this.presentToast('No es posible crear músicos en este momento', 'danger')
       })
     }
 
     this.setOpenExternalMusicianForm(false)
-    this.route.navigate(['/event/',this.event.id]);
+
   }
 
-
+  deleteMusician(id:number){
+  this.externalMusicianService.deleteExternalMusician(id).subscribe(response=>{
+    this.presentToast('El músico externo ha sido eliminado correctamente', 'success')// Accede al status del error
+    this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data)=>{
+      this.externalMusicianList=data
+    })
+  },(error: HttpErrorResponse) => {
+    this.presentToast('No es posible eliminar músicos en este momento', 'danger')
+  })
+    this.route.navigate(['/event/',this.event.id]);
+  }
 
 }

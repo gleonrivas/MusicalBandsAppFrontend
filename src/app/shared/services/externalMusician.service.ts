@@ -3,6 +3,7 @@ import {RestService} from "./rest.service";
 import {EncryptionService} from "./encryption.service";
 import {HttpClient} from "@angular/common/http";
 import {ExternalMusicianModel, ExternalMusicianResponse} from "../models/externalMusician.model";
+import {ResponseStringModel} from "../models/responseString.model";
 
 
 @Injectable({
@@ -19,5 +20,12 @@ export class ExternalMusicianService{
 
   createMusician(musician:ExternalMusicianModel){
     return this.rest.post<ExternalMusicianModel,ExternalMusicianResponse>('http://localhost:8080/ExternalMusician/create',musician)
+  }
+  listExternalMusician(idEvent: number){
+    return this.rest.get<ExternalMusicianResponse[]>('http://localhost:8080/ExternalMusician/findByCalendar/'+ idEvent)
+  }
+
+  deleteExternalMusician(idMusician:number){
+    return this.rest.delete<ResponseStringModel>('http://localhost:8080/ExternalMusician/'+idMusician)
   }
 }
