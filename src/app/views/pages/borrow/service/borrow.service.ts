@@ -108,4 +108,14 @@ export class BorrowService {
     const id = sessionStorage.getItem('idFormacionC');
     return this.http.get('http://localhost:8080/formation/listUsers/' + id)
   }
+
+  getBorrowedUsers(id:any){
+    const body =
+      {
+        "materialId":id
+      }
+      // @ts-ignore
+    return this.http.post('http://localhost:8080/material/getAllUserBorrorwedMaterial', body)
+
+  }
 }

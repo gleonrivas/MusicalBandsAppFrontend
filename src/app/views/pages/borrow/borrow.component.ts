@@ -101,7 +101,7 @@ export class BorrowComponent {
     if (material.showPeople) {
       material.showPeople = false; // Oculta la lista de personas si ya está visible
     } else {
-      this.borrowService.getUsers().subscribe((data: any)=> {
+      this.borrowService.getBorrowedUsers(material.id).subscribe((data: any)=> {
         this.listaUsuarios = data
         console.log(data)
       })

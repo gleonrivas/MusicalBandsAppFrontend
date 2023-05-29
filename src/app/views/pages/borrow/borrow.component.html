@@ -38,9 +38,9 @@
               <p>{{material.transferredMaterial}}, <b *ngIf="material.materialType===1">Instrumento</b> <b *ngIf="material.materialType===0">Uniforme</b> </p>
             </ion-col>
             <ion-col>
-              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="deleteMaterial(material.id)"><ion-icon name="close-outline" style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon></button>
-              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="openEdit(material)"><ion-icon name="pencil-outline" style="background-color: #ffc409; border-radius: 50px; color: whitesmoke"></ion-icon></button>
-              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="showPeople(material.id)"><ion-icon name="caret-down-outline" style="background-color: #CCCCCC; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="deleteMaterial(material.id)"><ion-icon name="close" style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="openEdit(material)"><ion-icon name="create" style="background-color: #ffc409; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+              <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="showPeople(material)"><ion-icon name="chevron-down" style="background-color: #CCCCCC; border-radius: 50px; color: whitesmoke"></ion-icon></button>
             </ion-col>
           </ion-row>
           <div *ngIf="material.showPeople">
