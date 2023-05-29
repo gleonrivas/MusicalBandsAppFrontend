@@ -17,6 +17,10 @@ import {MusicalPieceService} from "../../../shared/services/musical-piece.servic
 import {ToastController} from "@ionic/angular";
 import {HttpErrorResponse} from "@angular/common/http";
 import {RoleDTO} from "../../../shared/models/roleDTO";
+import {CalendarEventUpdateDTO} from "../../../shared/models/eventModels/calendarEventUpdateDTO";
+
+import {ExternalMusicianService} from "../../../shared/services/externalMusician.service";
+import {ExternalMusicianModel} from "../../../shared/models/externalMusician.model";
 
 
 @Component({
@@ -33,6 +37,7 @@ export class EventComponent {
               private readonly absenceService: AbsenceService,
               private readonly musicalPieceService: MusicalPieceService,
               private toastController: ToastController,
+              private readonly externalMusicianService: ExternalMusicianService,
               private readonly route: Router) {
   }
 
@@ -45,8 +50,31 @@ export class EventComponent {
     description: "",
     type: "",
     paid: true,
-    amount: -1,
+    amount: 0,
     penaltyPonderation: -1
+  }
+
+  public externalMusician:ExternalMusicianModel= {
+    amount: -1,
+    dni: "",
+    name: "",
+    surname: "",
+    idCalendar: -1,
+    bankAccount: "",
+    email:"",
+    phone: ""
+  }
+  public calendarUpdate:CalendarEventUpdateDTO = {
+    idCalendarEvent: "",
+    enumTypeActuation: "", //EnumTypeActuation
+    title:"",
+    place:"",
+    paid:"", //boolean
+    description: "",
+    date: "", //LocalDate
+    amount:"",  //Double
+    penaltyPonderation: "", //Double
+    idRepertory:"", //Integer
   }
 
   public formation: FormationType = {
@@ -73,6 +101,9 @@ export class EventComponent {
   public rolList: string[] = [];
   public isUserChecked: number[] = [];
   public isSaved: boolean=false;
+  public isModalOpen = false;
+  public musicianExternanFormOpened = false;
+  public isPast : boolean = false;
 
 
 
@@ -131,6 +162,11 @@ export class EventComponent {
       let todayDate: Date = new Date();
       if (this.fecha.getDate() == todayDate.getDate()) {
         this.isToday = false;
+      }
+      if(this.fecha.getDate()>=todayDate.getDate()){
+        this.isPast = true
+      }else{
+        this.isPast=false
       }
 
     })
@@ -309,5 +345,118 @@ export class EventComponent {
     }
     return response
   }
+
+
+
+  deleteCalendar(calendarId:number){
+    this.eventService.deleteCalendar(calendarId).subscribe(response=>{
+      this.presentToast('Se han guardado los datos correctamente', 'success')// Accede al status del error
+      if(response.response == "The event has already occurred, it is not possible to delete it."){
+        this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
+      }
+    },(error: HttpErrorResponse) => {
+      if(error.error.message =="The event has already occurred, it is not possible to delete it."){
+        this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
+      }
+      if(error.message == "The event has already occurred, it is not possible to delete it."){
+        this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
+      }else if(error.message == "You cannot delete events"){
+        this.presentToast('Tu rol no te permite eliminar el evento', 'danger')
+      }else{
+        this.presentToast('No se ha podido borrar el evento', 'danger')
+      }
+      // Acceder a la respuesta del servidor en caso de error
+      // if (error.error instanceof ErrorEvent) {
+      //   // Error de cliente (ejemplo: error de red)
+      //   if(error.error.message =="The event has already occurred, it is not possible to delete it."){
+      //     this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
+      //   }
+      //   console.log('Error de cliente:', error.error.message);
+      // } else {
+      //   // Error del servidor
+      //   console.log('Error del servidor:', error.status);
+      //   console.log('Respuesta del servidor:', error.error); // Aquí puedes acceder a la respuesta del servidor
+      // }
+    })
+    this.route.navigate(['/home']);
+  }
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+  openEdit(calendar:EventResponse){
+    sessionStorage.setItem('idCalendar', calendar.id.toString())
+
+    this.setOpen(true);
+  }
+  setOpenExternalMusicianForm(isOpen: boolean) {
+    this.musicianExternanFormOpened = isOpen;
+  }
+  openMusicalExternForm(){
+    this.setOpenExternalMusicianForm(true)
+  }
+  async editerEvento(){
+    console.log(this.event)
+    let paid:string=""
+    let repertoryId:string | null= ""
+    if(this.event.paid == true){
+      paid="1"
+    }else{
+      paid="0"
+    }
+    if(this.repertoryByCalendar.id){
+      if(this.repertoryByCalendar.id == -1){
+        repertoryId = ""
+      }else {
+        repertoryId = this.repertoryByCalendar.id.toString()
+      }
+    }
+
+
+    this.calendarUpdate = {
+      idCalendarEvent : this.event.id.toString(),
+      enumTypeActuation:this.event.type,
+      title:this.event.title,
+      place:this.event.place,
+      paid:paid,
+      description:this.event.description,
+      date:this.event.date.toString(),
+      amount:this.event.amount.toString(),
+      penaltyPonderation:this.event.penaltyPonderation.toString(),
+      idRepertory: repertoryId
+    }
+    console.log(this.calendarUpdate)
+    this.eventService.updateCalendar(this.calendarUpdate).subscribe(response=>{
+      this.presentToast('Se han guardado los datos correctamente', 'success')// Accede al status del error
+    },(error: HttpErrorResponse) => {
+      if(error.message== 'No earlier date than the current date is possible' ){
+        this.presentToast('No puede guardar un evento anterior a la fecha actual', 'danger')
+      }else if (error.message== 'You cannot update events'){
+        this.presentToast('No puedes editar este evento', 'danger')
+      }else if( error.message =='Something wron' ){
+        this.presentToast('No es posible guardar el evento en este momento', 'danger')
+      }else{
+        this.presentToast('No es posible guardar el evento en este momento', 'danger')
+      }
+
+    })
+    this.route.navigate(['/event/',this.event.id]);
+  }
+
+  async createExternalMusician(){
+    this.externalMusician.idCalendar= this.id_event;
+
+    if(this.externalMusician.name){
+      this.externalMusicianService.createMusician(this.externalMusician).subscribe(response=>{
+        this.presentToast('El músico externo se ha creado correctamente', 'success')// Accede al status del error
+      },(error: HttpErrorResponse) => {
+        this.presentToast('No es posible crear músicos en este momento', 'danger')
+      })
+    }
+
+    this.setOpenExternalMusicianForm(false)
+    this.route.navigate(['/event/',this.event.id]);
+  }
+
+
 
 }

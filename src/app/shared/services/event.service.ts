@@ -3,9 +3,11 @@ import {RestService} from "./rest.service";
 import {EncryptionService} from "./encryption.service";
 import {FormationType} from "../models/formationType.model";
 import {EventResponse} from "../models/eventModels/eventResponse";
-import {CalendarEventUpdateDTO} from "../models/eventModels/calendarEventUpdateDTO";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CalendarEventDTODelete} from "../models/eventModels/CalendarEventDTODelete";
+import {CalendarEventUpdateDTO} from "../models/eventModels/calendarEventUpdateDTO";
+import {ResponseStringModel} from "../models/responseString.model";
+
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +35,11 @@ export class EventService{
   updateCalendar(calendarUpdate:CalendarEventUpdateDTO){
     return this.rest.put<CalendarEventUpdateDTO,EventResponse>('http://localhost:8080/calendar/update',calendarUpdate)
   }
-
+  
   deleteCalendar(eventId:number){
     let calendarEvent:CalendarEventDTODelete = {
       idCalendarEvent: eventId.toString()
     }
-    return this.http.put<EventResponse>('http://localhost:8080/calendar/delete',calendarEvent,{
-      headers: this.getHeaders()
-    })
+    return this.rest.deleteBody<CalendarEventDTODelete,ResponseStringModel>('http://localhost:8080/calendar/delete', calendarEvent)
   }
 }

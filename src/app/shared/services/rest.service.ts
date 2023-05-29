@@ -31,6 +31,13 @@ export class RestService {
     });
   }
 
+  public deleteBody<K, T = Object>(url: string,  body:K) {
+    return this.http.delete<T>(url, {
+      headers: this.getHeaders(),
+      body
+    });
+  }
+
   public put<K,T =Object>(url:string, body:K){
     return this.http.put<T>(url, body, {
       headers: this.getHeaders()

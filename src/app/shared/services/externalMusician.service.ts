@@ -1,0 +1,23 @@
+import {Injectable} from "@angular/core";
+import {RestService} from "./rest.service";
+import {EncryptionService} from "./encryption.service";
+import {HttpClient} from "@angular/common/http";
+import {ExternalMusicianModel, ExternalMusicianResponse} from "../models/externalMusician.model";
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ExternalMusicianService{
+  public apikey = sessionStorage.getItem('Authorization')
+  constructor(
+    private rest: RestService,
+    private encryptionService: EncryptionService,
+    private http: HttpClient
+  ) { }
+
+
+  createMusician(musician:ExternalMusicianModel){
+    return this.rest.post<ExternalMusicianModel,ExternalMusicianResponse>('http://localhost:8080/ExternalMusician/create',musician)
+  }
+}
