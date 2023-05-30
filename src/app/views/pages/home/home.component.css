@@ -7,8 +7,7 @@ ion-searchbar{
   width: 50%;
   margin: 3rem auto 0 auto;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
-  border-radius: .5rem;
-  --border-radius: .5rem;
+  border-radius: 1rem;
 }
 
 .div-img{
@@ -49,7 +48,7 @@ body::-webkit-scrollbar{
   width: 90%;
   height: 100vh;
   margin: 0 auto;
-  border-radius: .3rem;
+  border-radius: 1rem;
   background-color: white;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
 }
@@ -82,7 +81,7 @@ body::-webkit-scrollbar{
   width: 100%;
   background-color: white;
   padding:.7rem;
-  border-radius: .3rem;
+  border-radius: 1rem;
   margin: .3rem auto;
   align-items: center;
   gap: 1.5rem;
@@ -147,7 +146,7 @@ h3{
   padding: 1rem;
   font-weight: bold;
   color: white;
-  border-radius: .3rem;
+  border-radius: 1rem;
   background-color: #C63535;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
 }
@@ -156,7 +155,7 @@ a{
   color: white;
   background-color: #C63535;
   padding: .5rem 1.5rem;
-  border-radius: .3rem;
+  border-radius: 1rem;
   width: max-content;
   margin: auto 0 auto auto;
 }
@@ -194,7 +193,7 @@ a{
   margin: 0 auto 5rem auto;
   width: 83vw;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.50);
-  border-radius: .3rem;
+  border-radius: 1rem;
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
 }
@@ -217,8 +216,8 @@ a{
     width: 80%;
     margin: 3rem auto 0 auto;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
-    border-radius: .5rem;
-    --border-radius: .5rem;
+    border-radius: 1rem;
+    --border-radius: 1rem;
   }
 
   .scroll {
@@ -237,7 +236,7 @@ a{
   background: -moz-linear-gradient(172deg, rgba(198,53,53,1) 0%, rgba(187,47,47,1) 44%, rgba(128,12,12,1) 100%);
   background: -webkit-linear-gradient(172deg, rgba(198,53,53,1) 0%, rgba(187,47,47,1) 44%, rgba(128,12,12,1) 100%);
   background: linear-gradient(172deg, rgba(198,53,53,1) 0%, rgba(187,47,47,1) 44%, rgba(128,12,12,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c63535",endColorstr="#800c0c",GradientType=1);  border-radius: .5rem;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c63535",endColorstr="#800c0c",GradientType=1);  border-radius: 1rem;
   padding: 2rem 2rem 1rem 2rem;
   width: 70%;
   height: max-content;
