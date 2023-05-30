@@ -40,6 +40,7 @@ import { PerformanceComponent } from './views/pages/performance/performance.comp
 import { SquadPlayComponent } from './views/pages/squad-play/squad-play.component';
 import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component';
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
+import { TreasuryComponent } from './views/pages/treasury/treasury.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.compo
     SquadPlayComponent,
     RehearsalComponent,
     NoAuthPageComponent,
+    TreasuryComponent,
   ],
   imports: [
     BrowserModule,

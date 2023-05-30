@@ -15,6 +15,7 @@ import {RehearsalComponent} from "./views/pages/rehearsal/rehearsal.component";
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
 import {AuthGuard} from "./shared/auth/auth";
 import {EventComponent} from "./views/pages/event/event.component";
+import {TreasuryComponent} from "./views/pages/treasury/treasury.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -82,6 +83,10 @@ const routes: Routes = [
   {
     path: 'crearensayo',
     component: RehearsalComponent
+  },
+  {
+    path: 'treasury/:id_formation',
+    component: TreasuryComponent
   }
 ]
 @NgModule({

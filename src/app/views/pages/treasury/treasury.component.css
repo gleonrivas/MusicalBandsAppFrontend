@@ -1,0 +1,37 @@
+.tittle{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.flecha{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.conjunto{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between
+}
+.home-container{
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 40%;
+  margin: 3rem auto;
+  height: 60vh;
+}
+body{
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+.formationName{
+  margin: auto 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 183%;
+  font-weight: bold;
+  text-align: end;
+  width: 93%;
+}
