@@ -45,7 +45,7 @@
           <a class="text-light" (click)="openFormation(formation)">Ver</a>
         </div>
 <!--        <h3 *ngIf="isPartFormations.length!=0">Formas parte</h3>-->
-        <div class="formacion flex-row with-border" *ngFor="let formation of isPartFormations">
+        <div class="formacion flex-row " *ngFor="let formation of isPartFormations">
           <div class="div-img"><img src="{{formation.logo}}"></div>
           <div class="formacion-info f-col ">
             <p class="fw-bold">{{formation.name}}</p>

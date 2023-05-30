@@ -9,8 +9,9 @@
 <br>
 <div class="repertory-parent ">
   <div class="tittle-container">
+    <h4 class="add-new with-border" [routerLink]="'/repertory'">Volver</h4>
     <h4 class="tittle">Piezas musicales de {{repertory.name | titlecase}}</h4>
-    <h4 class="w-25 add-new " (click)="setOpen(true)">Crear</h4>
+    <h4 class="add-new " (click)="setOpen(true)">Crear</h4>
   </div>
   <div class="repertory-child">
     <div class="repertory-child-sub">
@@ -22,7 +23,7 @@
           <p class="m-0 w-auto">{{musicalPiece.length}}</p>
         </div>
         <div class="d-flex flex-column gap-2 ms-auto">
-          <h6 class="add-new w-100 with-border">Ver archivo</h6>
+          <h6 class="add-new w-100 ">Ver archivo</h6>
           <h6 (click)="deleteMusicalPiece(musicalPiece.id!)" class="add-new w-100 with-border bg-light text-dark">Eliminar</h6>
         </div>
       </div>

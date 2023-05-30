@@ -9,6 +9,8 @@
   <br>
   <div class="repertory-parent ">
     <div class="tittle-container">
+<!--      <h4 class="add-new d-flex text-center" [routerLink]="'/formacion'"><ion-icon name="arrow-back" aria-hidden='true' class="mt-auto mb-auto"></ion-icon> Volver</h4>-->
+      <h4 class="add-new with-border" [routerLink]="'/formacion'">Volver</h4>
       <h4 class="tittle">Repertorios de "{{formationData.name}}"</h4>
       <h4 class="add-new" (click)="setOpen(true)">Crear</h4>
     </div>
@@ -21,7 +23,7 @@
             <p class="text-center mt-3 mb-3 m-auto ">{{repertory.description}}</p>
           </div>
           <div class="d-flex flex-row gap-2 justify-content-around mt-auto">
-            <h6 (click)="showMusicalPiece(repertory.id!)" class="add-new with-border">Ver</h6>
+            <h6 (click)="showMusicalPiece(repertory.id!)" class="add-new ">Ver</h6>
             <h6 (click)="deleteRepertory(repertory.id!)" class="add-new with-border bg-light text-dark">Eliminar</h6>
           </div>
         </div>
@@ -46,5 +48,6 @@
   </ng-template>
 </ion-modal>
 
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
 </body>
