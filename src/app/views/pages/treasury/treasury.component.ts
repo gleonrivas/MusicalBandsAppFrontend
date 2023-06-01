@@ -11,6 +11,7 @@ import {ToastController} from "@ionic/angular";
 import {ExternalMusicianService} from "../../../shared/services/externalMusician.service";
 import {FormationType} from "../../../shared/models/formationType.model";
 import {EnumFormationType} from "../../../shared/models/Enum/EnumFormationType";
+import {EventResponse} from "../../../shared/models/eventModels/eventResponse";
 
 @Component({
   selector: 'app-treasury',
@@ -40,6 +41,8 @@ constructor(private readonly router: ActivatedRoute,
     type: EnumFormationType.BANDS_OF_MUSIC,
     origin: "",
   }
+  public eventList: EventResponse[] =[]
+
 
 ngOnInit(){
   this.router.paramMap.subscribe((value) => {
@@ -52,6 +55,16 @@ ngOnInit(){
   this.formationService.getFormationById(this.id_formation).subscribe((data)=>{
     this.formation=data
   })
+
+  if(this.id_formation){
+    this.eventService.getEventsByIdFormation(this.id_formation).subscribe((data)=>{
+      this.eventList=data
+    })
+  }
+
+
+
+
 
 }
 

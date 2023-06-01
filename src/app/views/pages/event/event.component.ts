@@ -31,7 +31,7 @@ import {Location} from "@angular/common";
 })
 export class EventComponent {
   constructor(private readonly router: ActivatedRoute,
-              private readonly location:Location,
+              private readonly location: Location,
               private readonly eventService: EventService,
               private readonly formationService: FormationService,
               private readonly getMeService: GetMeService,
@@ -56,27 +56,27 @@ export class EventComponent {
     penaltyPonderation: -1
   }
 
-  public externalMusician:ExternalMusicianModel= {
+  public externalMusician: ExternalMusicianModel = {
     amount: 0,
     dni: "",
     name: "",
     surname: "",
     idCalendar: -1,
     bankAccount: "",
-    email:"",
+    email: "",
     phone: ""
   }
-  public calendarUpdate:CalendarEventUpdateDTO = {
+  public calendarUpdate: CalendarEventUpdateDTO = {
     idCalendarEvent: "",
     enumTypeActuation: "", //EnumTypeActuation
-    title:"",
-    place:"",
-    paid:"", //boolean
+    title: "",
+    place: "",
+    paid: "", //boolean
     description: "",
     date: "", //LocalDate
-    amount:"",  //Double
+    amount: "",  //Double
     penaltyPonderation: "", //Double
-    idRepertory:"", //Integer
+    idRepertory: "", //Integer
   }
 
   public formation: FormationType = {
@@ -90,24 +90,32 @@ export class EventComponent {
     type: EnumFormationType.BANDS_OF_MUSIC,
     origin: "",
   }
-  public musicalPieceList: MusicalPieceType[]= []
+  public musicalPieceList: MusicalPieceType[] = []
   public day: number = -1;
   public monthList: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre"];
   public numberMonth: number = -1;
   public fecha: Date = new Date();
   public month: string = "";
   public userList: UserFormation[] = [];
-  public isToday: boolean = true;
+  public isToday: boolean = false;
   public rolList: string[] = [];
   public isUserChecked: number[] = [];
-  public isSaved: boolean=false;
+  public isSaved: boolean = false;
   public isModalOpen = false;
   public musicianExternanFormOpened = false;
   public viewMusicianExternanFormOpened = false;
-  public isPast : boolean = false;
-  public time:string = '';
-  public externalMusicianList:ExternalMusicianResponse[]=[]
+  public isPast: boolean = false;
+  public time: string = '';
+  public externalMusicianList: ExternalMusicianResponse[] = []
+  public id: number = -1
 
+  public idUser: number[] = []
+
+  public isLoading = true;
+
+  public isEditable = false;
+
+  public isDeletable = false;
 
   public repertoryByFormation: RepertoryType[] = []
 
@@ -118,12 +126,14 @@ export class EventComponent {
     description: "",
     idFormation: -1
   }
+  public date: Date = new Date()
 
   private absenceList: AbscenceModel = {
     calendarEventId: '',
     listOfUserId: []
   }
-  async presentToast(message:string, color:string) {
+
+  async presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
@@ -135,8 +145,7 @@ export class EventComponent {
 
   ngOnInit() {
 
-
-    const id = this.getMeService.id;
+    this.id = this.getMeService.id;
 
 
     this.router.paramMap.subscribe((value) => {
@@ -148,46 +157,66 @@ export class EventComponent {
 
     this.eventService.getEventById(this.id_event).subscribe((data) => {
       this.event = data;
-      this.fecha = this.event.date;
-      this.time= this.event.date.toString().slice(11,16)
-      console.log(this.fecha)
-      let fechastring = this.fecha.toString();
-      let cadena: string = fechastring.slice(5, -3);
-      this.numberMonth = parseInt(cadena);
-      this.month = this.monthList[this.numberMonth - 1];
-      this.day = Math.abs(parseInt(fechastring.slice(7)));
-      let todayDate: Date = new Date();
-      if (this.fecha.getDate() == todayDate.getDate()) {
-        this.isToday = false;
-      }
-      if(this.fecha.getDate()>=todayDate.getDate()){
-        this.isPast = true
-      }else{
-        this.isPast=false
+      this.event.date = new Date(this.event.date);
+
+      const day = this.event.date.getDate();
+      const month = this.event.date.getMonth();
+      const year = this.event.date.getFullYear();
+
+      const nowDay = this.date.getDate();
+      const nowMonth = this.date.getMonth();
+      const nowYear = this.date.getFullYear();
+
+      this.setEditable(this.event.date);
+      if (nowDay === day && nowMonth === month && nowYear === year) {
+        this.isToday = true;
       }
 
+
+      this.fecha = this.event.date;
+      let hours = `${this.event.date.getHours()}`;
+      let minutes = `${this.event.date.getMinutes()}`;
+
+      if (hours.length < 2) {
+        hours = `0${hours}`;
+      }
+
+      if (minutes.length < 2) {
+        minutes = `0${minutes}`;
+      }
+
+      this.time = `${hours}:${minutes}`
+
+      let fechastring = this.fecha.toString();
+      this.numberMonth = this.fecha.getMonth();
+      this.month = this.monthList[this.numberMonth];
+      this.day = Math.abs(parseInt(fechastring.slice(7)));
+
     })
-    this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data)=>{
+
+
+    this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data) => {
       this.externalMusicianList = data
-      console.log(this.externalMusicianList)
     })
     this.eventService.getFormationByIdCalendar(this.id_event).subscribe((data) => {
       this.formation = data;
       this.formationService.getUsersByFormation(this.formation.id).subscribe((data) => {
         this.userList = data;
         for (let user of this.userList) {
-          if (user.id == id) {
+          this.idUser.push(user.id)
+          if (user.id == this.id) {
             for (let rol of user.roleDTOList) {
               this.rolList.push(rol.type)
             }
           }
         }
+        console.log(this.idUser)
+        console.log(this.id)
 
 
-        for(let user of this.userList){
-         user.roleDTOList = this.convertRole(user.roleDTOList)
+        for (let user of this.userList) {
+          user.roleDTOList = this.convertRole(user.roleDTOList)
         }
-
 
 
         if (this.formation.id) {
@@ -196,16 +225,17 @@ export class EventComponent {
           })
           this.repertoryService.getRepertoryByCalendar(this.id_event).subscribe((data) => {
             this.repertoryByCalendar = data;
-            if(this.repertoryByCalendar.id){
-              this.musicalPieceService.getMusicalPieceByRepertoryId(this.repertoryByCalendar.id).subscribe((data)=>{
+            if (this.repertoryByCalendar.id) {
+              this.musicalPieceService.getMusicalPieceByRepertoryId(this.repertoryByCalendar.id).subscribe((data) => {
 
-                this.musicalPieceList=data;
+                this.musicalPieceList = data;
               })
             }
           })
 
         }
 
+        this.isLoading = false;
       })
 
 
@@ -232,20 +262,36 @@ export class EventComponent {
         this.absenceList.listOfUserId.push(idUser.id.toString())
       }
     }
-    this.absenceService.postAbsenceList(this.absenceList).subscribe(response=>{
-      this.isSaved=true;
+    this.absenceService.postAbsenceList(this.absenceList).subscribe(response => {
+      this.isSaved = true;
       this.presentToast('Se han guardado los datos correctamente', 'success')// Accede al status del error
-    },(error: HttpErrorResponse) => {
+    }, (responseError: HttpErrorResponse) => {
+      const error = responseError.error;
+      if (error.response == "There are already registered users") {
+        this.presentToast('No puede vovler a pasar lista', 'danger')
+      }
+      if (error.response == "There are already registered users") {
+        this.presentToast('No puedes volver a pasar lista', 'danger')
+      } else if (error.response == "There is a user who does not belong to the formation") {
+        this.presentToast('Hay usuarios que no pertenecen a esta formación', 'danger')
+      } else if (error.response == "You can't register absences") {
+        this.presentToast('Tu rol no te permite registar ausencias', 'danger')
+      } else if (error.response == "The event is not today") {
+        this.presentToast('No puede registrar una ausencia de un evento que no es hoy', 'danger')
+      } else {
+        this.presentToast('No se ha podido borrar el evento', 'danger')
+      }
 
     })
   }
-  saveRepertory(){
+
+  saveRepertory() {
 
   }
 
-  timeToString(date:Date){
-    let hours= date.getHours()
-    let minutes=date.getMinutes()
+  timeToString(date: Date) {
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
 
     let time = date.toString()
     let response = time.split('T')[1]
@@ -254,103 +300,103 @@ export class EventComponent {
 
   }
 
-  convertRole(roleList: RoleDTO[]){
-    let response:RoleDTO[]=[];
+  convertRole(roleList: RoleDTO[]) {
+    let response: RoleDTO[] = [];
 
-    for(let role of roleList){
+    for (let role of roleList) {
 
-      if(role.type=="OWNER"){
-        let finalRole:RoleDTO = {
+      if (role.type == "OWNER") {
+        let finalRole: RoleDTO = {
           type: 'PROPIETARIO'
         };
         response.push(finalRole)
       }
-      if(role.type=="PRESIDENT"){
-        let finalRole:RoleDTO = {
+      if (role.type == "PRESIDENT") {
+        let finalRole: RoleDTO = {
           type: 'PRESIDENTE'
         };
         response.push(finalRole)
       }
-      if(role.type=="DIRECTOR_MUSICAL"){
-        let finalRole:RoleDTO = {
+      if (role.type == "DIRECTOR_MUSICAL") {
+        let finalRole: RoleDTO = {
           type: 'DIRECTOR MUSICAL'
         };
         response.push(finalRole)
       }
-      if(role.type=="VOCALIST"){
-        let finalRole:RoleDTO = {
+      if (role.type == "VOCALIST") {
+        let finalRole: RoleDTO = {
           type: 'VOCALISTA'
         };
         response.push(finalRole)
       }
-      if(role.type=="TREASURER"){
-        let finalRole:RoleDTO = {
+      if (role.type == "TREASURER") {
+        let finalRole: RoleDTO = {
           type: 'TESORERO'
         };
         response.push(finalRole)
       }
-      if(role.type=="ADMINISTRATOR"){
-        let finalRole:RoleDTO = {
+      if (role.type == "ADMINISTRATOR") {
+        let finalRole: RoleDTO = {
           type: 'ADMINISTRADOR'
         };
         response.push(finalRole)
       }
-      if(role.type=="ARCHIVIST"){
-        let finalRole:RoleDTO = {
+      if (role.type == "ARCHIVIST") {
+        let finalRole: RoleDTO = {
           type: 'ARCHIVERO'
         };
         response.push(finalRole)
       }
-      if(role.type=="ASSISTANCE_CONTROL"){
-        let finalRole:RoleDTO = {
+      if (role.type == "ASSISTANCE_CONTROL") {
+        let finalRole: RoleDTO = {
           type: 'CONTROL DE ASISTENCIA'
         };
         response.push(finalRole)
       }
-      if(role.type=="PERCUSSION"){
-        let finalRole:RoleDTO = {
+      if (role.type == "PERCUSSION") {
+        let finalRole: RoleDTO = {
           type: 'PERCUSIONISTA'
         };
         response.push(finalRole)
       }
-      if(role.type=="HAND_PERCUSSION_DE_MANO"){
-        let finalRole:RoleDTO = {
+      if (role.type == "HAND_PERCUSSION_DE_MANO") {
+        let finalRole: RoleDTO = {
           type: 'PERCUSIONISTA'
         };
         response.push(finalRole)
       }
-      if(role.type=="KEYBOARD_INSTRUMENT"){
-        let finalRole:RoleDTO = {
+      if (role.type == "KEYBOARD_INSTRUMENT") {
+        let finalRole: RoleDTO = {
           type: 'TECLISTA'
         };
         response.push(finalRole)
       }
-      if(role.type=="ELECTRONIC_INSTRUMENT"){
-        let finalRole:RoleDTO = {
+      if (role.type == "ELECTRONIC_INSTRUMENT") {
+        let finalRole: RoleDTO = {
           type: 'INSTRUMENTO ELECTRÓNICO'
         };
         response.push(finalRole)
       }
-      if(role.type=="PULSED_STRINGS"){
-        let finalRole:RoleDTO = {
+      if (role.type == "PULSED_STRINGS") {
+        let finalRole: RoleDTO = {
           type: 'CUERDA PULSADA'
         };
         response.push(finalRole)
       }
-      if(role.type=="BOWED_STRINGS"){
-        let finalRole:RoleDTO = {
+      if (role.type == "BOWED_STRINGS") {
+        let finalRole: RoleDTO = {
           type: 'CUERDA'
         };
         response.push(finalRole)
       }
-      if(role.type=="BRASS_INSTRUMENT"){
-        let finalRole:RoleDTO = {
+      if (role.type == "BRASS_INSTRUMENT") {
+        let finalRole: RoleDTO = {
           type: 'VIENTO MADERA'
         };
         response.push(finalRole)
       }
-      if(role.type=="COMPONENT"){
-        let finalRole:RoleDTO = {
+      if (role.type == "COMPONENT") {
+        let finalRole: RoleDTO = {
           type: 'COMPONENTE'
         };
         response.push(finalRole)
@@ -360,104 +406,115 @@ export class EventComponent {
   }
 
 
-
-  deleteCalendar(calendarId:number){
-    this.eventService.deleteCalendar(calendarId).subscribe(response=>{
+  deleteCalendar(calendarId: number) {
+    this.eventService.deleteCalendar(calendarId).subscribe(response => {
       this.presentToast('Se han guardado los datos correctamente', 'success')// Accede al status del error
-      if(response.response == "The event has already occurred, it is not possible to delete it."){
+      this.route.navigate(['/home']);
+      if (response.response == "The event has already occurred, it is not possible to delete it.") {
         this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
       }
-    },(error: HttpErrorResponse) => {
-      if(error.error.message =="The event has already occurred, it is not possible to delete it."){
+    }, (responseError: HttpErrorResponse) => {
+      const error = responseError.error;
+      if (error.response == "The event has already occurred, it is not possible to delete it.") {
         this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
       }
-      if(error.message == "The event has already occurred, it is not possible to delete it."){
+      if (error.response == "The event has already occurred, it is not possible to delete it.") {
         this.presentToast('Un evento ya ocurrido no se puede borrar', 'danger')
-      }else if(error.message == "You cannot delete events"){
+      } else if (error.response == "You cannot delete events") {
         this.presentToast('Tu rol no te permite eliminar el evento', 'danger')
-      }else{
+      } else {
         this.presentToast('No se ha podido borrar el evento', 'danger')
       }
 
     })
-    this.route.navigate(['/home']);
+
   }
+
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
-  openEdit(calendar:EventResponse){
+
+  openEdit(calendar: EventResponse) {
     sessionStorage.setItem('idCalendar', calendar.id.toString())
 
     this.setOpen(true);
   }
+
   setOpenExternalMusicianForm(isOpen: boolean) {
     this.musicianExternanFormOpened = isOpen;
   }
+
   setViewOpenExternalMusicianForm(isOpen: boolean) {
     this.viewMusicianExternanFormOpened = isOpen;
   }
-  openviewExternalMusician(){
+
+  openviewExternalMusician() {
     this.setViewOpenExternalMusicianForm(true)
   }
-  openMusicalExternForm(){
+
+  openMusicalExternForm() {
     this.setOpenExternalMusicianForm(true)
   }
-  async editerEvento(){
+
+  async editerEvento() {
     console.log(this.event)
-    let paid:string=""
-    let repertoryId:string | null= ""
-    if(this.event.paid == true){
-      paid="1"
-    }else{
-      paid="0"
+    let paid: string = ""
+    let repertoryId: string | null = ""
+    if (this.event.paid == true) {
+      paid = "1"
+    } else {
+      paid = "0"
     }
-    if(this.repertoryByCalendar.id){
-      if(this.repertoryByCalendar.id == -1){
+    if (this.repertoryByCalendar.id) {
+      if (this.repertoryByCalendar.id == -1) {
         repertoryId = ""
-      }else {
+      } else {
         repertoryId = this.repertoryByCalendar.id.toString()
       }
     }
 
 
     this.calendarUpdate = {
-      idCalendarEvent : this.event.id.toString(),
-      enumTypeActuation:this.event.type,
-      title:this.event.title,
-      place:this.event.place,
-      paid:paid,
-      description:this.event.description,
-      date:this.event.date.toString(),
-      amount:this.event.amount.toString(),
-      penaltyPonderation:this.event.penaltyPonderation.toString(),
+      idCalendarEvent: this.event.id.toString(),
+      enumTypeActuation: this.event.type,
+      title: this.event.title,
+      place: this.event.place,
+      paid: paid,
+      description: this.event.description,
+      date: this.event.date.toString(),
+      amount: this.event.amount.toString(),
+      penaltyPonderation: this.event.penaltyPonderation.toString(),
       idRepertory: repertoryId
     }
     console.log(this.calendarUpdate)
-    this.eventService.updateCalendar(this.calendarUpdate).subscribe(response=>{
+    this.eventService.updateCalendar(this.calendarUpdate).subscribe(response => {
       this.presentToast('Se han guardado los datos correctamente', 'success')// Accede al status del error
-    },(error: HttpErrorResponse) => {
-      if(error.message== 'No earlier date than the current date is possible' ){
+    }, (responseError: HttpErrorResponse) => {
+      const error = responseError.error;
+
+      if (error.response == 'No earlier date than the current date is possible') {
         this.presentToast('No puede guardar un evento anterior a la fecha actual', 'danger')
-      }else if (error.message== 'You cannot update events'){
+      } else if (error.response == 'You cannot update events') {
         this.presentToast('No puedes editar este evento', 'danger')
-      }else if( error.message =='Something wron' ){
+      } else if (error.response == 'Something wron') {
         this.presentToast('No es posible guardar el evento en este momento', 'danger')
-      }else{
+      } else {
         this.presentToast('No es posible guardar el evento en este momento', 'danger')
       }
 
     })
-    this.route.navigate(['/event/',this.event.id]);
+    this.route.navigate(['/event/', this.event.id]);
   }
 
-  async createExternalMusician(){
-    this.externalMusician.idCalendar= this.id_event;
+  async createExternalMusician() {
+    this.externalMusician.idCalendar = this.id_event;
 
-    if(this.externalMusician.name){
-      this.externalMusicianService.createMusician(this.externalMusician).subscribe(response=>{
+    if (this.externalMusician.name) {
+      this.externalMusicianService.createMusician(this.externalMusician).subscribe(response => {
         this.presentToast('El músico externo se ha creado correctamente', 'success')// Accede al status del error
-        this.route.navigate(['/event/',this.event.id]);
-      },(error: HttpErrorResponse) => {
+        this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data) => this.externalMusicianList = data)
+        this.route.navigate(['/event/', this.event.id]);
+      }, (error: HttpErrorResponse) => {
         this.presentToast('No es posible crear músicos en este momento', 'danger')
       })
     }
@@ -466,16 +523,21 @@ export class EventComponent {
 
   }
 
-  deleteMusician(id:number){
-  this.externalMusicianService.deleteExternalMusician(id).subscribe(response=>{
-    this.presentToast('El músico externo ha sido eliminado correctamente', 'success')// Accede al status del error
-    this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data)=>{
-      this.externalMusicianList=data
+  deleteMusician(id: number) {
+    this.externalMusicianService.deleteExternalMusician(id).subscribe(response => {
+      this.presentToast('El músico externo ha sido eliminado correctamente', 'success')// Accede al status del error
+      this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data) => {
+        this.externalMusicianList = data
+      })
+    }, (error: HttpErrorResponse) => {
+      this.presentToast('No es posible eliminar músicos en este momento', 'danger')
     })
-  },(error: HttpErrorResponse) => {
-    this.presentToast('No es posible eliminar músicos en este momento', 'danger')
-  })
-    this.route.navigate(['/event/',this.event.id]);
+    this.route.navigate(['/event/', this.event.id]);
+  }
+
+  setEditable(eventDate: Date) {
+    this.isEditable = this.date < eventDate;
+    this.isDeletable = this.date < eventDate;
   }
 
 }

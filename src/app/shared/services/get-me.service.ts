@@ -12,15 +12,18 @@ export class GetMeService {
     const token = sessionStorage.getItem("Authorization");
 
     if (token) {
+      console.log(jwtDecode<UserInfo>(token))
       return jwtDecode<UserInfo>(token)
     }
     return null;
   }
 
   public get id(): number {
-    const id = this.decodeToken()?.id;
-
-    return id || -1;
+    const userInfo = this.decodeToken();
+    if (userInfo != null) {
+      return parseInt(userInfo.id.toString())
+    }
+    return -1;
   }
 
 }

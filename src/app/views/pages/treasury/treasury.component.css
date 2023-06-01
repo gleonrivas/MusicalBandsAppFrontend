@@ -19,7 +19,7 @@
   flex-flow: column nowrap;
   min-width: 40%;
   margin: 3rem auto;
-  height: 60vh;
+  height: 25vh;
 }
 body{
   height: 100vh;
@@ -34,4 +34,15 @@ body{
   font-weight: bold;
   text-align: end;
   width: 93%;
+}
+.bodyContainer{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 90%;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+}
+.listados{
+  width: 50%;
 }

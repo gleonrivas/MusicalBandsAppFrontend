@@ -7,6 +7,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CalendarEventDTODelete} from "../models/eventModels/CalendarEventDTODelete";
 import {CalendarEventUpdateDTO} from "../models/eventModels/calendarEventUpdateDTO";
 import {ResponseStringModel} from "../models/responseString.model";
+import {FormationIdDTO} from "../models/formationIdDTO";
 
 
 @Injectable({
@@ -35,11 +36,17 @@ export class EventService{
   updateCalendar(calendarUpdate:CalendarEventUpdateDTO){
     return this.rest.put<CalendarEventUpdateDTO,EventResponse>('http://localhost:8080/calendar/update',calendarUpdate)
   }
-  
+
   deleteCalendar(eventId:number){
     let calendarEvent:CalendarEventDTODelete = {
       idCalendarEvent: eventId.toString()
     }
     return this.rest.deleteBody<CalendarEventDTODelete,ResponseStringModel>('http://localhost:8080/calendar/delete', calendarEvent)
+  }
+  getEventsByIdFormation(formationId:number){
+    let formationIdDTO:FormationIdDTO = {
+      formationId:formationId.toString()
+    }
+    return this.rest.post<FormationIdDTO,EventResponse[]>('http://localhost:8080/calendar/MyEventsByFormation',formationIdDTO)
   }
 }

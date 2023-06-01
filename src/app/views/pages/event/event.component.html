@@ -13,8 +13,8 @@
 <br>
 
 <div class="home-container ">
-
-  <div *ngIf="event.id == -1" class="noExiste">
+  <app-full-loading *ngIf="isLoading"></app-full-loading>
+  <div *ngIf="event.id == -1 " class="noExiste">
 
     <ion-card class="conjunto">
       <div class="flecha">
@@ -27,8 +27,22 @@
     </ion-card>
 
   </div>
+  <div *ngIf="!idUser.includes(id)" class="noExiste">
 
-    <div id="title" *ngIf="event.id != -1">
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>No tienes permiso para entrar en este evento</ion-card-title>
+          <ion-card-subtitle>Vuelva a la página de inicio</ion-card-subtitle>
+        </ion-card-header>
+      </div>
+    </ion-card>
+
+  </div>
+
+  <div *ngIf=" event.id != -1 && idUser.includes(id)">
+    <div id="title" *ngIf=" event.id != -1">
       <h3 class="formationName">{{formation.name}}</h3>
       <br>
       <ion-card class="conjunto">
@@ -41,9 +55,13 @@
 
         </div>
         <div class="buttonsUpdateDelete">
-          <h6 class="add-new with-border bg-light text-dark" (click)="openEdit(event)">
+        <button class="add-new with-border bg-light text-dark"  [disabled]="!isEditable" (click)="openEdit(event)">
+          <h6>
             Editar</h6>
-          <h6 (click)="deleteCalendar(event.id)" class="add-new-delete with-border">Eliminar</h6>
+        </button>
+        <button class="add-new-delete with-border" (click)="deleteCalendar(event.id)" [disabled]="!isDeletable">
+          <h6>Eliminar</h6>
+        </button>
         </div>
       </ion-card>
     </div>
@@ -126,8 +144,8 @@
             </div>
           </ion-accordion>
         </ion-accordion-group>
-        <ion-card  style="height: 30%">
-          <img alt="Silhouette of mountains" src="{{formation.logo}}" />
+        <ion-card style="height: 30%">
+          <img alt="Silhouette of mountains" src="{{formation.logo}}"/>
 
         </ion-card>
       </div>
@@ -142,7 +160,7 @@
                         fill="outline" (click)="openMusicalExternForm()">
               Añadir
             </ion-button>
-            <ion-button  color="danger"
+            <ion-button color="danger"
                         fill="outline" (click)="openviewExternalMusician()">
               Ver
             </ion-button>
@@ -154,7 +172,7 @@
         <ion-card>
           <ion-card-header>
             <ion-card-title>Lista de asistencia
-              <ion-button disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')" color="danger"
+              <ion-button disabled="{{!isToday}}" *ngIf="rolList.includes('OWNER')" color="danger"
                           fill="outline" (click)="saveAbscence()">
                 Guardar
               </ion-button>
@@ -171,7 +189,7 @@
                   </ion-thumbnail>
                   <div class="namecheckbox">
                     <ion-label>{{user.name}} {{user.surName}}  </ion-label>
-                    <ion-checkbox disabled="{{!isToday || isSaved}}" *ngIf="rolList.includes('OWNER')"
+                    <ion-checkbox disabled="{{false}}" *ngIf="rolList.includes('OWNER') && isToday==true"
                                   [indeterminate]="false" color="danger"
                                   (click)="abscenceRegistrer($event, user.id)"></ion-checkbox>
                   </div>
@@ -182,7 +200,7 @@
         </ion-card>
       </div>
     </div>
-
+  </div>
 </div>
 <ion-modal [isOpen]="isModalOpen" id="modal" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
   <ng-template>

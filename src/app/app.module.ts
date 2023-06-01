@@ -41,12 +41,14 @@ import { SquadPlayComponent } from './views/pages/squad-play/squad-play.componen
 import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component';
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
 import { TreasuryComponent } from './views/pages/treasury/treasury.component';
+import { FullLoadingComponent } from './views/components/full-loading/full-loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavegacionComponent,
+    FullLoadingComponent,
     RegistroComponent,
     HomeComponent,
     RegistroComponent,
@@ -64,6 +66,7 @@ import { TreasuryComponent } from './views/pages/treasury/treasury.component';
     RehearsalComponent,
     NoAuthPageComponent,
     TreasuryComponent,
+    FullLoadingComponent,
   ],
   imports: [
     BrowserModule,
