@@ -7,7 +7,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CalendarEventDTODelete} from "../models/eventModels/CalendarEventDTODelete";
 import {CalendarEventUpdateDTO} from "../models/eventModels/calendarEventUpdateDTO";
 import {ResponseStringModel} from "../models/responseString.model";
-import {FormationIdDTO} from "../models/formationIdDTO";
 import {PayLowModel} from "../models/payLow.model";
 
 
