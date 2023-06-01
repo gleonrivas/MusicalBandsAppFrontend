@@ -304,6 +304,10 @@ ion-button{
   animation: spin 1s linear infinite;
 }
 
+.yes > .alert-button-inner.sc-ion-alert-ios {
+  color: rgb(198, 53, 53) !important;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

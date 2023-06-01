@@ -8,45 +8,48 @@ import {CalendarEventDTODelete} from "../models/eventModels/CalendarEventDTODele
 import {CalendarEventUpdateDTO} from "../models/eventModels/calendarEventUpdateDTO";
 import {ResponseStringModel} from "../models/responseString.model";
 import {FormationIdDTO} from "../models/formationIdDTO";
+import {PayLowModel} from "../models/payLow.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventService{
+export class EventService {
   public apikey = sessionStorage.getItem('Authorization')
+
   constructor(
     private rest: RestService,
     private encryptionService: EncryptionService,
     private http: HttpClient
-  ) { }
+  ) {
+  }
+
   private getHeaders() {
     const apiToken = sessionStorage.getItem("Authorization");
     const headers = new HttpHeaders();
     return headers.set("Authorization", apiToken!);
   }
-  getEventById(eventID:number){
-    return this.rest.get<EventResponse>('http://localhost:8080/calendar/findEvent/'+eventID);
+
+  getEventById(eventID: number) {
+    return this.rest.get<EventResponse>('http://localhost:8080/calendar/findEvent/' + eventID);
   }
 
-  getFormationByIdCalendar(eventID:number){
-    return this.rest.get<FormationType>('http://localhost:8080/calendar/findFormation/'+eventID);
+  getFormationByIdCalendar(eventID: number) {
+    return this.rest.get<FormationType>('http://localhost:8080/calendar/findFormation/' + eventID);
   }
 
-  updateCalendar(calendarUpdate:CalendarEventUpdateDTO){
-    return this.rest.put<CalendarEventUpdateDTO,EventResponse>('http://localhost:8080/calendar/update',calendarUpdate)
+  updateCalendar(calendarUpdate: CalendarEventUpdateDTO) {
+    return this.rest.put<CalendarEventUpdateDTO, EventResponse>('http://localhost:8080/calendar/update', calendarUpdate)
   }
 
-  deleteCalendar(eventId:number){
-    let calendarEvent:CalendarEventDTODelete = {
+  deleteCalendar(eventId: number) {
+    let calendarEvent: CalendarEventDTODelete = {
       idCalendarEvent: eventId.toString()
     }
-    return this.rest.deleteBody<CalendarEventDTODelete,ResponseStringModel>('http://localhost:8080/calendar/delete', calendarEvent)
+    return this.rest.deleteBody<CalendarEventDTODelete, ResponseStringModel>('http://localhost:8080/calendar/delete', calendarEvent)
   }
-  getEventsByIdFormation(formationId:number){
-    let formationIdDTO:FormationIdDTO = {
-      formationId:formationId.toString()
-    }
-    return this.rest.post<FormationIdDTO,EventResponse[]>('http://localhost:8080/calendar/MyEventsByFormation',formationIdDTO)
+
+  getEventsByIdFormation(payLow: PayLowModel) {
+    return this.rest.post<PayLowModel, EventResponse[]>('http://localhost:8080/treasury/getAllEvents', payLow)
   }
 }

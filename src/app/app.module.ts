@@ -20,6 +20,7 @@ import {
   faWrench,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
+import { AlertController } from '@ionic/angular';
 import {NavegacionComponent} from './views/components/navegacion/navegacion.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegistroComponent} from './views/pages/registro/registro.component';
@@ -67,6 +68,7 @@ import { FullLoadingComponent } from './views/components/full-loading/full-loadi
     NoAuthPageComponent,
     TreasuryComponent,
     FullLoadingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,7 @@ import { FullLoadingComponent } from './views/components/full-loading/full-loadi
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [EncryptionService],
+  providers: [EncryptionService, AlertController],
   bootstrap: [AppComponent]
 })
 

@@ -46,3 +46,23 @@ body{
 .listados{
   width: 50%;
 }
+
+.buttonsUpdateDelete{
+  display:flex;
+  flex-flow: column nowrap;
+  width: 10%;
+  align-items: baseline;
+}
+.add-new{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: .1rem 0;
+}
+.with-border{
+  border: 2px solid rgb(199,52,52);
+  background-color: inherit;
+}

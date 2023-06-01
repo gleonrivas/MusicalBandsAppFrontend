@@ -55,13 +55,13 @@
 
         </div>
         <div class="buttonsUpdateDelete">
-        <button class="add-new with-border bg-light text-dark"  [disabled]="!isEditable" (click)="openEdit(event)">
-          <h6>
-            Editar</h6>
-        </button>
-        <button class="add-new-delete with-border" (click)="deleteCalendar(event.id)" [disabled]="!isDeletable">
-          <h6>Eliminar</h6>
-        </button>
+          <button class="add-new with-border bg-light text-dark" [disabled]="!isEditable" (click)="openEdit(event)">
+            <h6>
+              Editar</h6>
+          </button>
+          <button class="add-new-delete with-border" (click)="deleteCalendar(event.id)" [disabled]="!isDeletable">
+            <h6>Eliminar</h6>
+          </button>
         </div>
       </ion-card>
     </div>
