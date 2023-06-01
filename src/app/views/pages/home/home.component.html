@@ -10,7 +10,7 @@
 <br>
 <ion-searchbar placeholder="Interta un enlace de invitación." [(ngModel)]="finder" (keyup)="searchFormation()"></ion-searchbar><div class="super-container">
 
-  <div class="home-container ">
+  <div class="home-container">
 
     <div class="scroll">
 
@@ -26,11 +26,11 @@
         <div>
           <img src="{{formationByLink.logo}}">
         </div>
-        <h1 class="m-0">{{formationByLink.name | titlecase}}</h1>
-        <h5 class="m-0">{{formationByLink.designation | titlecase}}</h5>
-        <a *ngIf="!verifyYourFormations()" (click)="acceptInvitation(formationByLink, finder)" class=" bg-white border-white text-dark mt-3">Aceptar</a>
+        <h1 class="m-0 text-light">{{formationByLink.name | titlecase}}</h1>
+        <h5 class="m-0 text-light">{{formationByLink.designation | titlecase}}</h5>
+        <a *ngIf="!verifyYourFormations()" (click)="acceptInvitation(formationByLink, finder)" class=" bg-white border-white text-ligth mt-3">Aceptar</a>
         <a *ngIf="verifyYourFormations()" class="bg-transparent fw-bold border border-2 border-white mt-3">Ya formas parte</a>
-        <p class="w-auto text-center m-auto mt-1 mb-2 " >Fundada en {{formationByLink.fundationDate | slice: 0:4}}</p>
+        <p class="w-auto text-center m-auto mt-1 mb-2 text-light" >Fundada en {{formationByLink.fundationDate | slice: 0:4}}</p>
       </div>
 
       <div *ngIf="!finder" class="box">
@@ -61,8 +61,14 @@
   </div>
 
   <div class="home-container">
-    <h3 class="">Calendario</h3>
-
+    <div class='scroll'>
+      <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+        <ng-template #eventContent let-arg>
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </ng-template>
+      </full-calendar>
+    </div>
   </div>
 
 
