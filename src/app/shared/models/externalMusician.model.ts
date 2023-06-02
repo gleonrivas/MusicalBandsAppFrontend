@@ -1,3 +1,6 @@
+import {CalendarEventDTODelete} from "./eventModels/CalendarEventDTODelete";
+import {CalendarEventUpdateDTO} from "./eventModels/calendarEventUpdateDTO";
+
 export type ExternalMusicianModel ={
   amount: number,
   dni: string,
@@ -19,4 +22,19 @@ export type ExternalMusicianResponse = {
   bankAccount: string,
   email:string,
   phone: string
+}
+
+
+export type ExternalMusicianTreasury = {
+  id:number,
+  amount: number,
+  dni: string,
+  name: string,
+  surname: string,
+  calendar: CalendarEventUpdateDTO,
+  bankAccount: string,
+  email:string,
+  phone: string,
+  active:boolean,
+  paid:boolean
 }

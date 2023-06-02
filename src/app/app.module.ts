@@ -20,6 +20,7 @@ import {
   faWrench,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
+import { AlertController } from '@ionic/angular';
 import {NavegacionComponent} from './views/components/navegacion/navegacion.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegistroComponent} from './views/pages/registro/registro.component';
@@ -41,12 +42,15 @@ import { SquadPlayComponent } from './views/pages/squad-play/squad-play.componen
 import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component';
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
 import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
+import { TreasuryComponent } from './views/pages/treasury/treasury.component';
+import { FullLoadingComponent } from './views/components/full-loading/full-loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavegacionComponent,
+    FullLoadingComponent,
     RegistroComponent,
     HomeComponent,
     RegistroComponent,
@@ -63,6 +67,9 @@ import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
     SquadPlayComponent,
     RehearsalComponent,
     NoAuthPageComponent,
+    TreasuryComponent,
+    FullLoadingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -80,7 +87,7 @@ import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
     ReactiveFormsModule,
     FullCalendarModule,
   ],
-  providers: [EncryptionService],
+  providers: [EncryptionService, AlertController],
   bootstrap: [AppComponent]
 })
 

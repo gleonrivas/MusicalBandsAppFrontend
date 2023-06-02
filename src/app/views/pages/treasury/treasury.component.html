@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event</title>
+</head>
+
+<body>
+<app-navegacion></app-navegacion>
+<br>
+<br>
+
+
+<div class="home-container ">
+
+
+  <div id="title">
+    <h3 class="formationName">{{formation.name}}</h3>
+    <br>
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/formacion"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>Tesorería</ion-card-title>
+          <ion-card-subtitle>Mantente al tanto de tus cuentas</ion-card-subtitle>
+
+        </ion-card-header>
+
+      </div>
+      <div class="buttonsUpdateDelete">
+        <button class="add-new with-border bg-light text-dark" (click)="closeSeason()">
+          <h6>
+            Cerrar temporada</h6>
+        </button>
+      </div>
+    </ion-card>
+  </div>
+</div>
+
+<div class="bodyContainer">
+  <ion-card class="listados" *ngIf="eventList.length> 0">
+    <img alt="evento" src="assets/micro.jpg"/>
+    <ion-card-header>
+      <ion-card-title>Eventos de la formación</ion-card-title>
+      <ion-card-subtitle>Accede a gestionar el cobro de los eventos</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let event of eventList">
+          <ion-label>{{event.title}}</ion-label>
+          <ion-label>Fecha: {{event.date}}</ion-label>
+          <ion-button [disabled]="event.paid" color="success" (click)="this.chargeEvent(event.id)">Cobrado</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="listados" *ngIf="eventList.length== 0">
+    <img alt="evento" src="assets/micro.jpg"/>
+    <ion-card-header>
+      <ion-card-title>Eventos de la formación</ion-card-title>
+      <ion-card-subtitle>Accede a gestionar el cobro de los eventos</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="eventList.length== 0">
+      <ion-list>
+        <ion-item>
+          <ion-label>Su formación todavía no tiene eventos</ion-label>
+
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="listados" *ngIf="musicianList.length== 0">
+    <img alt="Silhouette of mountains" src="assets/violins.jpg"/>
+    <ion-card-header>
+      <ion-card-title>Músicos externos</ion-card-title>
+      <ion-card-subtitle>Accede al pago de los servicios de un músico externo</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Su formación no cuenta con músicos externos</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="listados" *ngIf="musicianList.length> 0">
+    <img alt="Silhouette of mountains" src="assets/violins.jpg"/>
+    <ion-card-header>
+      <ion-card-title>Músicos externos</ion-card-title>
+      <ion-card-subtitle>Accede al pago de los servicios de un músico externo</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let musician of musicianList">
+          <ion-label>{{musician.name}} {{musician.surname}}</ion-label>
+          <ion-button [disabled]="musician.paid" color="success" (click)="this.payMusician(musician.id)">Pagar
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>

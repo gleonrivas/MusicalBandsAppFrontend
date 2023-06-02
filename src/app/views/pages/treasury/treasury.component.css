@@ -1,0 +1,68 @@
+.tittle{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.flecha{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.conjunto{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between
+}
+.home-container{
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 40%;
+  margin: 3rem auto;
+  height: 25vh;
+}
+body{
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+.formationName{
+  margin: auto 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 183%;
+  font-weight: bold;
+  text-align: end;
+  width: 93%;
+}
+.bodyContainer{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 90%;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+}
+.listados{
+  width: 50%;
+}
+
+.buttonsUpdateDelete{
+  display:flex;
+  flex-flow: column nowrap;
+  width: 10%;
+  align-items: baseline;
+}
+.add-new{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: .1rem 0;
+}
+.with-border{
+  border: 2px solid rgb(199,52,52);
+  background-color: inherit;
+}
