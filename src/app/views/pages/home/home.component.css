@@ -56,6 +56,19 @@ body::-webkit-scrollbar{
   display: none;
 }
 
+.calendar{
+  display: flex;
+  flex-flow: column;
+  padding: 1rem;
+  width: 45vw;
+  height: 100% !important;
+  margin: auto;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
+
+}
+
 .title-controller{
   display: flex;
   align-items: center;
@@ -269,4 +282,49 @@ a{
 }
 
 
+.calendar h2 {
+  margin: 0;
+  font-size: 16px;
+}
 
+.calendar ul {
+  margin: 0;
+  padding: 0 0 0 1.5em;
+}
+
+.calendar li {
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+.calendar b { /* used for event dates/times */
+  margin-right: 3px;
+}
+
+.calendar .demo-app {
+  display: flex;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.calendar .demo-app-sidebar {
+  width: 300px;
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #d3e2e8;
+}
+
+.calendar .demo-app-sidebar-section {
+  padding: 2em;
+}
+
+.calendar .demo-app-main {
+  flex-grow: 1;
+  padding: 3em;
+}
+
+.calendar .fc { /* the calendar root */
+  width: auto;
+  margin: 0 auto;
+}

@@ -5,7 +5,7 @@
 <body style="background-image: url('https://i.imgur.com/mQAPWfg.jpg');">
 
 <app-navegacion></app-navegacion>
-<br>
+
 <br>
 <br>
 <ion-searchbar placeholder="Interta un enlace de invitación." [(ngModel)]="finder" (keyup)="searchFormation()"></ion-searchbar><div class="super-container">
@@ -61,7 +61,7 @@
   </div>
 
   <div class="home-container">
-    <div class='scroll'>
+    <div class='calendar' style="overflow-y: hidden;">
       <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
         <ng-template #eventContent let-arg>
           <b>{{ arg.timeText }}</b>
