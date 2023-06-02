@@ -43,6 +43,13 @@ export class SquadService {
     return count;
   }
 
-
+  getEvents(){
+    const id = sessionStorage.getItem('idFormacionC')
+    const token: string | null = sessionStorage.getItem('Authorization')
+    const headers = new HttpHeaders({'Authorization': token!})
+    const params = new HttpParams();
+    const body = {'formationId':id}
+    return this.http.post('http://localhost:8080/calendar/MyEventsByFormation' , body, {headers: headers, params: params})
+  }
 
 }

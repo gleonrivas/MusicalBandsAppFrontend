@@ -17,6 +17,13 @@
     </ion-col>
 
     <ion-col>
+      <ion-chip color="primary" routerLink="/treasury/{{id}}">
+        <ion-icon name="cash"></ion-icon>
+        <ion-label>Tesorería</ion-label>
+      </ion-chip>
+    </ion-col>
+
+    <ion-col>
       <ion-chip color="primary">
         <ion-icon name="musical-notes"></ion-icon>
         <ion-label>Actuaciones</ion-label>
@@ -48,7 +55,7 @@
 </ion-grid>
 
 <ion-grid class="container" >
-  <ion-row>
+  <ion-row style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 20px;">
 
     <ion-col>
       <ion-card>
@@ -56,8 +63,23 @@
           <ion-card-title>Próxima actuación</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content *ngIf="nextPerformance.length === 0">
           <ion-icon name="musical-notes"></ion-icon> Por ahora, no se han programado actuaciones.
+        </ion-card-content>
+
+        <ion-card-content *ngIf="nextPerformance.length > 0">
+          <ion-card style="box-shadow: none; padding: 0">
+            <ion-card-header>
+              <ion-card-title>{{ nextPerformance[0].title }}</ion-card-title>
+              <ion-card-subtitle>{{ nextPerformance[0].date }}</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              {{ nextPerformance[0].description }}
+              <br>
+              <b>Precio:</b> {{nextPerformance[0].amount}} €
+            </ion-card-content>
+          </ion-card>
         </ion-card-content>
 
         <ion-button color="danger" routerLink="/crearactuacion">Nueva actuación</ion-button>
@@ -71,8 +93,23 @@
           <ion-card-title>Próximo ensayo</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content *ngIf="nextRehearsal.length === 0">
           <ion-icon name="microphone"></ion-icon> Por ahora, no hay programado ensayos.
+        </ion-card-content>
+
+        <ion-card-content *ngIf="nextRehearsal.length > 0">
+          <ion-card style="box-shadow: none; padding: 0">
+            <ion-card-header>
+              <ion-card-title>{{ nextRehearsal[0].title }}</ion-card-title>
+              <ion-card-subtitle>{{ nextRehearsal[0].date }}</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              {{ nextRehearsal[0].description }}
+              <br>
+              <b>Penalización:</b> {{nextRehearsal[0].penaltyPonderation}} %
+            </ion-card-content>
+          </ion-card>
         </ion-card-content>
 
         <ion-button color="danger" routerLink="/crearensayo">Nuevo ensayo</ion-button>
@@ -106,8 +143,29 @@
     </ion-col>
     <ion-col>
       <ion-card>
-        <ion-title> {{finalSquad.name}} <img src="{{finalSquad.logo}}" style="height: 10%; width: 20%; border-radius: 50px"></ion-title>
+        <ion-title> Miembros de {{finalSquad.name}}</ion-title>
       </ion-card>
+      <ion-accordion-group (ionChange)="showPeople($event)">
+        <ion-accordion *ngFor="let person of usersList" [value]="person.id">
+          <ion-item slot="header" color="light">
+            <ion-col>
+              <ion-label>{{person.name}}</ion-label>
+            </ion-col>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>{{person.name}}</ion-card-title>
+                <ion-card-subtitle>{{person.surName}}</ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-card-content>
+                {{person.email}}
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-col>
   </ion-row>
 </ion-grid>
