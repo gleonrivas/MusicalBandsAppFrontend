@@ -18,7 +18,7 @@
   display: flex;
   flex-flow: column nowrap;
   min-width: 40%;
-  margin: 3rem auto;
+  margin: 3rem auto 5rem auto;
   height: 25vh;
 }
 body{
@@ -46,11 +46,13 @@ body{
 .listados{
   width: 50%;
 }
-
+.noExiste{
+  width: 80%;
+  margin: 6rem auto;
+}
 .buttonsUpdateDelete{
   display:flex;
   flex-flow: column nowrap;
-  width: 10%;
   align-items: baseline;
 }
 .add-new{

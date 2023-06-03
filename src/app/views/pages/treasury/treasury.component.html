@@ -13,10 +13,21 @@
 <br>
 <br>
 
+<app-full-loading *ngIf="isLoading"></app-full-loading>
+<div *ngIf="!isLoading && !hasPermission" class="noExiste">
 
-<div class="home-container ">
+  <ion-card class="conjunto">
+    <div class="flecha">
+      <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+      <ion-card-header>
+        <ion-card-title>No tienes permiso para entrar en esta tesoreria</ion-card-title>
+        <ion-card-subtitle>Vuelva a la página de inicio</ion-card-subtitle>
+      </ion-card-header>
+    </div>
+  </ion-card>
 
-
+</div>
+<div class="home-container"*ngIf="!isLoading && hasPermission">
   <div id="title">
     <h3 class="formationName">{{formation.name}}</h3>
     <br>
@@ -30,17 +41,28 @@
         </ion-card-header>
 
       </div>
+      <div style="display: flex" class="flex-column align-items-center">
+        <h4>Cantidad total</h4>
+        <h5>{{lastTreasury.amount}} €</h5>
+        <ion-button color="danger" class="add-new bg-light text-dark" (click)="viewTransactions()">
+          <h6>Ver movimientos</h6>
+        </ion-button>
+      </div>
       <div class="buttonsUpdateDelete">
-        <button class="add-new with-border bg-light text-dark" (click)="closeSeason()">
+        <ion-button color="danger"  (click)="closeSeason()">
           <h6>
             Cerrar temporada</h6>
-        </button>
+        </ion-button>
+        <ion-button color="danger" (click)="openDeleteMusician()">
+          <h6>
+            Dar de baja usuario</h6>
+        </ion-button>
       </div>
     </ion-card>
   </div>
 </div>
 
-<div class="bodyContainer">
+<div class="bodyContainer" *ngIf="!isLoading && hasPermission">
   <ion-card class="listados" *ngIf="eventList.length> 0">
     <img alt="evento" src="assets/micro.jpg"/>
     <ion-card-header>
@@ -109,7 +131,177 @@
     </ion-card-content>
   </ion-card>
 </div>
+
+<ion-modal (ionModalDidDismiss)="closeSeasonModal()" [isOpen]="openedInfoSeason" id="modalViewExternan"
+           style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="closeSeasonModal()">
+            X
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Resumen de la temporada</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list class="scroll margin">
+        <ion-item>Fecha: {{payFormation.payDay}}</ion-item>
+        <ion-item>Saldo de la cuenta: {{payFormation.inAccount}}</ion-item>
+        <ion-item>Total pagado: {{payFormation.totalPaid}}</ion-item>
+        <ion-item class="fw-bold">
+          Usuarios pagados
+        </ion-item>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Músico</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Cantidad descontada</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Cantidad recibida</ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngFor="let user of payFormation.usersPaid">
+            <ion-col>
+              <ion-label>{{user.name}} {{user.subname}}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>{{user.amountPenalty}}</ion-label>
+
+            </ion-col>
+            <ion-col>
+              <ion-label>{{user.amountReceibes}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+      <ion-button (click)="downloadPdf()" color="danger">Descargar pdf</ion-button>
+    </ion-footer>
+  </ng-template>
+</ion-modal>
+
+<ion-modal (ionModalDidDismiss)="closeTransactions()" [isOpen]="openedTransactions"
+           style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="closeTransactions()">
+            X
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Movimientos de la formación</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Cantidad Total</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>Fecha del movimiento</ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let treasury of treasuryList.reverse()">
+          <ion-col>
+            <ion-label>{{treasury.amount}} €</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>{{treasury.receiveMoneyDate}}</ion-label>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal (ionModalDidDismiss)="closeDeleteMusician()" [isOpen]="openedDeleteMusician"
+           style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="closeDeleteMusician()">
+            X
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Dar de baja músico</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1">
+            <ion-label></ion-label>
+          </ion-col>
+          <ion-col size="9">
+            <ion-label>Músico</ion-label>
+          </ion-col>
+          <ion-col size="2">
+            <ion-label>Acción</ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let musician of musicians">
+          <ion-col size="1">
+            <ion-label>
+              <ion-icon color="danger" *ngIf="musician.roleDTOList | getSpecialPipe" name="star"></ion-icon>
+            </ion-label>
+          </ion-col>
+          <ion-col size="9">
+            <ion-label>{{musician.name}} {{musician.surName}}</ion-label>
+          </ion-col>
+          <ion-col size="2">
+            <ion-label>
+              <ion-button size="small" color="danger" (click)="deleteMusician(musician)">Dar de baja</ion-button>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal (ionModalDidDismiss)="closeAddRolMusician()" [isOpen]="openedAddRolMusician"
+           style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); ">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="closeAddRolMusician()">
+            X
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Asignar rol a otro usuario</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-label>Usuarios disponibles</ion-label>
+      <ion-select placeholder="Selecciona un usuario de la lista" (ionChange)="onSelectAddUserRol($event)">
+        <ion-select-option *ngFor="let musician of notSpecialMusicians"
+                           value="{{musician.id}}">{{musician.name}} {{musician.surName}}</ion-select-option>
+      </ion-select>
+    </ion-content>
+    <ion-footer>
+      <ion-toolbar>
+        <ion-button size="small" color="danger" (click)="createRoleUser()">
+          Confirmar operación
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>
 </body>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
