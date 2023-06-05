@@ -96,6 +96,7 @@ export class SquadComponent{
     )
     await this.generalService.getUsers().subscribe(
       response => {
+        console.log(response)
         this.usersList = response
       }
     )
