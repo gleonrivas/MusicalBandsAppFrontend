@@ -277,3 +277,15 @@ ion-icon {
   overflow-y: scroll;
   height: 100%;
 }
+.carImgArchivo{
+  display: flex;
+  flex-flow: row wrap;
+
+  width: 95%;
+  margin: auto;
+  justify-content: space-around;
+}
+.imageArchivo{
+  width: 25%;
+  margin: 2% 1% 2% 1%;
+}
