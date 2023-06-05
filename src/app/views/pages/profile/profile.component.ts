@@ -105,7 +105,6 @@ export class ProfileComponent implements OnInit{
       url: this.url,
       dni: this.dni,
       birthDate: this.birthDate,
-      fake: this.fake.toString().split("\\")[2].split(".")[0],
     }
     if (this.name && this.surName && this.email){
       this.profileService.postProfileData(newProfile).subscribe(
