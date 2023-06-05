@@ -51,4 +51,5 @@ export class EventService {
   getEventsByIdFormation(payLow: PayLowModel) {
     return this.rest.post<PayLowModel, EventResponse[]>('http://localhost:8080/treasury/getAllEvents', payLow)
   }
+
 }

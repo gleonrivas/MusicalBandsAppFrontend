@@ -44,6 +44,7 @@ import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.compo
 import { TreasuryComponent } from './views/pages/treasury/treasury.component';
 import { FullLoadingComponent } from './views/components/full-loading/full-loading.component';
 import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
+import { EventListComponent } from './views/pages/event-list/event-list.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
     NoAuthPageComponent,
     TreasuryComponent,
     FullLoadingComponent,
-    GetSpecialRolePipe
+    GetSpecialRolePipe,
+    EventListComponent
 
   ],
   imports: [
