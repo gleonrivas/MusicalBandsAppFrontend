@@ -21,7 +21,7 @@
   </ion-col>
   <ion-col>
     <label style="margin-top: 0.3vh">Fecha</label>
-    <div class="inputbox mt-3"> <input [(ngModel)]="newPerformance.date" class="form-control" type="date"></div>
+    <div class="inputbox mt-3"> <input [(ngModel)]="newPerformance.date" class="form-control" type="datetime-local" [min]="getCurrentDateTime()"></div>
     <label style="margin-top: 0.3vh">Precio</label>
     <div class="inputbox mt-3"> <input type="text" placeholder="Precio" name="" class="form-control" [(ngModel)]="newPerformance.amount"></div>
     <label style="margin-top: 0.3vh">Penalización</label>

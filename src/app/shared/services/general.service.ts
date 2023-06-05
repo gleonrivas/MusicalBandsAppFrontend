@@ -67,6 +67,11 @@ export class GeneralService{
     const body= { 'formationId': id};
   }
 
+  getUsers(){
+    const id = sessionStorage.getItem('idFormacionC');
+    return this.http.get('http://localhost:8080/formation/listUsers/' + id)
+  }
+
   convertRole(roleList: RoleDTO[]) {
     let response: RoleDTO[] = [];
 
