@@ -4,6 +4,7 @@ import {FormationType} from "../models/formationType.model";
 import { EncryptionService } from './encryption.service';
 import {Observable} from "rxjs";
 import {UserFormation} from "../models/UserFormation";
+import {PayLowModel} from "../models/payLow.model";
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,8 @@ export class FormationService {
     return this.rest.get<UserFormation[]>('http://localhost:8080/formation/listUsers/'+idFormation);
   }
 
-
-
-
+  deleteUserFromFormation(payLow: PayLowModel) {
+    return this.rest.deleteBody<PayLowModel>('http://localhost:8080/formation/deleteUserFormation', payLow)
+  }
 
 }

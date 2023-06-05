@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
@@ -6,7 +6,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class RestService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
   private getHeaders() {
     const apiToken = sessionStorage.getItem("Authorization");
     const headers = new HttpHeaders();
@@ -20,8 +22,26 @@ export class RestService {
   }
 
   public post<K, T = Object>(url: string, body: K) {
+    const headers = this.getHeaders();
+
     return this.http.post<T>(url, body, {
-      headers: this.getHeaders()
+      headers,
+    });
+  }
+
+  public postPdf<K>(url: string, body: K, contentType?: string) {
+    const headers = this.getHeaders();
+
+    if (contentType) {
+      headers.append("Content-Type", contentType);
+      headers.append("Accept", contentType);
+    }
+
+    return this.http.post(url, body, {
+      headers,
+      // @ts-ignore
+      responseType: "arraybuffer",
+      observe: 'response'
     });
   }
 
@@ -31,19 +51,18 @@ export class RestService {
     });
   }
 
-  public deleteBody<K, T = Object>(url: string,  body:K) {
+  public deleteBody<K, T = Object>(url: string, body: K) {
     return this.http.delete<T>(url, {
       headers: this.getHeaders(),
       body
     });
   }
 
-  public put<K,T =Object>(url:string, body:K){
+  public put<K, T = Object>(url: string, body: K) {
     return this.http.put<T>(url, body, {
       headers: this.getHeaders()
     })
   }
-
 
 
 }

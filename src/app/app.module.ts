@@ -44,6 +44,7 @@ import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.compo
 import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
 import { TreasuryComponent } from './views/pages/treasury/treasury.component';
 import { FullLoadingComponent } from './views/components/full-loading/full-loading.component';
+import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { FullLoadingComponent } from './views/components/full-loading/full-loadi
     NoAuthPageComponent,
     TreasuryComponent,
     FullLoadingComponent,
+    GetSpecialRolePipe
 
   ],
   imports: [
