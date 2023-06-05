@@ -131,7 +131,7 @@
           </ion-accordion>
           <ion-accordion value="second">
             <ion-item slot="header" color="light">
-              <ion-label>Archivos</ion-label>
+              <ion-label>Subir Archivos</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
               <ion-input type="file" value="333"></ion-input>
@@ -142,6 +142,25 @@
                   <p *ngFor="let role of user.roleDTOList">{{role.type}}</p></ion-select-option>
               </ion-select>
             </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="light">
+              <ion-label>Mis Archivos</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-card>
+                <ion-card class="carImgArchivo">
+                  <div *ngFor="let user of userList" class="imageArchivo">
+                    <img src="assets/icons8-documento-144.png">
+                  </div>
+
+                </ion-card>
+                <ion-card-header>
+                  <ion-card-subtitle>Descarga tus archivos</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </div>
+
           </ion-accordion>
         </ion-accordion-group>
         <ion-card style="height: 30%">
