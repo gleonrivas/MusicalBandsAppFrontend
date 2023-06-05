@@ -1,10 +1,10 @@
 <ion-header class="position-fixed">
   <ion-toolbar color="danger" style="padding-top: 10px; padding-bottom: 10px ">
-      <ion-buttons class="ion-justify-content-center">
+      <ion-buttons>
+        <img src="https://i.imgur.com/kjKwTr5.png" style="width: 10vh; padding-top: 0; padding-bottom: 0; margin-left: 20px;">
         <ion-button style="margin-left: 1vw; margin-right: 1vw;"><a class="nav-link active" aria-current="page" (click)="searchBar()"><fa-icon [icon]="['fas', 'search']" style="Color:white;  hover-color: white; width: 100px;"></fa-icon></a></ion-button>
-        <ion-button style="margin-left: 1vw; margin-right: 1vw;"><a class="nav-link active" aria-current="page" routerLink="/profile"><fa-icon [icon]="['fas', 'person']" style="Color:white;  hover-color: white;"></fa-icon></a></ion-button>
-        <ion-button style="margin-left: 1vw; margin-right: 1vw;"><a class="nav-link" routerLink="/home" ><img src="https://i.imgur.com/68z5BI7.png"></a></ion-button>
-        <ion-button style="margin-left: 1vw; margin-right: 1vw;"><a class="nav-link" ><fa-icon [icon]="['fas', 'message']" style="Color:white;  hover-color: white; width: 150px;"></fa-icon></a></ion-button>
+        <ion-button style="margin-left: 1vw; margin-right: 1vw;"><a class="nav-link active" aria-current="page" routerLink="/profile">Perfil</a></ion-button>
+        <ion-button style="margin-left: 1vw; margin-right: 1vw;"><a class="nav-link" routerLink="/home" >Inicio</a></ion-button>
         <ion-button style="margin-left: 1vw; margin-right: 1vw;"><a style="background-color: transparent; border-color: transparent;" class="nav-link" href="#" tabindex="-1" aria-disabled="true" (click)="logout()"><fa-icon [icon]="['fas', 'sign-out']" style="Color:white;  hover-color: white;"></fa-icon></a></ion-button>
       </ion-buttons>
   </ion-toolbar>

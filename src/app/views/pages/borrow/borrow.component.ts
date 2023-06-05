@@ -4,6 +4,7 @@ import {newMaterial} from "../../../shared/models/newMaterial";
 import {BorrowService} from "./service/borrow.service";
 import {formatDate} from "@angular/common";
 import {GeneralService} from "../../../shared/services/general.service";
+import {newBorrow} from "../../../shared/models/newBorrow.model";
 
 @Component({
   selector: 'app-borrow',
@@ -23,14 +24,23 @@ export class BorrowComponent {
   editMaterial: newMaterial = { name: '', type: 0, date: new Date(), idFormation: 0}
 
   newMaterial: newMaterial = { name: '', type: 0, date: new Date(), idFormation: 0}
+  newBorrow: newBorrow = { materialId: 0, userId: 0}
 
   isModalOpen = false;
 
   listaMateriales: any;
+  listaUsuarios: any;
 
   materialEdit: any;
+
+  usersList: any;
   ngOnInit(){
    this.checkMaterials();
+   this.borrowService.getUsers().subscribe((data: any)=> {
+     this.usersList = data
+     console.log(data)
+   })
+    this.listaUsuarios = []
   }
 
   checkMaterials(){
@@ -94,6 +104,32 @@ export class BorrowComponent {
     await this.borrowService.editMaterial(body);
     this.generalService.presentToast('Material editado', 'success')
     this.checkMaterials()
+  }
+
+  checkBorrowedMaterials(id:any){
+    this.borrowService.getBorrowedUsers(id).subscribe((data: any)=> {
+      this.listaUsuarios = data
+      console.log(data)
+    })
+  }
+  showPeople(event: any) {
+    if (event.detail.value !== undefined){
+      this.checkBorrowedMaterials(event.detail.value)
+    }
+  }
+  async createBorrow(id:any){
+    console.log(id)
+    console.log(id, this.newBorrow.userId)
+    await this.borrowService.createBorrowMaterial(id, this.newBorrow.userId);
+    this.generalService.presentToast('Material prestado', 'success')
+    this.checkBorrowedMaterials(id)
+  }
+
+  async deleteBorrow(materialid: any, userid: any){
+    console.log(materialid, userid)
+    await this.borrowService.deleteBorrowMaterial(materialid, userid)
+    this.generalService.presentToast('Prestamo borrado', 'success')
+    this.checkBorrowedMaterials(materialid)
   }
 
 }

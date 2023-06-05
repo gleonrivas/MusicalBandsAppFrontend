@@ -17,7 +17,7 @@ export class PerfomanceService {
         "place":place,
         "paid":"0",
         "description":description,
-        "date":date,
+        "date":date + ":00.000",
         "amount":amount,
         "penaltyPonderation":penaltyPonderation,
         "idRepertory":"1"
