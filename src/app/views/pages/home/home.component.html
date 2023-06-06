@@ -61,7 +61,7 @@
   </div>
 
   <div class="home-container">
-    <div class='calendar' style="overflow-y: hidden;">
+    <div class='calendar' >
       <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
         <ng-template #eventContent let-arg>
           <b>{{ arg.timeText }}</b>

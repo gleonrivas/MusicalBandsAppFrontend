@@ -22,14 +22,18 @@ export class HomeComponent implements OnInit{
     plugins: [
       interactionPlugin,
       dayGridPlugin,
-      timeGridPlugin,
+      // timeGridPlugin,
       listPlugin,
     ],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'dayGridMonth,listWeek'
     },
+    eventColor: 'black',
+    eventBackgroundColor:'black',
+    eventBorderColor:'black',
+    eventTextColor:'white',
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
