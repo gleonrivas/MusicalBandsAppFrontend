@@ -1,0 +1,321 @@
+body{
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+.home-container{
+  display: flex;
+  flex-flow: column nowrap;
+  min-width: 40%;
+  margin: 3rem auto;
+  height: 60vh;
+}
+.body{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 85%;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.assistanceList{
+  width: 40%;
+}
+.infoEvent{
+  width: 96%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+.scroll{
+  overflow-y: scroll;
+  height: 500px;
+}
+.volver{
+  display:flex;
+  flex-flow: row nowrap;
+  width: 80%;
+}
+.noExiste{
+  width: 80%;
+  margin: auto;
+}
+.conjunto{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between
+}
+.boton{
+  width: 20%;
+}
+.text{
+  width: 80%;
+}
+.tittle{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.flecha{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.borrar{
+  width: 4.5%;
+  height: 2.5%;
+  margin-left: 50%;
+}
+.calendar{
+  margin:1.25em 10px 10px 0;
+  padding-top:5px;
+  float:left;
+  width:80px;
+  background:#ededef;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ededef), to(#ccc));
+  background: -moz-linear-gradient(top,  #ededef,  #ccc);
+  font:bold 30px/60px Arial Black, Arial, Helvetica, sans-serif;
+  text-align:center;
+  color:#000;
+  text-shadow:#fff 0 1px 0;
+  border-radius:3px;
+  position:relative;
+  box-shadow:0 2px 2px #888;
+}
+
+/* Em element is also styled, it contains the month’s name. */
+.calendar em{
+  display:block;
+  font:normal bold 11px/30px Arial, Helvetica, sans-serif;
+  color:#fff;
+  text-shadow:#00365a 0 -1px 0;
+  background:#04599a;
+  background:-webkit-gradient(linear, left top, left bottom, from(#04599a), to(#00365a));
+  background:-moz-linear-gradient(top,  #04599a,  #00365a);
+  border-bottom-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-top:1px solid #00365a;
+}
+
+/* Now I am styling the pseudo elements. Container’s pseudo elements (:before and :after) are used to create thos circles, "holes in te paper". */
+.calendar:before, .calendar:after{
+  content:'';
+  float:left;
+  position:absolute;
+  top:5px;
+  width:8px;
+  height:8px;
+  background:#111;
+  z-index:1;
+  border-radius:10px;
+  box-shadow:0 1px 1px #fff;
+}
+.calendar:before{left:11px;}
+.calendar:after{right:11px;}
+
+/*…and em’s pseudo elements are used to create the rings: */
+.calendar em:before, .calendar em:after{
+  content:'';
+  float:left;
+  position:absolute;
+  top:-5px;
+  width:4px;
+  height:14px;
+  background:#dadada;
+  background:-webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#aaa));
+  background:-moz-linear-gradient(top,  #f1f1f1,  #aaa);
+  z-index:2;
+  border-radius:2px;
+}
+.calendar em:before{left:13px;}
+.calendar em:after{right:13px;}
+.cuerpo{
+  width: 60%;
+}
+.imagen{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+
+}
+.namecheckbox{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+}
+ion-icon {
+  font-size: 100px !important;
+  color: #C63535;
+}
+.formationName{
+  margin: auto 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 183%;
+  font-weight: bold;
+  text-align: end;
+  width: 93%;
+}
+.acordeon{
+  color:  #C63535;
+}
+#musicalPieceInfo{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: space-between;
+  color: #C63535;
+}
+.createRepertory{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: space-around;
+}
+.add-new{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.with-border{
+  border: 2px solid rgb(199,52,52);
+  background-color: inherit;
+}
+.buttonsUpdateDelete{
+  display:flex;
+  flex-flow: column nowrap;
+  width: 10%;
+  align-items: baseline;
+}
+.add-new-delete{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.tittle2{
+  margin: auto;
+  width: 90%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.tittle-container{
+  display: flex;
+  flex-flow: row nowrap;
+  margin: auto;
+  width: 95%;
+  gap: 1rem;
+}
+.add-new2{
+  margin: auto;
+  width: 15%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+}
+.event-child-modal{
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  border-radius: inherit;
+  width: 100%;
+  height: fit-content;
+  margin: auto ;
+  gap: 2rem;
+}
+.inputboxEditar{
+  margin: 0 auto;
+  width: 90%;
+}
+.inputbox{
+  margin-bottom: 15px
+}
+.save{
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: .5rem;
+  padding: 1rem 0;
+  margin: auto;
+  width: 35%;
+}
+.update{
+  width: fit-content;
+  margin:2%
+
+}
+.margin{
+  margin: 2%;
+}
+.margin-bottom{
+  margin-bottom: 2%;
+}
+.externalMusician{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+.totalscroll{
+  overflow-y: scroll;
+  height: 100%;
+}
+.carImgArchivo{
+  display: flex;
+  flex-flow: row wrap;
+
+  width: 95%;
+  margin: auto;
+  justify-content: space-around;
+}
+.imageArchivo{
+  width: 25%;
+  margin: 2% 1% 2% 1%;
+}
+
+.margin-auto {
+  text-align: center;
+}
+
+.card-width {
+  width: 60%;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:70%;
+}
+.image{
+  width: 100%;
+  height: 100%;
+}
+ion-avatar {
+  width: 120px;
+  height: 120px;
+  margin-right: 5%;
+}
+.list-image{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 80%;
+  margin:auto;
+}

@@ -71,6 +71,7 @@ import { EventListComponent } from './views/pages/event-list/event-list.componen
     TreasuryComponent,
     FullLoadingComponent,
     GetSpecialRolePipe,
+
     EventListComponent
 
   ],

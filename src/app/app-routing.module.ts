@@ -90,7 +90,7 @@ const routes: Routes = [
     component: TreasuryComponent
   },
   {
-    path: 'eventList/:id_formation',
+    path: 'eventList/:id_formation/:type',
     component: EventListComponent
   }
 ]
