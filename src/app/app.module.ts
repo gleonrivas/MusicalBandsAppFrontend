@@ -45,6 +45,7 @@ import { TreasuryComponent } from './views/pages/treasury/treasury.component';
 import { FullLoadingComponent } from './views/components/full-loading/full-loading.component';
 import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
 import { EventListComponent } from './views/pages/event-list/event-list.component';
+import { FooterComponent } from './views/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { EventListComponent } from './views/pages/event-list/event-list.componen
     FullLoadingComponent,
     GetSpecialRolePipe,
 
-    EventListComponent
+    EventListComponent,
+      FooterComponent
 
   ],
   imports: [

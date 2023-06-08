@@ -42,7 +42,8 @@
 
   <div *ngIf=" hasPermission">
     <div id="title" *ngIf="formation.id != -1">
-      <h3 class="formationName">La formación tiene {{eventList.length}} {{type === "CONCERT" ? "conciertos" : "ensayos"}}</h3>
+      <h3 class="formationName">La formación
+        tiene {{eventList.length}} {{type === "CONCERT" ? "conciertos" : "ensayos"}}</h3>
       <br>
       <ion-card class="conjunto">
         <div class="flecha">
@@ -52,7 +53,7 @@
             <ion-card-subtitle>{{formation.designation}}</ion-card-subtitle>
           </ion-card-header>
         </div>
-        <ion-avatar >
+        <ion-avatar>
           <img class="image" src="{{formation.logo}}">
         </ion-avatar>
       </ion-card>
@@ -61,13 +62,13 @@
       <div>
 
 
-        <h2 size="large"  class="margin-auto margin">
+        <h1 class="margin-auto margin">
           {{type === "CONCERT" ? "Conciertos" : "Ensayos"}}
-        </h2>
+        </h1>
 
       </div>
       <div class="list-image">
-        <div class="flex">
+        <div class="eventlist">
           <ion-card *ngFor="let event of eventList" class="card-width">
             <ion-card-header>
               <ion-title color="danger">
@@ -93,17 +94,34 @@
                 </ion-row>
                 <ion-row>
                   <ion-col size="12">
-                    Penalización: <ion-text class="fw-bolder" color="danger">{{event.penaltyPonderation}}%</ion-text>
+                    Penalización:
+                    <ion-text class="fw-bolder" color="danger">{{event.penaltyPonderation}}%</ion-text>
                   </ion-col>
                 </ion-row>
               </ion-grid>
+              <ion-grid class="ganancia">
+                <ion-col>
+                  <ion-text>Ganancia</ion-text>
+                  <div>
+                    {{event.amount}} €
+                  </div>
+                </ion-col>
+              </ion-grid>
             </ion-card-content>
+            <ion-footer>
+              <ion-button color="danger" routerLink="/event/{{event.id}}"> Ver evento</ion-button>
+            </ion-footer>
           </ion-card>
 
         </div>
-        <ion-img src="/assets/microfono.jpg"></ion-img>
+        <div class="micro">
+          <img class="border" src="/assets/microfono.jpg">
+        </div>
 
+      </div>
     </div>
   </div>
+  <br>
 </div>
-
+</body>
+<app-footer></app-footer>

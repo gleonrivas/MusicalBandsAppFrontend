@@ -1,15 +1,12 @@
 body{
-  height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
 }
 .home-container{
   display: flex;
   flex-flow: column nowrap;
   min-width: 40%;
   margin: 3rem auto;
-  height: 60vh;
 }
 .body{
   display: flex;
@@ -295,7 +292,7 @@ ion-icon {
 }
 
 .card-width {
-  width: 60%;
+  width: 100%;
 }
 
 .flex {
@@ -318,4 +315,36 @@ ion-avatar {
   flex-flow: row nowrap;
   width: 80%;
   margin:auto;
+  justify-content: space-evenly
+}
+.eventlist{
+  width: 60%;
+}
+
+.micro{
+  width: 30%;
+
+}
+.border{
+  border-radius: 10px;
+}
+
+h1{
+  font-size: 200%;
+  text-align: center;
+  color:rgb(198, 53, 53);
+  font-weight: bold;
+}
+ion-card-content{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.ganancia{
+  margin:4% auto auto auto;
+  width: 10%;
+  text-align: center;
+  border-radius: 10px;
+  color: rgb(198, 53, 53);
+  font-weight: bold;
+
 }
