@@ -3,12 +3,13 @@ import {FormationService} from "../../../shared/services/formation.service";
 import {FormationType} from "../../../shared/models/formationType.model";
 import {Router} from "@angular/router";
 import {ToastController} from "@ionic/angular";
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import {CalendarOptions, DateSelectArg, EventApi, EventClickArg, EventInput,} from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { INITIAL_EVENTS, createEventId } from './events-utils';
+import {EventService} from "../../../shared/services/event.service";
+import {CalendarType} from "../../../shared/models/calendarType.model";
+import {createEventId} from "./events-utils";
 
 @Component({
   selector: 'app-home',
@@ -17,12 +18,18 @@ import { INITIAL_EVENTS, createEventId } from './events-utils';
 })
 export class HomeComponent implements OnInit{
 
+  isModalOpen = false;
+
+  public formationCalendarModal!: FormationType
+  public eventCalendarModal!: CalendarType
+
+  originalEvents: CalendarType[] = []
+  calendarEvents:EventInput[] = []
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
       interactionPlugin,
       dayGridPlugin,
-      // timeGridPlugin,
       listPlugin,
     ],
     headerToolbar: {
@@ -30,12 +37,12 @@ export class HomeComponent implements OnInit{
       center: 'title',
       right: 'dayGridMonth,listWeek'
     },
+    locale: 'esLocale',
     eventColor: 'black',
     eventBackgroundColor:'black',
     eventBorderColor:'black',
     eventTextColor:'white',
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: false,
     selectable: false,
@@ -44,11 +51,6 @@ export class HomeComponent implements OnInit{
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this)
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
   };
   currentEvents: EventApi[] = [];
 
@@ -61,6 +63,7 @@ export class HomeComponent implements OnInit{
 
   constructor(
     private formationService:FormationService,
+    private eventService:EventService,
     private route:Router,
     private toast:ToastController,
     private changeDetector: ChangeDetectorRef
@@ -69,7 +72,14 @@ export class HomeComponent implements OnInit{
 
 
 
-  ngOnInit(){
+  async ngOnInit() {
+    this.eventService.getMyEvents().subscribe((data) => {
+        for (let e of data) if (e.date) {
+          this.originalEvents.push(e)
+        }
+        console.log('calendario', this.originalEvents);
+      }
+    );
     this.formationService.getUserFormationsByOwner().subscribe((data) => {
       this.ownFormations = [];
       data.forEach((result: any) => {
@@ -84,16 +94,79 @@ export class HomeComponent implements OnInit{
           type: type,
         });
       });
-      console.log('propietario',this.ownFormations)
-
+      console.log('propietario', this.ownFormations)
     });
     this.formationService.getUserFormationsByUser().subscribe((data) => {
       this.isPartFormations = data;
-      });
-      console.log('participante',this.isPartFormations);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    this.calendarOptions.initialEvents = async () => {
+      this.calendarEvents = []
+      for (const event of this.originalEvents) {
+        const newCalendarEvent: EventInput = {
+          id: event.id?.toString(),
+          title: `${
+            event.id
+            + ',' +
+            event.place
+            + ',' +
+            event.date?.split('T')[0]
+            + ',' +
+            event.title
+            + ',' +
+            event.description
+            + ',' +
+            event.type
+            + ',' +
+            event.paid
+            + ',' +
+            event.amount
+            + ',' +
+            event.penaltyPonderation
+          }`,
+          start: event.date?.split('T')[0],
+          allDay:false
+        };
+        if (event.date) {
+          this.calendarEvents.push(newCalendarEvent);
+        }
+      }
+      return this.calendarEvents;
+    };
+
+    // @ts-ignore
+    const events = await this.calendarEvents();
+    // --------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+    console.log('eeeee', this.calendarOptions.initialEvents);
+
   }
 
-  searchFormation() {
+    searchFormation() {
     if (!this.finder && this.finder.length<30) {
       !this.formationByLink;
       console.log(this.formationByLink)
@@ -110,10 +183,12 @@ export class HomeComponent implements OnInit{
   }
 
 
-  openFormation(formation:FormationType){
-    this.formationService.setFormation(formation);
-    this.route.navigate(['/formacion']);
-  }
+  openFormation(formationId:number){
+    this.isModalOpen = false
+    setTimeout(() => {
+      this.formationService.setFormation(formationId);
+      this.route.navigate(['/formacion']);
+    }, 500);  }
 
 
   verifyYourFormations():boolean {
@@ -126,7 +201,7 @@ export class HomeComponent implements OnInit{
     try {
       await this.formationService.acceptFormationByInvitation({link: invitation}).toPromise();
       this.presentToast('Has aceptado la invitacion. Ahora formas parte de ' + formation.name, 'success');
-      this.openFormation(formation);
+      this.openFormation(formation.id!);
     } catch (error) {
       console.error(error);
       this.presentToast('Hubo un error, inténtalo de nuevo mas tarde.', 'danger');
@@ -168,15 +243,37 @@ export class HomeComponent implements OnInit{
     }
   }
 
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
   handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
+    this.formationService.getFormationById(parseInt(clickInfo.event.id)).subscribe((data) => {
+      this.formationCalendarModal = data
+    });
+    this.parseCalendarString(clickInfo.event.title)
+    this.isModalOpen = true
   }
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
+
+  parseCalendarString(calendarString: string) {
+    const calendarArray = calendarString.split(',');
+
+    this.eventCalendarModal = {
+      id: parseInt(calendarArray[0]),
+      place: calendarArray[1],
+      date: calendarArray[2],
+      title: calendarArray[3],
+      description: calendarArray[4],
+      type: calendarArray[5],
+      paid: calendarArray[6] === 'true',
+      amount: parseFloat(calendarArray[7]),
+      penaltyPonderation: parseInt(calendarArray[8])
+    };
+  }
+
 
 }

@@ -8,6 +8,7 @@ import {CalendarEventDTODelete} from "../models/eventModels/CalendarEventDTODele
 import {CalendarEventUpdateDTO} from "../models/eventModels/calendarEventUpdateDTO";
 import {ResponseStringModel} from "../models/responseString.model";
 import {PayLowModel} from "../models/payLow.model";
+import {CalendarType} from "../models/calendarType.model";
 
 
 @Injectable({
@@ -27,6 +28,10 @@ export class EventService {
     const apiToken = sessionStorage.getItem("Authorization");
     const headers = new HttpHeaders();
     return headers.set("Authorization", apiToken!);
+  }
+
+  getMyEvents(){
+    return this.rest.get<CalendarType[]>('http://localhost:8080/calendar/AllMyEvents')
   }
 
   getEventById(eventID: number) {

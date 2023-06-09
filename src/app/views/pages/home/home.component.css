@@ -345,3 +345,47 @@ a{
   text-decoration: none !important;
   --color: red !important;
 }
+
+
+ion-modal{
+  --height: 70vh;
+  --min-width: 30vw ;
+  --border-radius: 1.5rem ;
+  --babackground-color: inherit;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+}
+
+.tittle-container{
+  display: flex;
+  flex-flow: row nowrap;
+  margin: auto;
+  width: 95%;
+  gap: 1rem;
+}
+.tittle{
+  margin: auto;
+  width: 90%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem 0;
+}
+.add-new{
+  margin: auto;
+  width: 15%;
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem 0;
+}
+.save{
+  text-align: center;
+  background-color: rgb(198, 53, 53);
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem 0;
+  margin: auto;
+  width: 35%;
+}
