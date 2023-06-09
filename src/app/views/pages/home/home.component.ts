@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit{
 
   isModalOpen = false;
 
-  public formationCalendarModal!: FormationType
   public eventCalendarModal!: CalendarType
 
   originalEvents: CalendarType[] = []
@@ -189,6 +188,12 @@ export class HomeComponent implements OnInit{
       this.formationService.setFormation(formationId);
       this.route.navigate(['/formacion']);
     }, 500);  }
+  openEvent(eventId:number){
+    this.isModalOpen = false
+    setTimeout(() => {
+      this.formationService.setFormation(this.eventCalendarModal.id!);
+      this.route.navigate(['/event/'+eventId]);
+    }, 500);  }
 
 
   verifyYourFormations():boolean {
@@ -247,9 +252,6 @@ export class HomeComponent implements OnInit{
     this.isModalOpen = isOpen;
   }
   handleEventClick(clickInfo: EventClickArg) {
-    this.formationService.getFormationById(parseInt(clickInfo.event.id)).subscribe((data) => {
-      this.formationCalendarModal = data
-    });
     this.parseCalendarString(clickInfo.event.title)
     this.isModalOpen = true
   }

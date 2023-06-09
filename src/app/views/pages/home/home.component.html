@@ -92,7 +92,7 @@
 <ion-modal [isOpen]="isModalOpen" id="modal" style="backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(5px); ">
   <ng-template>
     <div class="tittle-container">
-      <h4 class="tittle">{{formationCalendarModal.name | titlecase}}</h4>
+      <h4 class="tittle">{{eventCalendarModal.title | titlecase}}</h4>
       <h4 class="add-new" (click)="setOpen(false)">X</h4>
     </div>
     <ion-list [inset]="true">
@@ -119,7 +119,7 @@
         <ion-label><b class="text-light bg-danger rounded-2 p-1">Penalización del: {{eventCalendarModal.penaltyPonderation!}}%</b> (En caso de ausencia NO justificada.)</ion-label>
       </ion-item>
     </ion-list>
-      <h4 class="save" (click)="openFormation(formationCalendarModal.id!)">Ver formación</h4>
+      <h4 class="save" (click)="openEvent(eventCalendarModal.id!)">Ver formación</h4>
   </ng-template>
 </ion-modal>
 
