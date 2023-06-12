@@ -69,8 +69,27 @@ export class GeneralService{
 
   getUsers(){
     const id = sessionStorage.getItem('idFormacionC');
-    return this.http.get('http://localhost:8080/formation/listUsers/' + id)
+    return this.http.get('http://localhost:8080/formation/listUsers2/' + id)
   }
+
+  async getUserRol(id: any): Promise<any> {
+    const token: string | null = sessionStorage.getItem('Authorization');
+    const headers = new HttpHeaders({ 'Authorization': token! });
+
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:8080/role/list/' + id, { headers }).subscribe(
+        (response) => {
+          const jsonResponse = response; // JSON de respuesta
+          resolve(jsonResponse);
+        },
+        (error) => {
+          console.error(error);
+          reject(error);
+        }
+      );
+    });
+  }
+
 
   convertRole(roleList: RoleDTO[]) {
     let response: RoleDTO[] = [];

@@ -5,6 +5,7 @@ import {EChartsOption} from "echarts";
 import {FormationType} from "../../../shared/models/formationType.model";
 import { trigger, transition, style, animate } from '@angular/animations';
 import {GeneralService} from "../../../shared/services/general.service";
+import {newRole} from "../../../shared/models/newRole.model";
 
 export const fadeInAnimation = trigger('fadeInAnimation', [
   transition(':enter', [
@@ -38,24 +39,50 @@ export class SquadComponent{
 
   nextPerformance: any[] = [];
   nextRehearsal: any[] = [];
-
-
-
   allEvents: any;
 
+  allRoles: any;
+  owner = false;
+  admin = false;
+  president = false;
+  treasurer = false;
+  newRole: newRole = { EnumRolUserFormation: '', userId: 0, formationId: 0}
+
+  roleOptions = [
+    { value: 'OWNER', label: 'Propietario' },
+    { value: 'PRESIDENT', label: 'Presidente' },
+    { value: 'DIRECTOR_MUSICAL', label: 'Director musical' },
+    { value: 'VOCALIST', label: 'Vocalista' },
+    { value: 'TREASURER', label: 'Tesorero' },
+    { value: 'ADMINISTRATOR', label: 'Administrador' },
+    { value: 'ARCHIVIST', label: 'Archivero' },
+    { value: 'ASSISTANCE_CONTROL', label: 'Control de asistencia' },
+    { value: 'PERCUSSION', label: 'Percusionista' },
+    { value: 'HAND_PERCUSSION_DE_MANO', label: 'Percusionista de mano' },
+    { value: 'KEYBOARD_INSTRUMENT', label: 'Teclista' },
+    { value: 'ELECTRONIC_INSTRUMENTS', label: 'Instrumento electrónico' },
+    { value: 'PULSED_STRINGS', label: 'Cuerda pulsada' },
+    { value: 'BOWED_STRINGS', label: 'Cuerda' },
+    { value: 'WINDWOOD', label: 'Viento madera' },
+    { value: 'BRASS_INSTRUMENTS', label: 'Viento metal' },
+    { value: 'COMPONENT', label: 'Componente' }
+  ];
+
+
   async ngOnInit(){
+
     const elements:any = document.getElementsByClassName('container');
     let squad = await this.formationService.getFormation().toPromise();
     // @ts-ignore
     this.id = squad.id;
+    this.allRoles = await this.generalService.getUserRol(this.id);
+    console.log(this.allRoles);
+    this.checkRol(this.allRoles)
     sessionStorage.setItem('idFormacionC', this.id);
     await this.squadService.checkLink(this.id).subscribe(
       response => {
         // @ts-ignore
-        console.log(response.link)
-        // @ts-ignore
         if (response.link !== null){
-          console.log('No es nulo')
           const linkSpace:any = document.getElementById('invitationLink');
           linkSpace.style.display = 'block'
           // @ts-ignore
@@ -72,32 +99,26 @@ export class SquadComponent{
       response => {
         this.allEvents = response
         this.orderEvents();
-        console.log(this.allEvents)
         for (let event of this.allEvents){
           // @ts-ignore
           if(event.date !== null){
-            console.log('pass1')
-            console.log(event)
             // @ts-ignore
             if (event.type === "CONCERT"){
-              console.log('pass2')
+
               this.nextPerformance.push(event)
             }
             // @ts-ignore
             if (event.type === "PRACTICE"){
-              console.log('pass3')
               this.nextRehearsal.push(event)
             }
-            console.log('Concert:', this.nextPerformance);
-            console.log('Practice:', this.nextRehearsal);
           }
         }
       }
     )
     await this.generalService.getUsers().subscribe(
       response => {
-        console.log(response)
         this.usersList = response
+        console.log(this.usersList)
       }
     )
     this.finalSquad = {
@@ -112,6 +133,35 @@ export class SquadComponent{
 
 
   }
+
+  getRoleEquivalent(roleType: string): string {
+    const roleMapping = {
+      OWNER: 'Propietario',
+      PRESIDENT: 'Presidente',
+      DIRECTOR_MUSICAL: 'Director musical',
+      VOCALIST: 'Vocalista',
+      TREASURER: 'Tesorero',
+      ADMINISTRATOR: 'Administrador',
+      ARCHIVIST: 'Archivero',
+      ASSISTANCE_CONTROL: 'Control de asistencia',
+      PERCUSSION: 'Percursionista',
+      HAND_PERCUSSION_DE_MANO: 'Percursionista de mano',
+      KEYBOARD_INSTRUMENT: 'Teclista',
+      ELECTRONIC_INSTRUMENT: 'Instrumento electrónico',
+      PULSED_STRINGS: 'Cuerda pulsada',
+      BOWED_STRINGS: 'Cuerda',
+      WINDWOOD: 'Viento madera',
+      BRASS_INSTRUMENT: 'Viento metal',
+      COMPONENT: 'Miembro'
+    };
+
+
+
+
+    // @ts-ignore
+    return roleMapping[roleType] || roleType;
+  }
+
   async openLink(){
     const linkSpace:any = document.getElementById('invitationLink');
     if (!this.link){
@@ -144,6 +194,27 @@ export class SquadComponent{
     }
   }
 
+  checkRol(array: any){
+    for (let rol in array) {
+      const currentRol = array[rol]; // Accede al objeto actual
+      console.log(currentRol.type); // Imprime el valor de la propiedad 'id' del objeto actual
+
+      if (currentRol.type === 'OWNER') {
+        this.owner = true;
+      }
+      if (currentRol.type === 'PRESIDENT') {
+        this.president = true;
+      }
+      if (currentRol.type === 'ADMINISTRATOR') {
+        this.admin = true;
+      }
+      if (currentRol.type === 'TREASURER') {
+        this.treasurer = true;
+      }
+
+    }
+  }
+
   orderEvents() {
     // Ordenar eventos por fecha de forma ascendente
     // @ts-ignore
@@ -165,6 +236,21 @@ export class SquadComponent{
       }
       return true;
     });
+  }
+
+  async createNewRol(userId: any){
+    await this.squadService.createRol(userId, this.newRole.EnumRolUserFormation);
+    await this.generalService.getUsers().subscribe(
+      response => {
+        this.usersList = response
+      }
+    )
+  }
+
+  deleteRol(id:any){
+    console.log(id)
+    this.squadService.deleteRol(id);
+    this.generalService.presentToast('Rol eliminado', 'success')
   }
 
 
