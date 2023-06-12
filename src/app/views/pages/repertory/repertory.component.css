@@ -21,7 +21,7 @@ body{
   text-align: center;
   background-color: rgb(198, 53, 53);
   color: white;
-  border-radius: .5rem;
+  border-radius: 1rem;
   padding: 1rem 0;
 }
 .add-new{
@@ -30,14 +30,14 @@ body{
   text-align: center;
   background-color: rgb(198, 53, 53);
   color: white;
-  border-radius: .5rem;
+  border-radius: 1rem;
   padding: 1rem 0;
 }
 .save{
   text-align: center;
   background-color: rgb(198, 53, 53);
   color: white;
-  border-radius: .5rem;
+  border-radius: 1rem;
   padding: 1rem 0;
   margin: auto;
   width: 35%;
@@ -47,7 +47,7 @@ body{
   flex-flow: column;
   align-content: center;
   background-color: white;
-  border-radius: .5rem;
+  border-radius: 1rem;
   width: 70vw;
   height: 75%;
   margin: auto;
@@ -89,8 +89,8 @@ body{
   width: 14rem;
   max-width: 17rem;
   height: 15rem;
-  border-radius: .5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   justify-content: center;
 }
 .repertory div *{
@@ -125,9 +125,8 @@ body{
 }
 
 ion-modal{
-  --border-width:2px;
-  --border-style:solid;
-  --border-color:rgb(199,52,52);
+  --min-width: 50vw ;
+  --border-radius: 1.5rem ;
   --babackground-color: inherit;
   --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
 }

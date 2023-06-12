@@ -5,15 +5,18 @@
   flex-flow: row wrap;
   margin: 0 auto !important;
 }
+.repertory-child-sub > div{
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+}
 
 .musical{
-  flex: 0 1 auto;
-  margin: 1rem;
   display: flex;
+  flex: 0 0 auto;
+  margin: 1rem;
   height: min-content;
   flex-flow: row nowrap;
   min-width: 45%;
-  padding: .5rem 1rem;
+  padding:  1rem;
   border-radius: 1rem;
 }
 .musical div{

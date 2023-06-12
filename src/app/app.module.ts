@@ -41,6 +41,7 @@ import { PerformanceComponent } from './views/pages/performance/performance.comp
 import { SquadPlayComponent } from './views/pages/squad-play/squad-play.component';
 import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component';
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
+import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
 import { TreasuryComponent } from './views/pages/treasury/treasury.component';
 import { FullLoadingComponent } from './views/components/full-loading/full-loading.component';
 import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
@@ -91,6 +92,7 @@ import { FooterComponent } from './views/components/footer/footer.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FullCalendarModule,
   ],
   providers: [EncryptionService, AlertController],
   bootstrap: [AppComponent]
