@@ -22,3 +22,10 @@ body {
   align-items: center;
   gap: 0.2rem;
 }
+.imgfooter{
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+}

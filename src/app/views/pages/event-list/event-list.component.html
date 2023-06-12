@@ -68,7 +68,7 @@
 
       </div>
       <div class="list-image">
-        <div class="eventlist">
+        <div class="eventlist" *ngIf="eventList.length>0">
           <ion-card *ngFor="let event of eventList" class="card-width">
             <ion-card-header>
               <ion-title color="danger">
@@ -111,6 +111,16 @@
             <ion-footer>
               <ion-button color="danger" routerLink="/event/{{event.id}}"> Ver evento</ion-button>
             </ion-footer>
+          </ion-card>
+
+        </div>
+        <div class="eventlist" *ngIf="eventList.length==0">
+          <ion-card  class="card-width">
+            <ion-card-header>
+              <ion-title color="danger">
+                Esta formación no tiene {{type === "CONCERT" ? "conciertos" : "ensayos"}}
+              </ion-title>
+            </ion-card-header>
           </ion-card>
 
         </div>
