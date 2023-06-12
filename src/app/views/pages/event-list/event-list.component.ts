@@ -111,7 +111,7 @@ export class EventListComponent {
   setHasPermission() {
     const user = this.musicians.find(user => user.id === this.getMeService.id);
     if (user != null) {
-      const hasTreasuryRole = user.roleDTOList.find(role => role.type === "TREASURER");
+      const hasTreasuryRole = this.musicians.find(user => user.id === this.getMeService.id);
       if (hasTreasuryRole != null) {
         this.hasPermission = true;
       }
