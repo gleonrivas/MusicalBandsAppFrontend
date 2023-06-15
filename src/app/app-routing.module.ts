@@ -17,6 +17,7 @@ import {AuthGuard} from "./shared/auth/auth";
 import {EventComponent} from "./views/pages/event/event.component";
 import {TreasuryComponent} from "./views/pages/treasury/treasury.component";
 import {EventListComponent} from "./views/pages/event-list/event-list.component";
+import {MemberlistComponent} from "./views/pages/memberlist/memberlist.component";
 
 
 // Declaración de la rutas, aquí es donde hay que meter el código que sea
@@ -92,6 +93,10 @@ const routes: Routes = [
   {
     path: 'eventList/:id_formation/:type',
     component: EventListComponent
+  },
+  {
+    path: 'memberlist/:id_formation',
+    component: MemberlistComponent
   }
 ]
 @NgModule({

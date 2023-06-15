@@ -47,6 +47,7 @@ import { FullLoadingComponent } from './views/components/full-loading/full-loadi
 import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
 import { EventListComponent } from './views/pages/event-list/event-list.component';
 import { FooterComponent } from './views/components/footer/footer.component';
+import { MemberlistComponent } from './views/pages/memberlist/memberlist.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { FooterComponent } from './views/components/footer/footer.component';
     PasswordComponent,
     BorrowComponent,
     MusicalPieceComponent,
+    MemberlistComponent,
     EventComponent,
     PerformanceComponent,
     SquadPlayComponent,
@@ -75,7 +77,8 @@ import { FooterComponent } from './views/components/footer/footer.component';
     GetSpecialRolePipe,
 
     EventListComponent,
-      FooterComponent
+      FooterComponent,
+      MemberlistComponent
 
   ],
   imports: [

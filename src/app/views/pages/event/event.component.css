@@ -1,5 +1,4 @@
 body{
-  height: 100vh;
   margin: 0;
   padding: 0;
   overflow-y: scroll;
@@ -9,7 +8,10 @@ body{
   flex-flow: column nowrap;
   min-width: 40%;
   margin: 3rem auto;
-  height: 60vh;
+
+}
+.width{
+  width: 100%;
 }
 .body{
   display: flex;
