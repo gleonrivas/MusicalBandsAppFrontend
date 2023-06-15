@@ -3,13 +3,16 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 import {EChartsOption, getInstanceByDom} from 'echarts';
 import { NgxEchartsModule } from 'ngx-echarts';
-import {connect} from "rxjs";
+import {connect, map} from "rxjs";
 import {GeneralService} from "../../../../shared/services/general.service";
+import {PayLowModel} from "../../../../shared/models/payLow.model";
+import {Treasury} from "../../../../shared/models/treasury";
+import {TreasuryService} from "../../../../shared/services/treasury.service";
 @Injectable({
   providedIn: 'root'
 })
 export class SquadService {
-  constructor(private http: HttpClient, private generalService: GeneralService) { }
+  constructor(private http: HttpClient, private generalService: GeneralService, private treasuryService: TreasuryService) { }
 
   chart(){
 
@@ -81,5 +84,48 @@ export class SquadService {
     this.http.put("http://localhost:8080/role/delete/" + id, body).subscribe( request =>
     console.log(request))
   }
+
+
+
+  async getDailyAmounts(payLow: PayLowModel) {
+    try {
+      const data: Treasury[] | undefined = await this.treasuryService.getAllMoney(payLow).toPromise();
+
+      // Crea un objeto para almacenar la suma de amounts por día
+      const dailyAmounts = {};
+      console.log('Intro: ', data)
+
+      // Recorre los elementos del array de datos
+      // @ts-ignore
+      data.forEach(item => {
+        // @ts-ignore
+        const receiveMoneyDate = item.receiveMoneyDate.split('T')[0]; // Obtiene la fecha sin la parte de tiempo
+
+        // Si la fecha ya existe en el objeto dailyAmounts, suma el amount actual al existente
+        // @ts-ignore
+        if (dailyAmounts[receiveMoneyDate]) {
+          // @ts-ignore
+          dailyAmounts[receiveMoneyDate] += item.amount;
+        } else {
+          // Si la fecha no existe, crea una nueva entrada con el amount actual
+          // @ts-ignore
+          dailyAmounts[receiveMoneyDate] = item.amount;
+        }
+      });
+
+      // Retorna el objeto con las sumas de amounts por día
+      return dailyAmounts;
+    } catch (error) {
+      // Manejar el error de la promesa aquí
+      console.error('Error al obtener los datos:', error);
+      throw error;
+    }
+  }
+
+
+
+
+
+
 
 }
