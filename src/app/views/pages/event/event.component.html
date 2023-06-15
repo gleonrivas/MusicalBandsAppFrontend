@@ -134,14 +134,14 @@
               <ion-label>Subir Archivos</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
-              <ion-input type="file" required="required" (change)="readUrl($event)"></ion-input>
-              <button (click)="createMusicSheet()">Guardar</button>
-            </div>
-            <div class="ion-padding" slot="content">
-              <ion-select placeholder="Selecciona uno de la lista" (ionChange)="onSelectAddUserRol($event)">
-                <ion-select-option *ngFor="let user of userList"
-                                   value="{{user.id}}">{{user.name}} {{user.surName}} {{user.roleDTOList}}</ion-select-option>
-              </ion-select>
+              <div class="ion-padding row-cols-2" slot="content">
+                <ion-input type="file" required="required" (change)="readUrl($event)"></ion-input>
+                <ion-select placeholder="Asígnale el documento a un usuario" (ionChange)="onSelectAddUserRol($event)">
+                  <ion-select-option *ngFor="let user of userList"
+                                     value="{{user.id}}">{{user.name}} {{user.surName}}</ion-select-option>
+                </ion-select>
+              </div>
+              <button class="add-new2" (click)="createMusicSheet()">Guardar</button>
             </div>
           </ion-accordion>
           <ion-accordion value="third">
@@ -151,13 +151,13 @@
             <div class="ion-padding" slot="content">
               <ion-card>
                 <ion-card class="carImgArchivo">
-                  <div *ngFor="let user of userList" class="imageArchivo">
-                    <img src="assets/icons8-documento-144.png">
+                  <div *ngFor="let ms of musicSheetList; index as i;" class="imageArchivo">
+                    <a class="add-new2" style="text-decoration: none" [href]="ms.musicSheetPdf" (click)="downloadPdf(ms.musicSheetPdf)">-> Documento {{i+1}} <-</a>
                   </div>
 
                 </ion-card>
                 <ion-card-header>
-                  <ion-card-subtitle>Descarga tus archivos</ion-card-subtitle>
+                  <ion-card-subtitle>Visualiza y descarga tus archivos</ion-card-subtitle>
                 </ion-card-header>
               </ion-card>
             </div>

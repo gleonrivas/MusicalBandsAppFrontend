@@ -85,6 +85,7 @@ export class EventComponent {
   public musicSheet: MusicSheetDTO ={
     musicSheetPdf: "",
     formationId: -1, //Integer
+    userId: -1
   }
 
 
@@ -100,6 +101,7 @@ export class EventComponent {
     origin: "",
   }
   public musicalPieceList: MusicalPieceType[] = []
+  public musicSheetList: any = []
   public day: number = -1;
   public monthList: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre"];
   public numberMonth: number = -1;
@@ -126,6 +128,8 @@ export class EventComponent {
 
   public isDeletable = false;
   public ms: string | ArrayBuffer | null = '';
+
+  public idUserSelected = 0;
 
   public repertoryByFormation: RepertoryType[] = []
 
@@ -156,6 +160,8 @@ export class EventComponent {
   ngOnInit() {
 
     this.id = this.getMeService.id;
+
+
 
 
     this.router.paramMap.subscribe((value) => {
@@ -204,10 +210,10 @@ export class EventComponent {
 
     })
 
-
     this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data) => {
       this.externalMusicianList = data
     })
+
     this.eventService.getFormationByIdCalendar(this.id_event).subscribe((data) => {
       this.formation = data;
       this.formationService.getUsersByFormation(this.formation.id).subscribe((data) => {
@@ -250,6 +256,12 @@ export class EventComponent {
       })
 
 
+    })
+
+
+    this.musicSheetService.listMs(53).subscribe((data)=> {
+      this.musicSheetList = data
+      console.log(this.musicSheetList);
     })
 
 
@@ -567,10 +579,10 @@ export class EventComponent {
   }
 
   createMusicSheet() {
-
     this.musicSheet = {
       formationId: this.formation.id,
       musicSheetPdf: this.ms,
+      userId: this.idUserSelected
     }
     if (this.ms) {
       this.musicSheetService.createMusicSheet(this.musicSheet).subscribe(response => {
@@ -580,12 +592,14 @@ export class EventComponent {
         this.presentToast('No es posible guardar este archivo en estos momentos', 'danger')
       })
     }
-
   }
+
   onSelectAddUserRol($event: any) {
-    const id = $event.detail.value;
-
+     this.idUserSelected = $event.detail.value;
   }
 
+  downloadPdf(pdf: string | ArrayBuffer){
+    window.open(pdf.toString());
+  }
 
 }
