@@ -6,6 +6,8 @@ import {FormationType} from "../../../shared/models/formationType.model";
 import { trigger, transition, style, animate } from '@angular/animations';
 import {GeneralService} from "../../../shared/services/general.service";
 import {newRole} from "../../../shared/models/newRole.model";
+import {TreasuryService} from "../../../shared/services/treasury.service";
+import {PayLowModel} from "../../../shared/models/payLow.model";
 
 export const fadeInAnimation = trigger('fadeInAnimation', [
   transition(':enter', [
@@ -21,7 +23,7 @@ export const fadeInAnimation = trigger('fadeInAnimation', [
 })
 export class SquadComponent{
 
-  constructor(private formationService:FormationService, private squadService:SquadService, private generalService: GeneralService) {}
+  constructor(private formationService:FormationService, private squadService:SquadService, private generalService: GeneralService, private treasuryService: TreasuryService) {}
 
 
   usersList: any;
@@ -46,7 +48,10 @@ export class SquadComponent{
   admin = false;
   president = false;
   treasurer = false;
+
+  data: any;
   newRole: newRole = { EnumRolUserFormation: '', userId: 0, formationId: 0}
+  lowModel: PayLowModel = {userId: 0, formationId: 0}
 
   roleOptions = [
     { value: 'OWNER', label: 'Propietario' },
@@ -73,8 +78,26 @@ export class SquadComponent{
 
     const elements:any = document.getElementsByClassName('container');
     let squad = await this.formationService.getFormation().toPromise();
+    this.lowModel.userId = 63
     // @ts-ignore
     this.id = squad.id;
+    this.lowModel.formationId = this.id
+    try {
+      this.data = await this.squadService.getDailyAmounts(this.lowModel);
+      console.log("Hola", this.data);
+    } catch (error) {
+      // Manejar el error aquí si es necesario
+    }
+
+    const dates = Object.keys(this.data).map(key => String(key));
+
+    const amounts = Object.values(this.data);
+
+    // @ts-ignore
+    this.options.xAxis[0].data = dates;
+    // @ts-ignore
+    this.options.series[0].data = amounts;
+
     this.allRoles = await this.generalService.getUserRol(this.id);
     console.log(this.allRoles);
     this.checkRol(this.allRoles)
@@ -278,7 +301,7 @@ export class SquadComponent{
     xAxis: [
       {
         type: 'category',
-        data: ['Celia', 'Gonza', 'Luis', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: [],
         axisTick: {
           alignWithLabel: true
         }
@@ -291,7 +314,7 @@ export class SquadComponent{
       name: 'Counters',
       type: 'bar',
       barWidth: '30%',
-      data: [50, 52, 200, 334, 390, 330, 220]
+      data: []
     }]
   };
 }
