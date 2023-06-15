@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Musicians</title>
+</head>
+<body>
+<app-navegacion></app-navegacion>
+<br>
+<br>
+<div class="home-container ">
+  <app-full-loading *ngIf="isLoading"></app-full-loading>
+  <div *ngIf="!this.formation && !isLoading" class="noExiste">
+
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>La formacíón no existe</ion-card-title>
+          <ion-card-subtitle>Vuelva a la página de inicio</ion-card-subtitle>
+        </ion-card-header>
+      </div>
+    </ion-card>
+
+  </div>
+  <div *ngIf="!hasPermission && !isLoading" class="noExiste">
+
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>No tienes permiso para entrar en esta página</ion-card-title>
+          <ion-card-subtitle>Vuelva a la página de inicio</ion-card-subtitle>
+        </ion-card-header>
+      </div>
+    </ion-card>
+
+  </div>
+
+  <div *ngIf=" hasPermission">
+    <div id="title" *ngIf="formation.id != -1">
+      <h3 class="formationName">La formación
+        Tiene {{musicians.length}} miembros</h3>
+      <br>
+      <ion-card class="conjunto">
+        <div class="flecha">
+          <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+          <ion-card-header>
+            <ion-card-title>{{formation.name}}</ion-card-title>
+            <ion-card-subtitle>{{formation.designation}}</ion-card-subtitle>
+          </ion-card-header>
+        </div>
+        <ion-avatar>
+          <img class="image" src="{{formation.logo}}">
+        </ion-avatar>
+      </ion-card>
+    </div>
+    <div>
+      <div>
+
+
+        <h1 class="margin-auto margin">
+          Miembros de {{formation.name}}
+        </h1>
+
+      </div>
+      <div class="list-image">
+        <div class="eventlist" *ngIf="musicians.length>0">
+          <ion-card *ngFor="let musician of musicians" class="card-width">
+            <ion-card-header>
+              <ion-title color="danger">
+                Músico
+              </ion-title>
+            </ion-card-header>
+            <ion-card-content class="musicianCard">
+              <ion-grid class="ganancia">
+                <ion-col>
+                  <ion-avatar>
+                    <img class="image" src="{{musician.image}}">
+                  </ion-avatar>
+                </ion-col>
+              </ion-grid>
+              <ion-grid >
+                <ion-row>
+                  <ion-col size="12">
+                    Nombre: {{musician.name}} {{musician.surName}}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    Email: {{musician.email}}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    Fecha de nacimiento: {{musician.birthDate | date: 'short'}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-grid class="roles">
+                <ion-col>
+                  <h2>Roles</h2>
+                  <div *ngFor="let role of musician.roleDTOList">
+                    <h4 style="color: #0d0d0d">{{role.type | titlecase}}</h4>
+                  </div>
+                </ion-col>
+              </ion-grid>
+
+            </ion-card-content>
+          </ion-card>
+
+        </div>
+        <div class="eventlist" *ngIf="musicians.length==0">
+          <ion-card class="card-width">
+            <ion-card-header>
+              <ion-title color="danger">
+                Esta formación no tiene miembros
+              </ion-title>
+            </ion-card-header>
+          </ion-card>
+
+        </div>
+        <div class="micro}">
+          <img class="border" src="/assets/musician.jpg">
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+</body>
+<app-footer></app-footer>
+
