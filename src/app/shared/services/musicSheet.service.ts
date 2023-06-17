@@ -21,8 +21,8 @@ export class MusicSheetService{
     return this.rest.post<MusicSheetDTO,MusicSheetDTOResponse>('http://localhost:8080/ms/create',ms)
   }
 
-  listMs(ms: number | undefined){
-    return this.rest.get<MusicSheetDTO>('http://localhost:8080/ms/listMs/'+ ms)
+  listMs(f: number | undefined, u: number | undefined){
+    return this.rest.get<MusicSheetDTO>('http://localhost:8080/ms/listMs/'+ f + "/" + u)
   }
 
 }

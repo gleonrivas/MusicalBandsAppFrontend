@@ -259,7 +259,7 @@ export class EventComponent {
     })
 
 
-    this.musicSheetService.listMs(53).subscribe((data)=> {
+    this.musicSheetService.listMs(53,48).subscribe((data)=> {
       this.musicSheetList = data
       console.log(this.musicSheetList);
     })

@@ -153,8 +153,8 @@
                 <ion-card class="carImgArchivo">
                   <div *ngFor="let ms of musicSheetList; index as i;" class="imageArchivo">
                     <a class="add-new2" style="text-decoration: none" [href]="ms.musicSheetPdf" (click)="downloadPdf(ms.musicSheetPdf)">-> Documento {{i+1}} <-</a>
+                    <a style="text-decoration: none" (click)="downloadPdf(ms.musicSheetPdf)"><img src="assets/icons8-documento-144.png"></a>
                   </div>
-
                 </ion-card>
                 <ion-card-header>
                   <ion-card-subtitle>Visualiza y descarga tus archivos</ion-card-subtitle>
