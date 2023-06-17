@@ -29,4 +29,8 @@ export class RepertoryService {
     return this.restService.get<RepertoryType>('http://localhost:8080/repertory/list/calendar/'+idEvento)
   }
 
+  vinculateRepertory(idRepertory:number, idCalendar:number){
+    return this.restService.post<RepertoryType>('http://localhost:8080/repertory/vinculate/'+idRepertory+'/'+idCalendar, {})
+  }
+
 }

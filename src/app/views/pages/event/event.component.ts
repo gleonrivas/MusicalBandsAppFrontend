@@ -58,6 +58,7 @@ export class EventComponent {
     penaltyPonderation: -1
   }
 
+
   public externalMusician: ExternalMusicianModel = {
     amount: 0,
     dni: "",
@@ -131,6 +132,11 @@ export class EventComponent {
   public idUserSelected = 0;
 
   public repertoryByFormation: RepertoryType[] = []
+
+  public repertoryCalendar = {
+    idRepertory: -1,
+    idCalendar: -1
+  }
 
   public repertoryByCalendar: RepertoryType = {
     id: -1,
@@ -306,7 +312,25 @@ export class EventComponent {
   }
 
   saveRepertory() {
+    console.log(this.repertoryCalendar)
+    this.repertoryService.vinculateRepertory(this.repertoryCalendar.idRepertory,this.repertoryCalendar.idCalendar).subscribe({
+      next:(data)=>{
+        this.presentToast("Se han asignado el repertorio correctamente", "success");
+        this.repertoryByCalendar=data;
+        this.musicalPieceService.getMusicalPieceByRepertoryId(this.repertoryCalendar.idCalendar).subscribe((data) => {
 
+          this.musicalPieceList = data;
+        })
+      },
+      error:()=>this.presentToast("Ha ocurrido un error inesperado. Inténtelo más tarde", "danger")
+    })
+  }
+  onSelectRepertory($event:any){
+    const repertoryId = $event.detail.value;
+    if(repertoryId){
+      this.repertoryCalendar.idRepertory= repertoryId;
+      this.repertoryCalendar.idCalendar=this.event.id;
+    }
   }
 
   timeToString(date: Date) {
