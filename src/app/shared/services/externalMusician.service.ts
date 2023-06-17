@@ -4,6 +4,7 @@ import {EncryptionService} from "./encryption.service";
 import {HttpClient} from "@angular/common/http";
 import {ExternalMusicianModel, ExternalMusicianResponse} from "../models/externalMusician.model";
 import {ResponseStringModel} from "../models/responseString.model";
+import {MusicSheetDTO, MusicSheetDTOResponse} from "../models/eventModels/MusicSheetDTO";
 
 
 @Injectable({
@@ -20,6 +21,10 @@ export class ExternalMusicianService{
 
   createMusician(musician:ExternalMusicianModel){
     return this.rest.post<ExternalMusicianModel,ExternalMusicianResponse>('http://localhost:8080/ExternalMusician/create',musician)
+  }
+
+  createMusicSheet(ms:MusicSheetDTO){
+    return this.rest.post<MusicSheetDTO,MusicSheetDTOResponse>('http://localhost:8080/ExternalMusician/create',ms)
   }
   listExternalMusician(idEvent: number){
     return this.rest.get<ExternalMusicianResponse[]>('http://localhost:8080/ExternalMusician/findByCalendar/'+ idEvent)

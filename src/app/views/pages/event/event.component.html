@@ -134,29 +134,30 @@
               <ion-label>Subir Archivos</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
-              <ion-input type="file" value="333"></ion-input>
-            </div>
-            <div class="ion-padding" slot="content">
-              <ion-select placeholder="Selecciona uno de la lista">
-                <ion-select-option *ngFor="let user of userList">{{user.name}} {{user.surName}}
-                  <p *ngFor="let role of user.roleDTOList">{{role.type}}</p></ion-select-option>
-              </ion-select>
+              <div class="ion-padding row-cols-2" slot="content">
+                <ion-input type="file" required="required" (change)="readUrl($event)"></ion-input>
+                <ion-select placeholder="Asígnale el documento a un usuario" (ionChange)="onSelectAddUserRol($event)">
+                  <ion-select-option *ngFor="let user of userList"
+                                     value="{{user.id}}">{{user.name}} {{user.surName}}</ion-select-option>
+                </ion-select>
+              </div>
+              <button class="add-new2" (click)="createMusicSheet()">Guardar</button>
             </div>
           </ion-accordion>
-          <ion-accordion value="third">
+          <ion-accordion value="third" *ngIf="rolList.includes('ARCHIVIST')" >
             <ion-item slot="header" color="light">
               <ion-label>Mis Archivos</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
               <ion-card>
                 <ion-card class="carImgArchivo">
-                  <div *ngFor="let user of userList" class="imageArchivo">
-                    <img src="assets/icons8-documento-144.png">
+                  <div *ngFor="let ms of musicSheetList; index as i;" class="imageArchivo">
+                    <a style="text-decoration: none" (click)="downloadPdf(ms.musicSheetPdf)"><img src="assets/icons8-documento-144.png"></a>
+                    <a class="add-new2" style="text-decoration: none; width: 100%" [href]="ms.musicSheetPdf" (click)="downloadPdf(ms.musicSheetPdf)" > Documento {{i+1}}</a>
                   </div>
-
                 </ion-card>
                 <ion-card-header>
-                  <ion-card-subtitle>Descarga tus archivos</ion-card-subtitle>
+                  <ion-card-subtitle>Visualiza y descarga tus archivos</ion-card-subtitle>
                 </ion-card-header>
               </ion-card>
             </div>
@@ -321,9 +322,7 @@
           <ion-item>
             <ion-label>No hay músicos externos en este momento</ion-label>
           </ion-item>
-
         </ion-list>
-
       </div>
     </ion-list>
   </ng-template>
@@ -332,4 +331,5 @@
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>

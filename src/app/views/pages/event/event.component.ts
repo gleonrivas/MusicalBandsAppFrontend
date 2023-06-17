@@ -6,7 +6,6 @@ import {FormationType} from "../../../shared/models/formationType.model";
 import {EnumFormationType} from "../../../shared/models/Enum/EnumFormationType";
 import {UserFormation} from "../../../shared/models/UserFormation";
 import {FormationService} from "../../../shared/services/formation.service";
-import {UserInfo} from "../../../shared/models/user-info";
 import {GetMeService} from "../../../shared/services/get-me.service";
 import {RepertoryType} from "../../../shared/models/repertoryType.model";
 import {RepertoryService} from "../../../shared/services/repertory.service";
@@ -22,6 +21,8 @@ import {CalendarEventUpdateDTO} from "../../../shared/models/eventModels/calenda
 import {ExternalMusicianService} from "../../../shared/services/externalMusician.service";
 import {ExternalMusicianModel, ExternalMusicianResponse} from "../../../shared/models/externalMusician.model";
 import {Location} from "@angular/common";
+import {MusicSheetDTO} from "../../../shared/models/eventModels/MusicSheetDTO";
+import {MusicSheetService} from "../../../shared/services/musicSheet.service";
 
 
 @Component({
@@ -38,6 +39,7 @@ export class EventComponent {
               private readonly repertoryService: RepertoryService,
               private readonly absenceService: AbsenceService,
               private readonly musicalPieceService: MusicalPieceService,
+              private readonly musicSheetService: MusicSheetService,
               private toastController: ToastController,
               private readonly externalMusicianService: ExternalMusicianService,
               private readonly route: Router) {
@@ -79,6 +81,13 @@ export class EventComponent {
     idRepertory: "", //Integer
   }
 
+  public musicSheet: MusicSheetDTO ={
+    musicSheetPdf: "",
+    formationId: -1, //Integer
+    userId: -1
+  }
+
+
   public formation: FormationType = {
     id: -1,
     active: true,
@@ -91,6 +100,7 @@ export class EventComponent {
     origin: "",
   }
   public musicalPieceList: MusicalPieceType[] = []
+  public musicSheetList: any = []
   public day: number = -1;
   public monthList: string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre"];
   public numberMonth: number = -1;
@@ -116,6 +126,9 @@ export class EventComponent {
   public isEditable = false;
 
   public isDeletable = false;
+  public ms: string | ArrayBuffer | null = '';
+
+  public idUserSelected = 0;
 
   public repertoryByFormation: RepertoryType[] = []
 
@@ -146,6 +159,8 @@ export class EventComponent {
   ngOnInit() {
 
     this.id = this.getMeService.id;
+
+
 
 
     this.router.paramMap.subscribe((value) => {
@@ -194,10 +209,10 @@ export class EventComponent {
 
     })
 
-
     this.externalMusicianService.listExternalMusician(this.id_event).subscribe((data) => {
       this.externalMusicianList = data
     })
+
     this.eventService.getFormationByIdCalendar(this.id_event).subscribe((data) => {
       this.formation = data;
       this.formationService.getUsersByFormation(this.formation.id).subscribe((data) => {
@@ -211,6 +226,10 @@ export class EventComponent {
           }
         }
 
+        this.musicSheetService.listMs(this.formation.id, this.id).subscribe((data)=> {
+          this.musicSheetList = data
+          console.log(this.musicSheetList);
+        })
 
 
         for (let user of this.userList) {
@@ -238,7 +257,9 @@ export class EventComponent {
       })
 
 
+
     })
+
 
 
   }
@@ -537,6 +558,45 @@ export class EventComponent {
   setEditable(eventDate: Date) {
     this.isEditable = this.date < eventDate;
     this.isDeletable = this.date < eventDate;
+  }
+
+  readUrl(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent) => {
+
+        this.ms = (<FileReader>event.target).result;
+
+      }
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+  }
+
+  createMusicSheet() {
+    this.musicSheet = {
+      formationId: this.formation.id,
+      musicSheetPdf: this.ms,
+      userId: this.idUserSelected
+    }
+    if (this.ms) {
+      this.musicSheetService.createMusicSheet(this.musicSheet).subscribe(response => {
+        this.presentToast('El archivo se ha guardado correctamente', 'success')// Accede al status del error
+        this.route.navigate(['/event/', this.event.id]);
+      }, (error: HttpErrorResponse) => {
+        this.presentToast('No es posible guardar este archivo en estos momentos', 'danger')
+      })
+    }
+  }
+
+  onSelectAddUserRol($event: any) {
+     this.idUserSelected = $event.detail.value;
+  }
+
+  downloadPdf(pdf: string | ArrayBuffer){
+    window.open(pdf.toString());
   }
 
 }
