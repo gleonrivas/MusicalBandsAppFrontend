@@ -41,9 +41,13 @@ import { PerformanceComponent } from './views/pages/performance/performance.comp
 import { SquadPlayComponent } from './views/pages/squad-play/squad-play.component';
 import { RehearsalComponent } from './views/pages/rehearsal/rehearsal.component';
 import {NoAuthPageComponent} from "./views/pages/no-auth-page/no-auth-page.component";
+import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
 import { TreasuryComponent } from './views/pages/treasury/treasury.component';
 import { FullLoadingComponent } from './views/components/full-loading/full-loading.component';
 import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
+import { EventListComponent } from './views/pages/event-list/event-list.component';
+import { FooterComponent } from './views/components/footer/footer.component';
+import { MemberlistComponent } from './views/pages/memberlist/memberlist.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +66,7 @@ import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
     PasswordComponent,
     BorrowComponent,
     MusicalPieceComponent,
+    MemberlistComponent,
     EventComponent,
     PerformanceComponent,
     SquadPlayComponent,
@@ -69,7 +74,11 @@ import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
     NoAuthPageComponent,
     TreasuryComponent,
     FullLoadingComponent,
-    GetSpecialRolePipe
+    GetSpecialRolePipe,
+
+    EventListComponent,
+      FooterComponent,
+      MemberlistComponent
 
   ],
   imports: [
@@ -86,6 +95,7 @@ import {GetSpecialRolePipe} from "./views/pages/treasury/get-special-role.pipe";
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FullCalendarModule,
   ],
   providers: [EncryptionService, AlertController],
   bootstrap: [AppComponent]

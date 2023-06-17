@@ -36,5 +36,17 @@
       <a routerLink="/password" class="login">Cambiar contraseña</a>
     </div>
   </div>
+<app-footer></app-footer>
+<script>
+  function changeTypeFile(){
+    var input = document.getElementById("inputFile");
+    var fReader = new FileReader();
+    fReader.readAsDataURL(input.files[0]);
+    document.getElementById("inputFile").value = fReader.toString().split(".")[0].split("\\");
 
+  }
+
+
+</script>
 </body>
+

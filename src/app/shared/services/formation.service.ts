@@ -19,17 +19,10 @@ export class FormationService {
 
   private formation!:FormationType;
 
-  setFormation(formation: FormationType) {
-    this.formation = formation;
-    /*// @ts-ignore
-    sessionStorage.setItem('idFormation', formation.id)
-        */
+  setFormation(formationId: number) {
 
-    console.log(formation.id!.toString())
     // @ts-ignore
-    sessionStorage.setItem('idFormation', this.encryptionService.encrypt(formation.id!.toString()))
-    console.log('setFormationMethod '+this.encryptionService.encrypt(formation.id!.toString()))
-
+    sessionStorage.setItem('idFormation', this.encryptionService.encrypt(formationId.toString()))
   }
   getFormation(): Observable<FormationType> {
     // return this.getFormationById(parseInt(sessionStorage.getItem('idFormation')!));

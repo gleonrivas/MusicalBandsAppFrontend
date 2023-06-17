@@ -10,28 +10,28 @@
   <br>
   <ion-row>
     <ion-col>
-      <ion-chip color="primary">
+      <ion-chip  routerLink="/memberlist/{{id}}" color="primary">
         <ion-icon name="people"></ion-icon>
         <ion-label>Miembros</ion-label>
       </ion-chip>
     </ion-col>
 
-    <ion-col>
-      <ion-chip color="primary" routerLink="/treasury/{{id}}">
+    <ion-col *ngIf="treasurer">
+      <ion-chip  color="primary" routerLink="/treasury/{{id}}">
         <ion-icon name="cash"></ion-icon>
         <ion-label>Tesorería</ion-label>
       </ion-chip>
     </ion-col>
 
     <ion-col>
-      <ion-chip color="primary">
+      <ion-chip color="primary"  routerLink="/eventList/{{id}}/concert">
         <ion-icon name="musical-notes"></ion-icon>
         <ion-label>Actuaciones</ion-label>
       </ion-chip>
     </ion-col>
 
     <ion-col>
-      <ion-chip color="primary">
+      <ion-chip color="primary" routerLink="/eventList/{{id}}/practice">
         <ion-icon name="microphone"></ion-icon>
         <ion-label>Ensayos</ion-label>
       </ion-chip>
@@ -43,7 +43,7 @@
         <ion-label><b>{{repertory}}</b> Repertorios </ion-label>
       </ion-chip>
     </ion-col>
-    <ion-col>
+    <ion-col *ngIf="admin || owner || president">
       <ion-chip routerLink="/instrumentos" color="danger">
         <ion-icon name="albums"></ion-icon>
         <ion-label>Materiales</ion-label>
@@ -82,7 +82,7 @@
           </ion-card>
         </ion-card-content>
 
-        <ion-button color="danger" routerLink="/crearactuacion">Nueva actuación</ion-button>
+        <ion-button *ngIf="admin || owner || president" color="danger" routerLink="/crearactuacion">Nueva actuación</ion-button>
 
       </ion-card>
     </ion-col>
@@ -112,7 +112,7 @@
           </ion-card>
         </ion-card-content>
 
-        <ion-button color="danger" routerLink="/crearensayo">Nuevo ensayo</ion-button>
+        <ion-button *ngIf="admin || owner || president" color="danger" routerLink="/crearensayo">Nuevo ensayo</ion-button>
       </ion-card>
     </ion-col>
 
@@ -124,8 +124,8 @@
         </ion-card-header>
 
         <ion-card-content>
-          Activar link de invitación <ion-toggle color="danger" [(ngModel)]="link" (click)="openLink()"></ion-toggle>
-          <ion-input id="invitationLink" label="URL" [value]="invitation" placeholder="URL para invitar" [(ngModel)]="invitation"></ion-input>
+          Link de invitación <ion-toggle *ngIf="admin || owner || president" color="danger" [(ngModel)]="link" (click)="openLink()"></ion-toggle>
+          <ion-input id="invitationLink" label="URL" [value]="invitation" placeholder="Desactivado" [(ngModel)]="invitation"></ion-input>
 
         </ion-card-content>
 
@@ -139,7 +139,8 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <echarts [initOpts]="initOpts" [options]="options"></echarts>
+      <echarts *ngIf="data.length !== 0" [initOpts]="initOpts" [options]="options"></echarts>
+      <ion-text *ngIf="data.length === 0">No hay datos que mostrar.</ion-text>
     </ion-col>
     <ion-col>
       <ion-card>
@@ -163,12 +164,35 @@
                 {{person.email}}
               </ion-card-content>
             </ion-card>
+            <ion-row><ion-text>Roles</ion-text></ion-row>
+            <ion-row>
+              <ion-col *ngIf="admin || owner || president">
+                <ion-select class="inputbox" style="height: 5%; width: 60%" placeholder="Roles" [(ngModel)]="newRole.EnumRolUserFormation">
+                  <ion-select-option  *ngFor="let option of roleOptions" [value]="option.value">{{ option.label }}</ion-select-option>
+                </ion-select>
+              </ion-col>
+              <ion-col *ngIf="admin || owner || president">
+                <button  style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="createNewRol(person.id)"><ion-icon name="checkmark" style="background-color: lightskyblue; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+              </ion-col>
+            </ion-row>
+            <ul>
+              <li *ngFor="let role of person.roleDTOList">
+                <ion-col>
+                  {{getRoleEquivalent(role.type)}}
+                </ion-col>
+                <ion-col *ngIf="admin || owner || president">
+                  <button style="float: right; background-color: transparent; margin: 0 auto; margin-right: 2vh;" (click)="deleteRol(role.id)"><ion-icon name="close" style="background-color: #C63535; border-radius: 50px; color: whitesmoke"></ion-icon></button>
+                </ion-col>
+              </li>
+            </ul>
+
           </div>
         </ion-accordion>
       </ion-accordion-group>
     </ion-col>
   </ion-row>
 </ion-grid>
+<app-footer></app-footer>
 </body>
 
 

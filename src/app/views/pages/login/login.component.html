@@ -18,7 +18,7 @@
         <div class="form">
           <h2>Inicio sesión</h2>
           <div class="inputbox mt-3"> <span>Nombre de usuario</span> <input type="text" placeholder="" name="" class="form-control"  required="required" [(ngModel)]="currentUser.user"> </div>
-          <div class="inputbox mt-3"> <span>Contraseña</span> <input type="password" placeholder="" name="" class="form-control" required="required" [(ngModel)]="currentUser.password" > </div>
+          <div class="inputbox mt-3"> <span>Contraseña</span> <input (keydown.enter)="login()"  type="password" placeholder="" name="" class="form-control" required="required" [(ngModel)]="currentUser.password" > </div>
           <div class="d-flex justify-content-between align-items-center">
             <div class="text-right">
               <button class="btn register btn-block" (click)="login()">Iniciar sesión</button>
@@ -39,5 +39,6 @@
     </ion-item>
 </ion-modal>
 </body>
+
 
 

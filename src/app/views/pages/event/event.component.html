@@ -55,13 +55,13 @@
 
         </div>
         <div class="buttonsUpdateDelete">
-          <button class="add-new with-border bg-light text-dark" [disabled]="!isEditable" (click)="openEdit(event)">
+          <ion-button color="danger" class="width" [disabled]="!isEditable" (click)="openEdit(event)">
             <h6>
               Editar</h6>
-          </button>
-          <button class="add-new-delete with-border" (click)="deleteCalendar(event.id)" [disabled]="!isDeletable">
+          </ion-button>
+          <ion-button color="danger" class="width" (click)="deleteCalendar(event.id)" [disabled]="!isDeletable">
             <h6>Eliminar</h6>
-          </button>
+          </ion-button>
         </div>
       </ion-card>
     </div>
@@ -164,7 +164,7 @@
 
           </ion-accordion>
         </ion-accordion-group>
-        <ion-card style="height: 30%">
+        <ion-card>
           <img alt="Silhouette of mountains" src="{{formation.logo}}"/>
 
         </ion-card>
@@ -327,6 +327,7 @@
     </ion-list>
   </ng-template>
 </ion-modal>
+<app-footer></app-footer>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

@@ -226,8 +226,7 @@ export class EventComponent {
             }
           }
         }
-        console.log(this.idUser)
-        console.log(this.id)
+
 
 
 

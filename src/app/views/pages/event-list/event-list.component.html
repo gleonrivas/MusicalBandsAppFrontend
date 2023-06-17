@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event</title>
+</head>
+<body>
+<app-navegacion></app-navegacion>
+<br>
+<br>
+<div class="home-container ">
+  <app-full-loading *ngIf="isLoading"></app-full-loading>
+  <div *ngIf="!this.formation && !isLoading" class="noExiste">
+
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/home"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>La formacíón no existe</ion-card-title>
+          <ion-card-subtitle>Vuelva a la página de inicio</ion-card-subtitle>
+        </ion-card-header>
+      </div>
+    </ion-card>
+
+  </div>
+  <div *ngIf="!hasPermission && !isLoading" class="noExiste">
+
+    <ion-card class="conjunto">
+      <div class="flecha">
+        <a href="/formacion"><img src="/assets/icons8-flecha-90.png"></a>
+        <ion-card-header>
+          <ion-card-title>No tienes permiso para entrar en este evento</ion-card-title>
+          <ion-card-subtitle>Vuelva a la página de inicio</ion-card-subtitle>
+        </ion-card-header>
+      </div>
+    </ion-card>
+
+  </div>
+
+  <div *ngIf=" hasPermission">
+    <div id="title" *ngIf="formation.id != -1">
+      <h3 class="formationName">La formación
+        tiene {{eventList.length}} {{type === "CONCERT" ? "conciertos" : "ensayos"}}</h3>
+      <br>
+      <ion-card class="conjunto">
+        <div class="flecha">
+          <a href="/formacion"><img src="/assets/icons8-flecha-90.png"></a>
+          <ion-card-header>
+            <ion-card-title>{{formation.name}}</ion-card-title>
+            <ion-card-subtitle>{{formation.designation}}</ion-card-subtitle>
+          </ion-card-header>
+        </div>
+        <ion-avatar>
+          <img class="image" src="{{formation.logo}}">
+        </ion-avatar>
+      </ion-card>
+    </div>
+    <div>
+      <div>
+
+
+        <h1 class="margin-auto margin">
+          {{type === "CONCERT" ? "Conciertos" : "Ensayos"}}
+        </h1>
+
+      </div>
+      <div class="list-image">
+        <div class="eventlist" *ngIf="eventList.length>0">
+          <ion-card *ngFor="let event of eventList" class="card-width">
+            <ion-card-header>
+              <ion-title color="danger">
+                {{event.title}}
+              </ion-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    Información: {{event.description}}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    Lugar: {{event.place}}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    Fecha: {{event.date | date: 'short'}}
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    Penalización:
+                    <ion-text class="fw-bolder" color="danger">{{event.penaltyPonderation}}%</ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-grid class="ganancia">
+                <ion-col>
+                  <ion-text>Ganancia</ion-text>
+                  <div>
+                    {{event.amount}} €
+                  </div>
+                </ion-col>
+              </ion-grid>
+            </ion-card-content>
+            <ion-footer>
+              <ion-button color="danger" routerLink="/event/{{event.id}}"> Ver evento</ion-button>
+            </ion-footer>
+          </ion-card>
+
+        </div>
+        <div class="eventlist" *ngIf="eventList.length==0">
+          <ion-card  class="card-width">
+            <ion-card-header>
+              <ion-title color="danger">
+                Esta formación no tiene {{type === "CONCERT" ? "conciertos" : "ensayos"}}
+              </ion-title>
+            </ion-card-header>
+          </ion-card>
+
+        </div>
+        <div class="micro">
+          <img class="border" src="/assets/microfono.jpg">
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+</body>
+<app-footer></app-footer>
