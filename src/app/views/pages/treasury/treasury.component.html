@@ -27,7 +27,7 @@
   </ion-card>
 
 </div>
-<div class="home-container"*ngIf="!isLoading && hasPermission">
+<div class="home-container" *ngIf="!isLoading && hasPermission">
   <div id="title">
     <h3 class="formationName">{{formation.name}}</h3>
     <br>
@@ -43,13 +43,13 @@
       </div>
       <div style="display: flex" class="flex-column align-items-center">
         <h4>Cantidad total</h4>
-        <h5>{{lastTreasury.amount}} €</h5>
+        <h5>{{lastTreasury ? lastTreasury.amount : 0}} €</h5>
         <ion-button color="danger" class="add-new bg-light text-dark" (click)="viewTransactions()">
           <h6>Ver movimientos</h6>
         </ion-button>
       </div>
       <div class="buttonsUpdateDelete">
-        <ion-button color="danger"  (click)="closeSeason()">
+        <ion-button color="danger" (click)="closeSeason()">
           <h6>
             Cerrar temporada</h6>
         </ion-button>
@@ -211,16 +211,16 @@
             <ion-label>Fecha del movimiento</ion-label>
           </ion-col>
         </ion-row>
-
-        <ion-row *ngFor="let treasury of treasuryList.reverse()">
-          <ion-col>
-            <ion-label>{{treasury.amount}} €</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label>{{treasury.receiveMoneyDate}}</ion-label>
-
-          </ion-col>
-        </ion-row>
+        <div *ngIf="treasuryList.length>0">
+          <ion-row *ngFor="let treasury of treasuryList.reverse()">
+            <ion-col>
+              <ion-label>{{treasury.amount}} €</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>{{treasury.receiveMoneyDate}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </div>
       </ion-grid>
     </ion-content>
   </ng-template>
