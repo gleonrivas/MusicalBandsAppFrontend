@@ -615,6 +615,18 @@ export class EventComponent {
     }
   }
 
+  deleteMusicSheet(id: number) {
+    if (id) {
+      this.musicSheetService.deleteMs(id).subscribe(response => {
+        this.presentToast('El archivo se ha eliminado correctamente', 'success')// Accede al status del error
+        this.route.navigate(['/event/', this.event.id]);
+      }, (error: HttpErrorResponse) => {
+        this.presentToast('El archivo se ha eliminado correctamente', 'success')// Accede al status del error
+        this.route.navigate(['/event/', this.event.id]);
+      })
+    }
+  }
+
   onSelectAddUserRol($event: any) {
      this.idUserSelected = $event.detail.value;
   }

@@ -24,4 +24,8 @@ export class MusicSheetService{
     return this.rest.get<MusicSheetDTO>('http://localhost:8080/ms/listMs/'+ f + "/" + u)
   }
 
+  deleteMs(id: number){
+    return this.rest.delete<MusicSheetDTO>('http://localhost:8080/ms/delete/' + id)
+  }
+
 }
