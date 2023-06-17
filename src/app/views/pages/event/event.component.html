@@ -144,7 +144,7 @@
               <button class="add-new2" (click)="createMusicSheet()">Guardar</button>
             </div>
           </ion-accordion>
-          <ion-accordion value="third">
+          <ion-accordion value="third" *ngIf="rolList.includes('ARCHIVIST')" >
             <ion-item slot="header" color="light">
               <ion-label>Mis Archivos</ion-label>
             </ion-item>
