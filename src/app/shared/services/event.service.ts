@@ -31,7 +31,7 @@ export class EventService {
   }
 
   getMyEvents(){
-    return this.rest.get<CalendarType[]>('http://localhost:8080/calendar/AllMyEvents')
+    return this.rest.get<CalendarType[]>('http://localhost:8080/calendar/AllMyEvents2')
   }
 
   getEventById(eventID: number) {
