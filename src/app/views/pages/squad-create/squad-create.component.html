@@ -32,7 +32,7 @@
       </ion-select>
 
       <label style="margin-top: 2vh">Logo</label>
-      <input type="text" placeholder="Logo" name="" class="form-control" [(ngModel)]="newSquad.logo">
+      <input type="file" placeholder="Logo" name="" class="form-control" style="height: 17%;" (change)="readUrl($event)">
     </ion-col>
   </ion-row>
   <ion-row>

@@ -27,6 +27,19 @@ export class SquadCreateComponent {
   ngOnInit(){
     const value = EnumFormationType[this.selectedValue];
   }
+  readUrl(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent) => {
+
+        this.newSquad.logo = <string>(<FileReader>event.target).result;
+      }
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+  }
   createSquad(){
     const body =
       {'id_user': 2,
