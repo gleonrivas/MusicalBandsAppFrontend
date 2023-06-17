@@ -152,6 +152,7 @@
               <ion-card>
                 <ion-card class="carImgArchivo">
                   <div *ngFor="let ms of musicSheetList; index as i;" class="imageArchivo">
+                    <button  class="add-new2" style="height: 17px; margin-right: 20%; padding: 0" (click)="deleteMusicSheet(ms.id)">x</button>
                     <a style="text-decoration: none" (click)="downloadPdf(ms.musicSheetPdf)"><img src="assets/icons8-documento-144.png"></a>
                     <a class="add-new2" style="text-decoration: none; width: 100%" [href]="ms.musicSheetPdf" (click)="downloadPdf(ms.musicSheetPdf)" > Documento {{i+1}}</a>
                   </div>
