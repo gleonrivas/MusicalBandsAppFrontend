@@ -6,7 +6,6 @@ import {FormationType} from "../../../shared/models/formationType.model";
 import {EnumFormationType} from "../../../shared/models/Enum/EnumFormationType";
 import {UserFormation} from "../../../shared/models/UserFormation";
 import {FormationService} from "../../../shared/services/formation.service";
-import {UserInfo} from "../../../shared/models/user-info";
 import {GetMeService} from "../../../shared/services/get-me.service";
 import {RepertoryType} from "../../../shared/models/repertoryType.model";
 import {RepertoryService} from "../../../shared/services/repertory.service";
@@ -227,7 +226,10 @@ export class EventComponent {
           }
         }
 
-
+        this.musicSheetService.listMs(this.formation.id, this.id).subscribe((data)=> {
+          this.musicSheetList = data
+          console.log(this.musicSheetList);
+        })
 
 
         for (let user of this.userList) {
@@ -255,13 +257,9 @@ export class EventComponent {
       })
 
 
+
     })
 
-
-    this.musicSheetService.listMs(53,48).subscribe((data)=> {
-      this.musicSheetList = data
-      console.log(this.musicSheetList);
-    })
 
 
   }

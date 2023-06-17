@@ -10,25 +10,25 @@ import {ToastController} from "@ionic/angular";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
 
   constructor(
-    private profileService:ProfileService,
+    private profileService: ProfileService,
     private rt: Router,
     private toastController: ToastController,
-    ) {
+  ) {
   }
 
-  public profile!:UserType;
+  public profile!: UserType;
 
-  public name?:string
-  public surName?:string
-  public email?:string
-  public url?:string | ArrayBuffer | null
-  public dni:any
-  public birthDate:any;
-  public file:FileReader | undefined;
-  public fake?:any ;
+  public name?: string
+  public surName?: string
+  public email?: string
+  public url?: string | ArrayBuffer | null
+  public dni: any
+  public birthDate: any;
+  public file: FileReader | undefined;
+  public fake?: any;
 
   comprobarDNI(dni: string): boolean {
     const regexDNI = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/;
@@ -41,7 +41,8 @@ export class ProfileComponent implements OnInit{
     const letraCalculada = letrasDNI.charAt(numero % 23);
     return letra === letraCalculada;
   }
-  async presentToast(message:string, color:string) {
+
+  async presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
@@ -52,17 +53,16 @@ export class ProfileComponent implements OnInit{
     await toast.present();
 
 
-
   }
 
 
   ngOnInit() {
 
-    if (!sessionStorage.getItem('Authorization') || sessionStorage.getItem('Authorization') ==''){
+    if (!sessionStorage.getItem('Authorization') || sessionStorage.getItem('Authorization') == '') {
       this.rt.navigateByUrl('/login')
     }
 
-    this.profileService.getUserData().subscribe((data)=>{
+    this.profileService.getUserData().subscribe((data) => {
       this.profile = data;
       this.name = data.name;
       this.surName = data.surName;
@@ -70,15 +70,16 @@ export class ProfileComponent implements OnInit{
       this.url = data.url;
       this.fake = data.fake;
       this.dni = data.dni!;
-      if (!data.birthDate){
+      if (!data.birthDate) {
         this.birthDate = null
       } else {
-        this.birthDate = data.birthDate?.slice(0,4)+'-'+data.birthDate?.slice(5,7)+'-'+data.birthDate?.slice(8,10)!
+        this.birthDate = data.birthDate?.slice(0, 4) + '-' + data.birthDate?.slice(5, 7) + '-' + data.birthDate?.slice(8, 10)!
       }
     })
     console.log(this.profile)
   }
-  readUrl(event:any) {
+
+  readUrl(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
@@ -92,8 +93,7 @@ export class ProfileComponent implements OnInit{
 
   }
 
-  sendData(){
-
+  sendData() {
 
 
     var newProfile: UserType = {
@@ -106,9 +106,10 @@ export class ProfileComponent implements OnInit{
       dni: this.dni,
       birthDate: this.birthDate,
     }
-    if (this.name && this.surName && this.email){
+    if (this.name && this.surName && this.email) {
       this.profileService.postProfileData(newProfile).subscribe(
         response => {
+          this.presentToast('Se han guardado los datos correctamente', 'success')
         },
         (error: HttpErrorResponse) => {
           console.log(error.message);
@@ -119,11 +120,8 @@ export class ProfileComponent implements OnInit{
       this.presentToast('Hubo un problema con algún campo. Revisa los datos.', 'danger')// Accede al status del error
     }
 
-    console.log(newProfile)
+    console.log(newProfile);
 
   }
-
-
-
 
 }

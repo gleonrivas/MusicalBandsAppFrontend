@@ -288,6 +288,8 @@ ion-icon {
   justify-content: space-around;
 }
 .imageArchivo{
-  width: 25%;
-  margin: 2% 1% 2% 1%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
 }
