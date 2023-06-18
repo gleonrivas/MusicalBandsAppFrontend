@@ -3,7 +3,7 @@ import {RestService} from "./rest.service";
 import {EncryptionService} from "./encryption.service";
 import {FormationType} from "../models/formationType.model";
 import {EventResponse} from "../models/eventModels/eventResponse";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {CalendarEventDTODelete} from "../models/eventModels/CalendarEventDTODelete";
 import {CalendarEventUpdateDTO} from "../models/eventModels/calendarEventUpdateDTO";
 import {ResponseStringModel} from "../models/responseString.model";
@@ -55,6 +55,14 @@ export class EventService {
 
   getEventsByIdFormation(payLow: PayLowModel) {
     return this.rest.post<PayLowModel, EventResponse[]>('http://localhost:8080/treasury/getAllEvents', payLow)
+  }
+
+  getEvents(id:number){
+    const token: string | null = sessionStorage.getItem('Authorization')
+    const headers = new HttpHeaders({'Authorization': token!})
+    const params = new HttpParams();
+    const body = {'formationId':id}
+    return this.http.post('http://localhost:8080/calendar/MyEventsByFormation' , body, {headers: headers, params: params})
   }
 
 }

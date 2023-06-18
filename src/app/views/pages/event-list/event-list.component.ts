@@ -43,7 +43,7 @@ export class EventListComponent {
   };
 
   public type: EventFormationType = "CONCERT"
-  public eventList: EventResponse[] = []
+  public eventList: any;
   musicians: UserFormation[] = [];
   hasPermission = false;
   public payLow: PayLowModel = {
@@ -83,9 +83,10 @@ export class EventListComponent {
   getEventsByFormation() {
     return new Promise((resolve, reject) => {
       if (this.id_formation) {
-        this.eventService.getEventsByIdFormation(this.payLow).subscribe({
+        this.eventService.getEvents(this.payLow.formationId).subscribe({
           next: (data) => {
             this.eventList = data
+            // @ts-ignore
             this.eventList = this.eventList.filter(event => event.type === this.type);
             resolve(data);
           },
