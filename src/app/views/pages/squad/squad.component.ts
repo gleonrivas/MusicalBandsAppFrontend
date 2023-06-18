@@ -73,6 +73,8 @@ export class SquadComponent{
     { value: 'COMPONENT', label: 'Componente' }
   ];
 
+  amount = false;
+
 
   async ngOnInit(){
 
@@ -98,6 +100,12 @@ export class SquadComponent{
     // @ts-ignore
     this.options.series[0].data = amounts;
 
+    if (dates.length !== 0 || amounts.length !== 0 ){
+      console.log('Pasa')
+      console.log(dates.length);
+      console.log(amounts.length)
+      this.amount = true;
+    }
     this.allRoles = await this.generalService.getUserRol(this.id);
     console.log(this.allRoles);
     this.checkRol(this.allRoles)
@@ -121,6 +129,7 @@ export class SquadComponent{
     await this.squadService.getEvents().subscribe(
       response => {
         this.allEvents = response
+        console.log('Eventos:', response)
         this.orderEvents();
         for (let event of this.allEvents){
           // @ts-ignore

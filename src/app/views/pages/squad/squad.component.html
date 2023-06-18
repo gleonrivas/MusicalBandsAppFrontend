@@ -71,7 +71,7 @@
           <ion-card style="box-shadow: none; padding: 0">
             <ion-card-header>
               <ion-card-title>{{ nextPerformance[0].title }}</ion-card-title>
-              <ion-card-subtitle>{{ nextPerformance[0].date }}</ion-card-subtitle>
+              <ion-card-subtitle>{{ nextPerformance[0].date | date: 'short' }}</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
@@ -101,7 +101,7 @@
           <ion-card style="box-shadow: none; padding: 0">
             <ion-card-header>
               <ion-card-title>{{ nextRehearsal[0].title }}</ion-card-title>
-              <ion-card-subtitle>{{ nextRehearsal[0].date }}</ion-card-subtitle>
+              <ion-card-subtitle>{{ nextRehearsal[0].date | date: 'short'  }}</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
@@ -139,8 +139,8 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <echarts *ngIf="data.length !== 0" [initOpts]="initOpts" [options]="options"></echarts>
-      <ion-text *ngIf="data.length === 0">No hay datos que mostrar.</ion-text>
+      <echarts *ngIf="amount" [initOpts]="initOpts" [options]="options"></echarts>
+      <ion-text *ngIf="!amount">No hay datos que mostrar.</ion-text>
     </ion-col>
     <ion-col>
       <ion-card>
