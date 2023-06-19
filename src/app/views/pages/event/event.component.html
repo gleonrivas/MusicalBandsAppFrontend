@@ -173,7 +173,7 @@
             </div>
 
           </ion-accordion>
-          <ion-accordion value="fourth">
+          <ion-accordion value="fourth" *ngIf="rolList.includes('ARCHIVIST')">
             <ion-item slot="header" color="light">
               <ion-label>Subir Archivos</ion-label>
             </ion-item>
@@ -188,7 +188,7 @@
               <button class="add-new2" (click)="createMusicSheet()">Guardar</button>
             </div>
           </ion-accordion>
-          <ion-accordion value="fifth" *ngIf="rolList.includes('ARCHIVIST')">
+          <ion-accordion value="fifth" >
             <ion-item slot="header" color="light">
               <ion-label>Mis Archivos</ion-label>
             </ion-item>
